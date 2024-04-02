@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnetars</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for responsiveness */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 20px;
+            }
+
+            .nav-pills {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gradient-background {
+                padding: 10px;
+            }
+        }
+
+        .gradient-background {
+            background: rgb(2, 0, 36);
+            background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            /* Center-align text within .main-container */
+        }
+
+        .main-container {
+            background: url('./6902432-amazing-high-resolution-wallpaper.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            padding: 50px;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .d-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 300px;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        .lead {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="d-flex justify-content-center py-3 gradient-background">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Subjects</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Projects</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Research FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+        </ul>
+    </header>
+
+    <section class="main-container mb-0">
+        <img class="d-block mx-auto mb-4" src="./photo_2024-01-17_09-08-06.jpg" alt="logo" />
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Unite the Cosmos, Ignite Knowledge: StellarHub, Where Minds Converge for a Stellar Future in Astronomy, Technology, and Beyond!</p>
+        </div>
+    </section>
+</body>
+
+</html>

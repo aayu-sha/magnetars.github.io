@@ -1,0 +1,33 @@
+.gradient-background {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    color: white; 
+    padding: 20px; 
+    text-align: center; /* Center-align text within .main-container */
+}
+
+.main-container {
+    background: url('./6902432-amazing-high-resolution-wallpaper.jpg') no-repeat center center fixed; 
+    background-size: cover; 
+    color: white; 
+    padding: 50px; 
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.d-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px; 
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.lead{
+    margin: 0;
+}
+
