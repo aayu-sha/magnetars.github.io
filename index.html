@@ -12,22 +12,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Inter:wght@100..900&family=Libre+Baskerville&display=swap" rel="stylesheet">
     <style>
-        /* Additional styles for responsiveness */
-        @media (max-width: 768px) {
-            .main-container {
-                padding: 20px;
-            }
-
-            .nav-pills {
-                flex-direction: column;
-            }
-        }
-
         @media (max-width: 576px) {
-            .gradient-background {
+            .main-container {
                 padding: 10px;
             }
         }
+
+        /* Tablet Styles */
+        @media (min-width: 577px) and (max-width: 768px) {
+            .main-container {
+                padding: 20px;
+            }
+        }
+
+        /* Laptop Styles */
+        @media (min-width: 769px) and (max-width: 992px) {
+            .main-container {
+                padding: 30px;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 993px) and (max-width: 1200px) {
+            .main-container {
+                padding: 40px;
+            }
+        }
+
 
         .gradient-background {
             background: blue;
@@ -69,7 +80,7 @@
 <body>
     <header class="d-flex justify-content-center py-3 gradient-background">
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
             <li class="nav-item"><a href="domains.html" class="nav-link">Domains</a></li>
             <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
             <li class="nav-item"><a href="research.html" class="nav-link">Ask your Query</a></li>
@@ -128,11 +139,6 @@
 
             <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
                 <p>© 2024 Company, Inc. All rights reserved.</p>
-                <ul class="list-unstyled d-flex">
-                    <li class="ms-3"><a class="link-body-emphasis" href="linkedin.svg"><svg class="bi" width="24" height="24"><use xlink:href="#linkedin"></use></svg></a></li>
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-                </ul>
             </div>
         </div>
     </footer>
@@ -140,4 +146,3 @@
 </body>
 
 </html>
-d
