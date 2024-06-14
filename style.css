@@ -113,3 +113,50 @@ ul{
 .sub-item {
     margin-right: 10px; /* Add space between list items */
 }
+
+.subjects-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 0;
+    list-style-type: none;
+    position: relative; /* Position relative for absolute positioning of arrows */
+}
+
+.subjects {
+    display: flex;
+    gap: 20px; /* Add space between list items */
+}
+
+.sub-item {
+    margin-right: 10px;
+}
+
+.title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1; /* Ensure arrows are above the scrollable content */
+}
+
+.arrow.left {
+    left: 10px;
+}
+
+.arrow.right {
+    right: 10px;
+}
