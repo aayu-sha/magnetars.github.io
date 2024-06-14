@@ -103,17 +103,6 @@ ul{
     list-style-type: none;
 }
 
-.subjects {
-    display: flex; /* Make the list items display horizontally */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    padding: 0; /* Remove default padding */
-    list-style-type: none; /* Remove default list styles */
-}
-
-.sub-item {
-    margin-right: 10px; /* Add space between list items */
-}
-
 .subjects-container {
     display: flex;
     overflow-x: auto;
@@ -132,10 +121,8 @@ ul{
 }
 
 .title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 20px;
+    margin: 20px 0;
+    text-align: center;
 }
 
 .arrow {
