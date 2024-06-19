@@ -13,6 +13,7 @@
         .main-container {
             margin-top: 20px;
             position: relative;
+            overflow: hidden;
         }
         .title h1 {
             text-align: center;
@@ -32,9 +33,11 @@
             list-style: none;
             padding: 0;
             margin: 0;
+            gap: 20px;
+            width: 100%;
         }
         .sub-item {
-            flex: 0 0 30%;
+            flex: 0 0 100%;
             text-align: center;
             margin: 10px;
         }
@@ -42,12 +45,12 @@
             display: block;
             text-decoration: none;
             color: #000;
-            width: 100%;
-            height: auto;
         }
         .sub-link img {
             width: 100%;
             height: auto;
+            max-height: calc(100vh - 40px); /* Adjust the height */
+            object-fit: cover;
         }
         .arrow {
             cursor: pointer;
@@ -57,6 +60,9 @@
             top: 50%;
             transform: translateY(-50%);
             z-index: 1;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
         }
         .arrow.left {
             left: 10px;
@@ -86,7 +92,8 @@
                 <ul class="subjects">
                     <li class="sub-item">
                         <a href="aerospace.html" class="sub-link">
-                            <img src="Images/aero.png" alt="Aerospace Image"></a>
+                            <img src="Images/aero.png" alt="Aerospace Image">
+                        </a>
                     </li>
                     <li class="sub-item"><a href="ai.html" class="sub-link">Artificial Intelligence</a></li>
                     <li class="sub-item"><a href="astrophysics.html" class="sub-link">Astrophysics</a></li>
