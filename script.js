@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const arrowRight = document.querySelector('.arrow.right');
 
         arrowRight.addEventListener('click', () => {
-            subjectsContainer.scrollBy({ left: 300, behavior: 'smooth' });
+            subjectsContainer.scrollBy({ left: 250, behavior: 'smooth' });
         });
 
         arrowLeft.addEventListener('click', () => {
-            subjectsContainer.scrollBy({ left: -300, behavior: 'smooth' });
+            subjectsContainer.scrollBy({ left: -250, behavior: 'smooth' });
         });
