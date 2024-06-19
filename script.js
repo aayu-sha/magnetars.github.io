@@ -24,14 +24,41 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-        const subjectsContainer = document.querySelector('.subjects-container');
-        const arrowLeft = document.querySelector('.arrow.left');
-        const arrowRight = document.querySelector('.arrow.right');
+const subjectsContainer = document.querySelector('.subjects-container');
+const arrowLeft = document.querySelector('.arrow.left');
+const arrowRight = document.querySelector('.arrow.right');
 
-        arrowRight.addEventListener('click', () => {
-            subjectsContainer.scrollBy({ left: 250, behavior: 'smooth' });
-        });
+const pixelStep = 1; // Adjust this value as needed
 
-        arrowLeft.addEventListener('click', () => {
-            subjectsContainer.scrollBy({ left: -250, behavior: 'smooth' });
-        });
+arrowRight.addEventListener('click', () => {
+    subjectsContainer.scrollBy({ left: pixelStep, behavior: 'smooth' });
+});
+
+arrowLeft.addEventListener('click', () => {
+    subjectsContainer.scrollBy({ left: -pixelStep, behavior: 'smooth' });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const subjectsContainer = document.querySelector('.subjects-container');
+    const scrollStep = subjectsContainer.offsetWidth; // Width of one image element
+
+    const leftArrow = document.querySelector('.arrow.left');
+    const rightArrow = document.querySelector('.arrow.right');
+    let currentIndex = 0; // Current index of the displayed image
+
+    leftArrow.addEventListener('click', function() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            subjectsContainer.scrollTo({ left: currentIndex * scrollStep, behavior: 'smooth' });
+        }
+    });
+
+    rightArrow.addEventListener('click', function() {
+        const maxIndex = subjectsContainer.children.length - 1;
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            subjectsContainer.scrollTo({ left: currentIndex * scrollStep, behavior: 'smooth' });
+        }
+    });
+});
+
