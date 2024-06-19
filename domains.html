@@ -70,6 +70,16 @@
         .arrow.right {
             right: 10px;
         }
+
+        @media (max-width: 768px) {
+            .sub-item {
+                flex: 0 0 100%; /* Make sure each item takes full width on mobile */
+            }
+            .arrow {
+                font-size: 1.5rem; /* Reduce the size of arrows on mobile */
+                padding: 0 15px;
+            }
+        }
     </style>
 </head>
 <body>
