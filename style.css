@@ -121,8 +121,12 @@ ul{
 }
 
 .title {
-    margin: 20px 0;
-    text-align: center;
+    margin: 10px 0;
+    text-align: left;
+    font-size: 24px; /* Adjust the font size as needed */
+    position: absolute;
+    top: 60px; /* Adjust the distance from the top of the page */
+    left: 20px; /* Align to the left */
 }
 
 .arrow {
@@ -140,10 +144,60 @@ ul{
     z-index: 1; /* Ensure arrows are above the scrollable content */
 }
 
+.arrow-container {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1; /* Ensure arrows are above the scrollable content */
+}
+
 .arrow.left {
     left: 10px;
 }
 
 .arrow.right {
     right: 10px;
+}
+
+.gradient-background {
+    background: linear-gradient(to right, #4b6cb7, #182848);
+}
+.main-container {
+    margin-top: 20px;
+}
+.title h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.subjects-container {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+}
+.subjects {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    transition: transform 0.3s ease;
+}
+.sub-item {
+    flex: 0 0 25%;
+    text-align: center;
+    margin: 10px;
+}
+.sub-link {
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+.sub-link img {
+    width: 100%;
+    height: auto;
+}
+.arrow {
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 0 20px;
 }
