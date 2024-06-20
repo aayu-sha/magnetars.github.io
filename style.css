@@ -301,3 +301,20 @@ ul{
     flex-direction: column;
     height: 100vh;
 }
+
+.d-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.lead {
+    margin: 0;
+}
+
+ul{
+    list-style-type: none;
+}
