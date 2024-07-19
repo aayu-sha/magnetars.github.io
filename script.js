@@ -9,18 +9,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const subjectsContainer = document.querySelector('.subjects-container');
-    const scrollStep = subjectsContainer.scrollWidth / 5; 
-    const leftArrow = document.querySelector('.arrow.left');
-    const rightArrow = document.querySelector('.arrow.right');
+document.addEventListener('DOMContentLoaded', () => {
+    const subjects = document.querySelector('.subjects');
+    const subItems = document.querySelectorAll('.sub-item');
+    
+    let scrollSpeed = 10; // Speed of horizontal scroll
+    let previousScrollY = window.scrollY;
 
-    leftArrow.addEventListener('click', function() {
-        subjectsContainer.scrollBy({ left: -scrollStep, behavior: 'smooth' });
-    });
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const scrollDirection = currentScrollY > previousScrollY ? 1 : -1;
+        const scrollAmount = (currentScrollY - previousScrollY) * scrollSpeed * scrollDirection;
 
-    rightArrow.addEventListener('click', function() {
-        subjectsContainer.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        subjects.scrollLeft += scrollAmount;
+        previousScrollY = currentScrollY;
     });
 });
 
@@ -35,6 +37,5 @@ arrowRight.addEventListener('click', () => {
 arrowLeft.addEventListener('click', () => {
     subjectsContainer.scrollBy({ left: -3000, behavior: 'smooth' });
 });
-
 
 

@@ -318,3 +318,39 @@ ul{
 ul{
     list-style-type: none;
 }
+
+body {
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+.gradient-background {
+    background: black;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    color: white; 
+    padding: 20px;
+}
+.main-container {
+    margin: 20px auto;
+    text-align: center;
+}
+.subjects-container {
+    display: flex;
+    justify-content: center;
+}
+.subjects {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+.sub-item {
+    margin: 0 20px;
+}
+.sub-item img {
+    width: 1200px;
+    height: 700px;
+    object-fit: cover;
+}
+footer {
+    background-color: #f8f9fa;
+}
