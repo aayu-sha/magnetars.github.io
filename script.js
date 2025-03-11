@@ -1,6 +1,6 @@
-// Typing Effect for Hero Section
+// Typing Effect
 document.addEventListener("DOMContentLoaded", function () {
-    const textElement = document.querySelector(".hero-content p");
+    const textElement = document.querySelector(".typing-text");
     const text = "Innovating the future of Astrophysics & AI";
     let index = 0;
 
@@ -8,34 +8,23 @@ document.addEventListener("DOMContentLoaded", function () {
         if (index < text.length) {
             textElement.textContent += text[index];
             index++;
-            setTimeout(typeText, 50); // Adjust speed here
+            setTimeout(typeText, 50);
         }
     }
-
-    textElement.textContent = ""; // Clear initial text
+    textElement.textContent = "";
     typeText();
 });
 
-// Smooth Scrolling for Future Navigation
-document.querySelectorAll("a[href^='#']").forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth"
-        });
+// Scroll Animation
+const sections = document.querySelectorAll(".fade-in");
+
+function showSections() {
+    sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < window.innerHeight - 100) {
+            section.classList.add("visible");
+        }
     });
-});
+}
 
-// Dark Mode Toggle (Optional)
-const themeToggle = document.createElement("button");
-themeToggle.textContent = "🌙 Toggle Theme";
-themeToggle.style.position = "fixed";
-themeToggle.style.top = "20px";
-themeToggle.style.right = "20px";
-themeToggle.style.padding = "10px";
-themeToggle.style.cursor = "pointer";
-document.body.appendChild(themeToggle);
-
-themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-});
+window.addEventListener("scroll", showSections);
