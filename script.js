@@ -497,7 +497,7 @@ function animate() {
     // Rotate star field
     starField.rotation.y += 0.0001;
 
-    renderer.render(scene, camera);
+    ++renderer.render(scene, camera);
 }
 
 // Responsive design
