@@ -18,6 +18,7 @@
             color: #e0e0ff;
             overflow-x: hidden;
             cursor: none;
+            scroll-behavior: smooth;
         }
         #cursor {
             position: fixed;
@@ -33,46 +34,13 @@
         #cursor.hover {
             transform: scale(2);
         }
-        .container {
-            width: 100%;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
         #webgl {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
-        }
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .hero-title {
-            font-size: 6vw;
-            font-weight: 700;
-            color: #62e7d8;
-            mix-blend-mode: difference;
-            line-height: 1.1;
-            opacity: 0.9;
-        }
-        .hero-subtitle {
-            font-size: 2vw;
-            color: #e0e0ff;
-            margin-top: 1rem;
-            opacity: 0.7;
         }
         .nav {
             position: fixed;
@@ -96,20 +64,66 @@
         .nav a:hover {
             color: white;
         }
-        .project-grid {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        
+        /* Sections */
+        section {
+            position: relative;
+            min-height: 100vh;
             width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 26, 0.95);
-            z-index: 1000;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            padding: 10%;
-            overflow-y: auto;
+            padding: 0 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
         }
+        
+        section .content {
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        section.active .content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hero-title {
+            font-size: 6vw;
+            font-weight: 700;
+            color: #62e7d8;
+            mix-blend-mode: difference;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: 2vw;
+            color: #e0e0ff;
+            margin-top: 1rem;
+            opacity: 0.7;
+        }
+        
+        h2 {
+            font-size: 4vw;
+            font-weight: 700;
+            color: #62e7d8;
+            margin-bottom: 2rem;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
         .project-item {
             background: rgba(98, 231, 216, 0.1);
             border: 1px solid rgba(98, 231, 216, 0.3);
@@ -118,9 +132,76 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
+        
         .project-item:hover {
             transform: scale(1.05);
             background: rgba(98, 231, 216, 0.2);
+        }
+        
+        .project-item h3 {
+            color: #62e7d8;
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact form */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-form .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        input, textarea, button {
+            background: rgba(98, 231, 216, 0.1);
+            border: 1px solid rgba(98, 231, 216, 0.3);
+            padding: 1rem;
+            border-radius: 5px;
+            color: #e0e0ff;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        button {
+            background: rgba(98, 231, 216, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: rgba(98, 231, 216, 0.5);
+        }
+        
+        /* Progress indicator */
+        .progress-container {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(98, 231, 216, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .progress-dot.active {
+            background: #62e7d8;
+            transform: scale(1.5);
         }
     </style>
 </head>
@@ -128,32 +209,94 @@
     <div id="cursor"></div>
     
     <nav class="nav">
-        <a href="#" id="work-link">Work</a>
-        <a href="#" id="about-link">About</a>
-        <a href="#" id="contact-link">Contact</a>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
     </nav>
-
-    <div class="container">
-        <div id="webgl"></div>
-        <div class="overlay">
+    
+    <div id="webgl"></div>
+    
+    <section id="home" class="active">
+        <div class="content">
             <h1 class="hero-title">Magnetars</h1>
             <p class="hero-subtitle">Pushing Boundaries in Astrophysics & AI</p>
         </div>
-    </div>
-
-    <div class="project-grid" id="project-grid">
-        <div class="project-item">
-            <h3>AI Research</h3>
-            <p>Innovative machine learning approaches in astrophysical modeling</p>
+    </section>
+    
+    <section id="about">
+        <div class="content">
+            <h2>About</h2>
+            <p>Magnetars are a team of researchers and engineers dedicated to exploring the mysteries of the cosmos through cutting-edge technology and innovative approaches. Our interdisciplinary work combines astrophysics, high-energy physics, and artificial intelligence.</p>
+            <p>Founded in 2020, our mission is to advance our understanding of extreme cosmic phenomena and develop new tools that push the boundaries of scientific discovery. We collaborate with leading institutions worldwide to tackle some of the most challenging questions in modern physics.</p>
+            <p>Our team consists of experts in astrophysical modeling, machine learning, and quantum computing, all united by a passion for understanding the universe and developing technologies that can change the world.</p>
         </div>
-        <div class="project-item">
-            <h3>High-Energy Physics</h3>
-            <p>Exploring extreme cosmic phenomena and neutron star dynamics</p>
+    </section>
+    
+    <section id="work">
+        <div class="content">
+            <h2>Our Work</h2>
+            <p>Explore our pioneering research and technological innovations across different domains:</p>
+            
+            <div class="project-grid">
+                <div class="project-item">
+                    <h3>AI Research</h3>
+                    <p>Innovative machine learning approaches in astrophysical modeling, enabling new insights into complex cosmic phenomena and predictive analysis of high-energy events.</p>
+                </div>
+                <div class="project-item">
+                    <h3>High-Energy Physics</h3>
+                    <p>Exploring extreme cosmic phenomena and neutron star dynamics, with a special focus on the unique properties and behaviors of magnetars in our galaxy.</p>
+                </div>
+                <div class="project-item">
+                    <h3>Automation Tech</h3>
+                    <p>Developing intelligent systems for scientific research that streamline data collection, analysis, and theory testing in astrophysics and related fields.</p>
+                </div>
+                <div class="project-item">
+                    <h3>Quantum Computing</h3>
+                    <p>Leveraging quantum algorithms to simulate complex physical systems that are computationally intractable with classical computing approaches.</p>
+                </div>
+                <div class="project-item">
+                    <h3>Data Visualization</h3>
+                    <p>Creating immersive visualization tools that transform complex datasets into intuitive, interactive experiences for both researchers and the public.</p>
+                </div>
+                <div class="project-item">
+                    <h3>Educational Outreach</h3>
+                    <p>Developing programs and resources to inspire the next generation of scientists and make cutting-edge research accessible to everyone.</p>
+                </div>
+            </div>
         </div>
-        <div class="project-item">
-            <h3>Automation Tech</h3>
-            <p>Developing intelligent systems for scientific research</p>
+    </section>
+    
+    <section id="contact">
+        <div class="content">
+            <h2>Contact Us</h2>
+            <p>Interested in collaborating or learning more about our work? Reach out to us using the form below or connect with us on social media.</p>
+            
+            <form class="contact-form">
+                <div>
+                    <input type="text" placeholder="Name" required>
+                </div>
+                <div>
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="full-width">
+                    <input type="text" placeholder="Subject" required>
+                </div>
+                <div class="full-width">
+                    <textarea placeholder="Your message" required></textarea>
+                </div>
+                <div class="full-width">
+                    <button type="submit">Send Message</button>
+                </div>
+            </form>
         </div>
+    </section>
+    
+    <div class="progress-container">
+        <div class="progress-dot active" data-section="home"></div>
+        <div class="progress-dot" data-section="about"></div>
+        <div class="progress-dot" data-section="work"></div>
+        <div class="progress-dot" data-section="contact"></div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -169,21 +312,15 @@
             });
         });
 
-        // Work link interaction
-        const workLink = document.getElementById('work-link');
-        const projectGrid = document.getElementById('project-grid');
-        
-        workLink.addEventListener('mouseenter', () => {
-            cursor.classList.add('hover');
-        });
-        
-        workLink.addEventListener('mouseleave', () => {
-            cursor.classList.remove('hover');
-        });
-
-        workLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            projectGrid.style.display = 'grid';
+        // Interactive elements cursor effect
+        const interactiveElements = document.querySelectorAll('a, .project-item, button, input, textarea');
+        interactiveElements.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
         });
 
         // 3D Scene Setup
@@ -245,6 +382,173 @@
             return { core, fieldGroup };
         }
 
+        // Create Neural Network Visualization for About section
+        function createNeuralNetworkVisualization() {
+            const group = new THREE.Group();
+            
+            // Nodes
+            const layers = [5, 8, 8, 4];
+            const nodeGeometry = new THREE.SphereGeometry(1, 16, 16);
+            const nodeMaterial = new THREE.MeshStandardMaterial({
+                color: 0x62e7d8,
+                emissive: 0x006060,
+                emissiveIntensity: 0.5
+            });
+            
+            const nodes = [];
+            const connections = [];
+            
+            // Create layers of nodes
+            for (let l = 0; l < layers.length; l++) {
+                const layerNodes = [];
+                const layerSize = layers[l];
+                const xPos = (l - (layers.length - 1) / 2) * 30;
+                
+                for (let i = 0; i < layerSize; i++) {
+                    const yPos = (i - (layerSize - 1) / 2) * 10;
+                    const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
+                    node.position.set(xPos, yPos, 0);
+                    group.add(node);
+                    layerNodes.push(node);
+                    
+                    // Create connections to previous layer
+                    if (l > 0) {
+                        const prevLayer = nodes[l - 1];
+                        for (let j = 0; j < prevLayer.length; j++) {
+                            const connectionGeometry = new THREE.BufferGeometry();
+                            const lineMaterial = new THREE.LineBasicMaterial({
+                                color: 0x4169e1,
+                                transparent: true,
+                                opacity: 0.2
+                            });
+                            
+                            const points = [
+                                prevLayer[j].position.clone(),
+                                node.position.clone()
+                            ];
+                            
+                            connectionGeometry.setFromPoints(points);
+                            const line = new THREE.Line(connectionGeometry, lineMaterial);
+                            group.add(line);
+                            connections.push(line);
+                        }
+                    }
+                }
+                nodes.push(layerNodes);
+            }
+            
+            group.position.z = -50;
+            group.visible = false;
+            scene.add(group);
+            
+            return { group, nodes, connections };
+        }
+
+        // Create Data Visualization for Work section
+        function createDataVisualization() {
+            const group = new THREE.Group();
+            
+            // Create a grid of data points
+            const gridSize = 20;
+            const pointGeometry = new THREE.SphereGeometry(0.5, 8, 8);
+            const pointMaterial = new THREE.MeshStandardMaterial({
+                color: 0x4169e1,
+                emissive: 0x0000ff,
+                emissiveIntensity: 0.3
+            });
+            
+            const dataPoints = [];
+            
+            for (let x = -gridSize; x <= gridSize; x += 2) {
+                for (let z = -gridSize; z <= gridSize; z += 2) {
+                    const point = new THREE.Mesh(pointGeometry, pointMaterial);
+                    
+                    // Create a wave pattern
+                    const distance = Math.sqrt(x*x + z*z);
+                    const y = Math.sin(distance * 0.3) * 5;
+                    
+                    point.position.set(x, y, z);
+                    group.add(point);
+                    dataPoints.push(point);
+                }
+            }
+            
+            group.rotation.x = -Math.PI / 4;
+            group.position.z = -50;
+            group.visible = false;
+            scene.add(group);
+            
+            return { group, dataPoints };
+        }
+
+        // Create Communication Visualization for Contact section
+        function createCommunicationVisualization() {
+            const group = new THREE.Group();
+            
+            // Central hub
+            const hubGeometry = new THREE.SphereGeometry(5, 16, 16);
+            const hubMaterial = new THREE.MeshStandardMaterial({
+                color: 0x62e7d8,
+                emissive: 0x006060,
+                emissiveIntensity: 0.8
+            });
+            const hub = new THREE.Mesh(hubGeometry, hubMaterial);
+            group.add(hub);
+            
+            // Satellites
+            const satellites = [];
+            const connections = [];
+            const satelliteCount = 12;
+            
+            for (let i = 0; i < satelliteCount; i++) {
+                const angle = (i / satelliteCount) * Math.PI * 2;
+                const radius = 20 + Math.random() * 10;
+                
+                const satelliteGeometry = new THREE.SphereGeometry(1 + Math.random(), 8, 8);
+                const satelliteMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x4169e1,
+                    emissive: 0x0000ff,
+                    emissiveIntensity: 0.5
+                });
+                
+                const satellite = new THREE.Mesh(satelliteGeometry, satelliteMaterial);
+                satellite.position.x = Math.cos(angle) * radius;
+                satellite.position.y = (Math.random() - 0.5) * 20;
+                satellite.position.z = Math.sin(angle) * radius;
+                
+                group.add(satellite);
+                satellites.push(satellite);
+                
+                // Connection to hub
+                const connectionGeometry = new THREE.BufferGeometry();
+                const lineMaterial = new THREE.LineBasicMaterial({
+                    color: 0x62e7d8,
+                    transparent: true,
+                    opacity: 0.3
+                });
+                
+                const points = [
+                    hub.position.clone(),
+                    satellite.position.clone()
+                ];
+                
+                connectionGeometry.setFromPoints(points);
+                const line = new THREE.Line(connectionGeometry, lineMaterial);
+                group.add(line);
+                connections.push({
+                    line,
+                    satellite,
+                    initialDistance: satellite.position.length()
+                });
+            }
+            
+            group.position.z = -50;
+            group.visible = false;
+            scene.add(group);
+            
+            return { group, hub, satellites, connections };
+        }
+
         // Star field creation
         function createStarField() {
             const starGroup = new THREE.Group();
@@ -281,6 +585,9 @@
 
         // Create scene elements
         const { core, fieldGroup } = createMagnetarVisualization();
+        const neuralNetwork = createNeuralNetworkVisualization();
+        const dataViz = createDataVisualization();
+        const communication = createCommunicationVisualization();
         const starField = createStarField();
 
         // Camera positioning
@@ -294,15 +601,196 @@
         }
         window.addEventListener('mousemove', onMouseMove, false);
 
+        // Scroll interaction
+        let currentSection = 'home';
+        const sections = ['home', 'about', 'work', 'contact'];
+        const sectionElements = {};
+        const sectionVisualizationStates = {
+            'home': { obj: { core, fieldGroup }, active: true },
+            'about': { obj: neuralNetwork, active: false },
+            'work': { obj: dataViz, active: false },
+            'contact': { obj: communication, active: false }
+        };
+
+        // Get section elements
+        sections.forEach(section => {
+            sectionElements[section] = document.getElementById(section);
+        });
+
+        // Update active section based on scroll position
+        function updateActiveSection() {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            let activeSection = currentSection;
+            
+            // Find the current section
+            for (const section in sectionElements) {
+                const element = sectionElements[section];
+                const rect = element.getBoundingClientRect();
+                
+                // If the section is in the viewport
+                if (rect.top < windowHeight / 2 && rect.bottom > windowHeight / 2) {
+                    activeSection = section;
+                    break;
+                }
+            }
+            
+            // Only update if the section has changed
+            if (activeSection !== currentSection) {
+                // Update current section
+                currentSection = activeSection;
+                
+                // Update section classes
+                sections.forEach(section => {
+                    if (section === currentSection) {
+                        sectionElements[section].classList.add('active');
+                    } else {
+                        sectionElements[section].classList.remove('active');
+                    }
+                });
+                
+                // Update progress dots
+                document.querySelectorAll('.progress-dot').forEach(dot => {
+                    if (dot.dataset.section === currentSection) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+                
+                // Update visualizations
+                updateVisualizations();
+            }
+        }
+
+        // Update 3D visualizations based on active section
+        function updateVisualizations() {
+            // Hide all visualizations first
+            for (const section in sectionVisualizationStates) {
+                const state = sectionVisualizationStates[section];
+                
+                if (section === currentSection) {
+                    // Transition to this visualization
+                    if (!state.active) {
+                        if (section === 'home') {
+                            gsap.to(core.position, { x: 0, y: 0, z: 0, duration: 1.5, ease: "power2.inOut" });
+                            gsap.to(fieldGroup.position, { x: 0, y: 0, z: 0, duration: 1.5, ease: "power2.inOut" });
+                        } else {
+                            const obj = state.obj.group;
+                            obj.visible = true;
+                            gsap.fromTo(obj.position, 
+                                { z: -200 }, 
+                                { z: -50, duration: 1.5, ease: "power2.inOut" }
+                            );
+                            
+                            // Fade out home visualization
+                            gsap.to(core.position, { z: 200, duration: 1.5, ease: "power2.inOut" });
+                            gsap.to(fieldGroup.position, { z: 200, duration: 1.5, ease: "power2.inOut" });
+                        }
+                        state.active = true;
+                    }
+                } else if (state.active) {
+                    // Transition this visualization out
+                    if (section === 'home') {
+                        gsap.to(core.position, { z: 200, duration: 1.5, ease: "power2.inOut" });
+                        gsap.to(fieldGroup.position, { z: 200, duration: 1.5, ease: "power2.inOut" });
+                    } else {
+                        const obj = state.obj.group;
+                        gsap.to(obj.position, { z: -200, duration: 1.5, ease: "power2.inOut", onComplete: () => {
+                            obj.visible = false;
+                        }});
+                    }
+                    state.active = false;
+                }
+            }
+        }
+
+        // Scroll event listener
+        window.addEventListener('scroll', updateActiveSection);
+        
+        // Progress dots navigation
+        document.querySelectorAll('.progress-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const section = dot.dataset.section;
+                document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            dot.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+            
+            dot.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        });
+
         // Animation loop
         function animate() {
             requestAnimationFrame(animate);
 
-            // Rotate magnetar elements
+            // Home section animations
             core.rotation.x += 0.005;
             core.rotation.y += 0.003;
             fieldGroup.rotation.x += 0.005;
             fieldGroup.rotation.y += 0.003;
+            
+            // About section animations
+            if (sectionVisualizationStates.about.active) {
+                neuralNetwork.group.rotation.y += 0.005;
+                
+                // Pulse the nodes
+                neuralNetwork.nodes.forEach((layer, i) => {
+                    layer.forEach((node, j) => {
+                        const time = Date.now() * 0.001;
+                        const scale = 0.9 + Math.sin(time * 2 + i + j) * 0.2;
+                        node.scale.set(scale, scale, scale);
+                    });
+                });
+            }
+            
+            // Work section animations
+            if (sectionVisualizationStates.work.active) {
+                dataViz.group.rotation.y += 0.005;
+                
+                // Animate data points
+                dataViz.dataPoints.forEach((point, i) => {
+                    const time = Date.now() * 0.001;
+                    const x = point.position.x;
+                    const z = point.position.z;
+                    const distance = Math.sqrt(x*x + z*z);
+                    const y = Math.sin(distance * 0.3 + time) * 5;
+                    point.position.y = y;
+                });
+            }
+            
+            // Contact section animations
+            if (sectionVisualizationStates.contact.active) {
+                communication.group.rotation.y += 0.003;
+                
+                // Pulse the connections
+                communication.connections.forEach((conn, i) => {
+                    const time = Date.now() * 0.001;
+                    const satellite = conn.satellite;
+                    
+                    // Make satellites orbit slightly
+                    const initialPos = satellite.position.clone().normalize();
+                    const angle = time * 0.3 + i * 0.5;
+                    const distance = conn.initialDistance + Math.sin(time + i) * 2;
+                    
+                    satellite.position.x = Math.cos(angle) * initialPos.x * distance;
+                    satellite.position.z = Math.sin(angle) * initialPos.z * distance;
+                    
+                    // Update connection line
+                    const points = [
+                        communication.hub.position.clone(),
+                        satellite.position.clone()
+                    ];
+                    
+                    conn.line.geometry.setFromPoints(points);
+                    conn.line.geometry.verticesNeedUpdate = true;
+                });
+            }
 
             // Subtle camera movement based on mouse
             camera.position.x += (mouse.x * 20 - camera.position.x) * 0.05;
@@ -314,7 +802,6 @@
 
             renderer.render(scene, camera);
         }
-        animate();
 
         // Responsive design
         window.addEventListener('resize', () => {
@@ -322,17 +809,10 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
-
-        // Project items hover effects
-        const projectItems = document.querySelectorAll('.project-item');
-        projectItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                cursor.classList.add('hover');
-            });
-            item.addEventListener('mouseleave', () => {
-                cursor.classList.remove('hover');
-            });
-        });
+        
+        // Initialize
+        updateActiveSection();
+        animate();
     </script>
 </body>
 </html>
