@@ -1193,3 +1193,37 @@ button:hover::before {
 #publications {
     display: block;
 }
+
+#publications {
+    padding: 40px;
+    background-color: #f9f9f9;
+}
+
+#publications h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#publications ul {
+    list-style-type: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#publications ul li {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+#publications ul li ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    font-weight: normal;
+}
+
+#publications ul li ul li {
+    font-size: 1rem;
+}
