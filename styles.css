@@ -1082,21 +1082,23 @@ p {
 
 .socials {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center; /* Centers the links */
+    gap: 15px; /* Adds spacing between each link */
+    margin-top: 20px;
 }
 
 .social-icon {
     text-decoration: none;
     color: #0073b1;
     font-weight: bold;
+    font-size: 1rem;
     transition: color 0.3s ease;
 }
 
 .social-icon:hover {
     color: #005582;
 }
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .profiles {
