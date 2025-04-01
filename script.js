@@ -425,7 +425,7 @@ function createCommunicationVisualization() {
     const group = new THREE.Group();
     
     // Central hub
-    const hubGeometry = new THREE.SphereGeometry(5, 16, 16);
+    const hubGeometry = new THREE.SphereGeometry(10, 20, 20);
     const hubMaterial = new THREE.MeshStandardMaterial({
         color: 0x62e7d8,
         emissive: 0x006060,
@@ -441,9 +441,9 @@ function createCommunicationVisualization() {
     
     for (let i = 0; i < satelliteCount; i++) {
         const angle = (i / satelliteCount) * Math.PI * 2;
-        const radius = 20 + Math.random() * 10;
+        const radius = 50 + 10;
         
-        const satelliteGeometry = new THREE.SphereGeometry(1 + Math.random(), 8, 8);
+        const satelliteGeometry = new THREE.SphereGeometry(3, 10, 10);
         const satelliteMaterial = new THREE.MeshStandardMaterial({
             color: 0x4169e1,
             emissive: 0x0000ff,
@@ -494,7 +494,7 @@ function createStarField() {
     const starGeometry = new THREE.BufferGeometry();
     const starMaterial = new THREE.PointsMaterial({
         color: 0xffffff,
-        size: 0.5,
+        size: 0.8,
         transparent: true,
         opacity: 0.7
     });
