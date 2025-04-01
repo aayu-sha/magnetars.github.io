@@ -1,4 +1,3 @@
-
 // Cursor tracking
 const cursor = document.getElementById('cursor');
 document.addEventListener('mousemove', (e) => {
@@ -178,6 +177,84 @@ function createDataVisualization() {
     return { group, dataPoints };
 }
 
+// Create Publications Visualization
+function createPublicationsVisualization() {
+    const group = new THREE.Group();
+    
+    // Create floating papers/documents
+    const papers = [];
+    const paperCount = 20;
+    
+    const paperGeometry = new THREE.BoxGeometry(5, 7, 0.1);
+    const paperMaterials = [
+        new THREE.MeshStandardMaterial({ color: 0xffffff }),
+        new THREE.MeshStandardMaterial({ color: 0xf5f5f5 }),
+        new THREE.MeshStandardMaterial({ color: 0xf0f0f0 })
+    ];
+    
+    // Central hub for connections
+    const hubGeometry = new THREE.SphereGeometry(2, 16, 16);
+    const hubMaterial = new THREE.MeshStandardMaterial({
+        color: 0x62e7d8,
+        emissive: 0x006060,
+        emissiveIntensity: 0.7
+    });
+    const hub = new THREE.Mesh(hubGeometry, hubMaterial);
+    group.add(hub);
+    
+    // Create papers with connections
+    for (let i = 0; i < paperCount; i++) {
+        const angle = (i / paperCount) * Math.PI * 2;
+        const radius = 15 + Math.random() * 15;
+        const height = (Math.random() - 0.5) * 20;
+        
+        const paper = new THREE.Mesh(
+            paperGeometry, 
+            paperMaterials[Math.floor(Math.random() * paperMaterials.length)]
+        );
+        
+        paper.position.x = Math.cos(angle) * radius;
+        paper.position.y = height;
+        paper.position.z = Math.sin(angle) * radius;
+        
+        // Random rotation
+        paper.rotation.x = Math.random() * 0.5;
+        paper.rotation.y = Math.random() * Math.PI * 2;
+        paper.rotation.z = Math.random() * 0.5;
+        
+        group.add(paper);
+        papers.push({
+            mesh: paper,
+            initialPos: paper.position.clone(),
+            rotationSpeed: (Math.random() - 0.5) * 0.01,
+            floatSpeed: 0.5 + Math.random() * 0.5
+        });
+        
+        // Connection to hub
+        const connectionGeometry = new THREE.BufferGeometry();
+        const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x62e7d8,
+            transparent: true,
+            opacity: 0.2
+        });
+        
+        const points = [
+            hub.position.clone(),
+            paper.position.clone()
+        ];
+        
+        connectionGeometry.setFromPoints(points);
+        const line = new THREE.Line(connectionGeometry, lineMaterial);
+        group.add(line);
+    }
+    
+    group.position.z = -50;
+    group.visible = false;
+    scene.add(group);
+    
+    return { group, hub, papers };
+}
+
 // Create Communication Visualization for Contact section
 function createCommunicationVisualization() {
     const group = new THREE.Group();
@@ -284,6 +361,7 @@ scene.add(directionalLight);
 const { core, fieldGroup } = createMagnetarVisualization();
 const neuralNetwork = createNeuralNetworkVisualization();
 const dataViz = createDataVisualization();
+const publicationsViz = createPublicationsVisualization();
 const communication = createCommunicationVisualization();
 const starField = createStarField();
 
@@ -297,34 +375,19 @@ function onMouseMove(event) {
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 window.addEventListener('mousemove', onMouseMove, false);
-function createPublicationsVisualization() {
-    // You can copy and modify the dataViz creation or make something new
-    const group = new THREE.Group();
-    
-    // Create a different visualization than the work section
-    // For example, floating documents or citation connections
-    
-    group.position.z = -50;
-    group.visible = false;
-    scene.add(group);
-    
-    return { group };
-}
-
-// Add this after your other visualization creations
-const publicationsViz = createPublicationsVisualization();
 
 // Scroll interaction
 let currentSection = 'home';
-const sections = ['home', 'about', 'work', 'contact'];
+const sections = ['home', 'about', 'work', 'publications', 'contact'];
 const sectionElements = {};
 const sectionVisualizationStates = {
     'home': { obj: { core, fieldGroup }, active: true },
     'about': { obj: neuralNetwork, active: false },
     'work': { obj: dataViz, active: false },
-    'publications': { obj: dataViz, active: false }, 
+    'publications': { obj: publicationsViz, active: false },
     'contact': { obj: communication, active: false }
 };
+
 // Get section elements
 sections.forEach(section => {
     sectionElements[section] = document.getElementById(section);
@@ -477,6 +540,20 @@ function animate() {
         });
     }
     
+    // Publications section animations
+    if (sectionVisualizationStates.publications.active) {
+        publicationsViz.group.rotation.y += 0.002;
+        
+        // Animate papers
+        publicationsViz.papers.forEach((paper, i) => {
+            const time = Date.now() * 0.001;
+            // Floating animation
+            paper.mesh.position.y = paper.initialPos.y + Math.sin(time * paper.floatSpeed) * 2;
+            // Slight rotation
+            paper.mesh.rotation.y += paper.rotationSpeed;
+        });
+    }
+    
     // Contact section animations
     if (sectionVisualizationStates.contact.active) {
         communication.group.rotation.y += 0.003;
@@ -513,7 +590,7 @@ function animate() {
     // Rotate star field
     starField.rotation.y += 0.0001;
 
-    ++renderer.render(scene, camera);
+    renderer.render(scene, camera);
 }
 
 // Responsive design
