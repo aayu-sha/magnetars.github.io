@@ -31,11 +31,11 @@ function createMagnetarVisualization() {
     const group = new THREE.Group();
 
     // Core of the magnetar
-    const coreGeometry = new THREE.IcosahedronGeometry(15, 4);
+    const coreGeometry = new THREE.IcosahedronGeometry(20, 10);
     const coreMaterial = new THREE.MeshStandardMaterial({
         color: 0x62e7d8,
-        metalness: 0.8,
-        roughness: 0.2,
+        metalness: 8.0,
+        roughness: 0.8,
         emissive: 0x006060,
         emissiveIntensity: 0.5
     });
@@ -55,8 +55,8 @@ function createMagnetarVisualization() {
         });
         
         const positions = [];
-        const radius = 20 + Math.random() * 10;
-        const twists = 3 + Math.random() * 3;
+        const radius = 90 + Math.random() * 10;
+        const twists = 10 + Math.random() * 3;
 
         for (let j = 0; j < 100; j++) {
             const t = j / 99;
@@ -145,10 +145,12 @@ function createDataVisualization() {
     const group = new THREE.Group();
     
     // Create a grid of data points
-    const gridSize = 20;
-    const pointGeometry = new THREE.SphereGeometry(0.5, 8, 8);
+    const gridSize = 60;
+    const pointGeometry = new THREE.SphereGeometry(0.8, 12, 12);
     const pointMaterial = new THREE.MeshStandardMaterial({
-        color: 0x4169e1,
+        color: 0x00bfff, // Silver shade
+        metalness: 0,  // Makes it more metallic
+        roughness: 0.3,  // Slightly reflective
         emissive: 0x0000ff,
         emissiveIntensity: 0.3
     });
@@ -178,82 +180,245 @@ function createDataVisualization() {
 }
 
 // Create Publications Visualization
-function createPublicationsVisualization() {
+// Create Publications Visualization - Cosmic Web
+function createCosmicWebVisualization() {
     const group = new THREE.Group();
     
-    // Create floating papers/documents
-    const papers = [];
-    const paperCount = 20;
+    // Parameters
+    const galaxyCount = 40;
+    const filamentCount = 120;
+    const fieldSize = 60;
     
-    const paperGeometry = new THREE.BoxGeometry(5, 7, 0.1);
-    const paperMaterials = [
-        new THREE.MeshStandardMaterial({ color: 0xffffff }),
-        new THREE.MeshStandardMaterial({ color: 0xf5f5f5 }),
-        new THREE.MeshStandardMaterial({ color: 0xf0f0f0 })
+    // Create central black hole
+    const blackHoleGeometry = new THREE.SphereGeometry(3, 32, 32);
+    const blackHoleMaterial = new THREE.MeshStandardMaterial({
+      color: 0x000000,
+      emissive: 0x000000,
+      roughness: 0.1,
+      metalness: 0.8
+    });
+    
+    // Event horizon glow
+    const glowGeometry = new THREE.SphereGeometry(3.5, 32, 32);
+    const glowMaterial = new THREE.MeshStandardMaterial({
+      color: 0x3366ff,
+      emissive: 0x1133cc,
+      emissiveIntensity: 2.0,
+      transparent: true,
+      opacity: 0.6
+    });
+    
+    const blackHole = new THREE.Mesh(blackHoleGeometry, blackHoleMaterial);
+    const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+    group.add(blackHole);
+    group.add(glow);
+    
+    // Create accretion disk
+    const accretionDiskGeometry = new THREE.RingGeometry(10, 20, 64);
+    const accretionDiskMaterial = new THREE.MeshStandardMaterial({
+      color: 0x6699ff,
+      emissive: 0x3366cc,
+      emissiveIntensity: 1.0,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.7
+    });
+    
+    const accretionDisk = new THREE.Mesh(accretionDiskGeometry, accretionDiskMaterial);
+    accretionDisk.rotation.x = Math.PI / 2;
+    group.add(accretionDisk);
+    
+    // Create galaxies
+    const galaxies = [];
+    const galaxySizes = [0.5, 0.7, 0.9, 1.2, 1.5];
+    const galaxyGeometries = [
+      new THREE.SphereGeometry(5, 20, 20),  // Elliptical
+      new THREE.BoxGeometry(5, 2, 2)      // Spiral (simplified)
     ];
     
-    // Central hub for connections
-    const hubGeometry = new THREE.SphereGeometry(2, 16, 16);
-    const hubMaterial = new THREE.MeshStandardMaterial({
-        color: 0x62e7d8,
-        emissive: 0x006060,
-        emissiveIntensity: 0.7
-    });
-    const hub = new THREE.Mesh(hubGeometry, hubMaterial);
-    group.add(hub);
+    const galaxyMaterials = [
+      new THREE.MeshStandardMaterial({
+        color: 0xffaa44,
+        emissive: 0x994400,
+        emissiveIntensity: 0.5
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0x44aaff,
+        emissive: 0x0044aa,
+        emissiveIntensity: 0.5
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0xaa44ff,
+        emissive: 0x6600aa,
+        emissiveIntensity: 0.5
+      })
+    ];
     
-    // Create papers with connections
-    for (let i = 0; i < paperCount; i++) {
-        const angle = (i / paperCount) * Math.PI * 2;
-        const radius = 15 + Math.random() * 15;
-        const height = (Math.random() - 0.5) * 20;
+    // Distribution function based on cosmic web structure
+    function getPositionOnWeb(index) {
+      const phi = index * 0.618033988749895 * Math.PI * 2; // Golden ratio distribution
+      
+      // Create filamentary structure
+      const r = Math.pow(Math.random(), 0.5) * fieldSize;
+      const filamentWeight = Math.random();
+      
+      // Positions follow filamentary structures or nodes
+      if (filamentWeight > 0.7) {
+        // Create a node position (cluster)
+        const x = (Math.random() - 0.5) * fieldSize * 0.5;
+        const y = (Math.random() - 0.5) * fieldSize * 0.5;
+        const z = (Math.random() - 0.5) * fieldSize * 0.5;
+        return new THREE.Vector3(x, y, z);
+      } else {
+        // Create position along filament
+        const theta = phi;
+        const rho = (Math.random() * 0.6 + 0.4) * fieldSize;
         
-        const paper = new THREE.Mesh(
-            paperGeometry, 
-            paperMaterials[Math.floor(Math.random() * paperMaterials.length)]
-        );
+        const x = rho * Math.sin(theta) * Math.cos(phi);
+        const y = rho * Math.sin(theta) * Math.sin(phi);
+        const z = rho * Math.cos(theta);
         
-        paper.position.x = Math.cos(angle) * radius;
-        paper.position.y = height;
-        paper.position.z = Math.sin(angle) * radius;
-        
-        // Random rotation
-        paper.rotation.x = Math.random() * 0.5;
-        paper.rotation.y = Math.random() * Math.PI * 2;
-        paper.rotation.z = Math.random() * 0.5;
-        
-        group.add(paper);
-        papers.push({
-            mesh: paper,
-            initialPos: paper.position.clone(),
-            rotationSpeed: (Math.random() - 0.5) * 0.01,
-            floatSpeed: 0.5 + Math.random() * 0.5
-        });
-        
-        // Connection to hub
-        const connectionGeometry = new THREE.BufferGeometry();
-        const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0x62e7d8,
-            transparent: true,
-            opacity: 0.2
-        });
-        
-        const points = [
-            hub.position.clone(),
-            paper.position.clone()
-        ];
-        
-        connectionGeometry.setFromPoints(points);
-        const line = new THREE.Line(connectionGeometry, lineMaterial);
-        group.add(line);
+        return new THREE.Vector3(x, y, z);
+      }
     }
     
-    group.position.z = -50;
+    // Create galaxies positioned according to cosmic web principles
+    for (let i = 0; i < galaxyCount; i++) {
+      const position = getPositionOnWeb(i);
+      const geometryIndex = Math.random() > 0.6 ? 1 : 0; // 40% spiral, 60% elliptical
+      const sizeIndex = Math.floor(Math.random() * galaxySizes.length);
+      const materialIndex = Math.floor(Math.random() * galaxyMaterials.length);
+      
+      const size = galaxySizes[sizeIndex];
+      const galaxy = new THREE.Mesh(
+        galaxyGeometries[geometryIndex].clone(),
+        galaxyMaterials[materialIndex].clone()
+      );
+      
+      galaxy.position.copy(position);
+      galaxy.scale.set(size, size, size);
+      galaxy.rotation.x = Math.random() * Math.PI * 2;
+      galaxy.rotation.y = Math.random() * Math.PI * 2;
+      galaxy.rotation.z = Math.random() * Math.PI * 2;
+      
+      galaxies.push({
+        mesh: galaxy,
+        initialPos: galaxy.position.clone(),
+        rotationSpeed: (Math.random() - 0.5) * 0.005,
+        oscillationSpeed: 0.2 + Math.random() * 0.3,
+        oscillationFactor: 0.05 + Math.random() * 0.1
+      });
+      
+      group.add(galaxy);
+    }
+    
+    // Create filaments (dark matter connections)
+    const filaments = [];
+    const filamentMaterial = new THREE.LineBasicMaterial({
+      color: 0x334466,
+      transparent: true,
+      opacity: 0.3
+    });
+    
+    // Create mathematical pattern for filaments
+    for (let i = 0; i < filamentCount; i++) {
+      const startPoint = getPositionOnWeb(i);
+      const endPoint = getPositionOnWeb(i + 0.5);
+      
+      // Create curved filament using quadratic curve
+      const curvePoints = [];
+      const midPoint = new THREE.Vector3().addVectors(startPoint, endPoint).multiplyScalar(0.5);
+      
+      // Add some variation to the midpoint
+      midPoint.x += (Math.random() - 0.5) * 10;
+      midPoint.y += (Math.random() - 0.5) * 10;
+      midPoint.z += (Math.random() - 0.5) * 10;
+      
+      const curve = new THREE.QuadraticBezierCurve3(
+        startPoint,
+        midPoint,
+        endPoint
+      );
+      
+      const points = curve.getPoints(10);
+      const filamentGeometry = new THREE.BufferGeometry().setFromPoints(points);
+      const filament = new THREE.Line(filamentGeometry, filamentMaterial);
+      
+      group.add(filament);
+      filaments.push({
+        line: filament,
+        curve: curve,
+        pulsateSpeed: 0.5 + Math.random() * 0.5
+      });
+    }
+    
+    // Add some randomly positioned stars in the background
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsCount = 1000;
+    const starsPositions = new Float32Array(starsCount * 3);
+    
+    for (let i = 0; i < starsCount * 3; i += 3) {
+      // Random distribution with higher density toward center
+      const radius = Math.pow(Math.random(), 3) * fieldSize * 2;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      
+      starsPositions[i] = radius * Math.sin(phi) * Math.cos(theta);
+      starsPositions[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      starsPositions[i + 2] = radius * Math.cos(phi);
+    }
+    
+    starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
+    
+    const starsMaterial = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.1,
+      transparent: true,
+      opacity: 0.8
+    });
+    
+    const stars = new THREE.Points(starsGeometry, starsMaterial);
+    group.add(stars);
+    
+    // Position the whole cosmic web
+    group.position.z = -100;
     group.visible = false;
     scene.add(group);
     
-    return { group, hub, papers };
-}
+    return { 
+      group, 
+      blackHole, 
+      galaxies, 
+      filaments, 
+      animate: (time) => {
+        // Rotate accretion disk
+        accretionDisk.rotation.z += 0.002;
+        
+        // Pulsate the glow
+        const glowPulse = Math.sin(time * 0.001) * 0.1 + 1;
+        glow.scale.set(glowPulse, glowPulse, glowPulse);
+        
+        // Animate galaxies
+        galaxies.forEach((galaxy, index) => {
+          // Rotate galaxy
+          galaxy.mesh.rotation.x += galaxy.rotationSpeed;
+          galaxy.mesh.rotation.y += galaxy.rotationSpeed * 0.7;
+          
+          // Small oscillation
+          const oscFactor = Math.sin(time * 0.001 * galaxy.oscillationSpeed) * galaxy.oscillationFactor;
+          galaxy.mesh.position.x = galaxy.initialPos.x + oscFactor * galaxy.initialPos.x;
+          galaxy.mesh.position.y = galaxy.initialPos.y + oscFactor * galaxy.initialPos.y;
+          galaxy.mesh.position.z = galaxy.initialPos.z + oscFactor * galaxy.initialPos.z;
+        });
+        
+        // Animate filaments
+        filaments.forEach((filament, index) => {
+          const opacity = (Math.sin(time * 0.0005 * filament.pulsateSpeed) * 0.2 + 0.5);
+          filament.line.material.opacity = opacity;
+        });
+      }
+    };
+  }
 
 // Create Communication Visualization for Contact section
 function createCommunicationVisualization() {
@@ -361,7 +526,7 @@ scene.add(directionalLight);
 const { core, fieldGroup } = createMagnetarVisualization();
 const neuralNetwork = createNeuralNetworkVisualization();
 const dataViz = createDataVisualization();
-const publicationsViz = createPublicationsVisualization();
+const publicationsViz = createCosmicWebVisualization();
 const communication = createCommunicationVisualization();
 const starField = createStarField();
 
@@ -503,6 +668,7 @@ document.querySelectorAll('.progress-dot').forEach(dot => {
 
 // Animation loop
 function animate() {
+    const time = Date.now();
     requestAnimationFrame(animate);
 
     // Home section animations
@@ -518,8 +684,7 @@ function animate() {
         // Pulse the nodes
         neuralNetwork.nodes.forEach((layer, i) => {
             layer.forEach((node, j) => {
-                const time = Date.now() * 0.001;
-                const scale = 0.9 + Math.sin(time * 2 + i + j) * 0.2;
+                const scale = 0.9 + Math.sin(time * 0.001 * 2 + i + j) * 0.2;
                 node.scale.set(scale, scale, scale);
             });
         });
@@ -531,11 +696,10 @@ function animate() {
         
         // Animate data points
         dataViz.dataPoints.forEach((point, i) => {
-            const time = Date.now() * 0.001;
             const x = point.position.x;
             const z = point.position.z;
             const distance = Math.sqrt(x*x + z*z);
-            const y = Math.sin(distance * 0.3 + time) * 5;
+            const y = Math.sin(distance * 0.3 + time * 0.001) * 5;
             point.position.y = y;
         });
     }
@@ -543,15 +707,8 @@ function animate() {
     // Publications section animations
     if (sectionVisualizationStates.publications.active) {
         publicationsViz.group.rotation.y += 0.002;
-        
-        // Animate papers
-        publicationsViz.papers.forEach((paper, i) => {
-            const time = Date.now() * 0.001;
-            // Floating animation
-            paper.mesh.position.y = paper.initialPos.y + Math.sin(time * paper.floatSpeed) * 2;
-            // Slight rotation
-            paper.mesh.rotation.y += paper.rotationSpeed;
-        });
+        // Run the cosmic web's animation function
+        publicationsViz.animate(time);
     }
     
     // Contact section animations
@@ -560,13 +717,12 @@ function animate() {
         
         // Pulse the connections
         communication.connections.forEach((conn, i) => {
-            const time = Date.now() * 0.001;
             const satellite = conn.satellite;
             
             // Make satellites orbit slightly
             const initialPos = satellite.position.clone().normalize();
-            const angle = time * 0.3 + i * 0.5;
-            const distance = conn.initialDistance + Math.sin(time + i) * 2;
+            const angle = time * 0.0003 + i * 0.5;
+            const distance = conn.initialDistance + Math.sin(time * 0.001 + i) * 2;
             
             satellite.position.x = Math.cos(angle) * initialPos.x * distance;
             satellite.position.z = Math.sin(angle) * initialPos.z * distance;
@@ -578,7 +734,6 @@ function animate() {
             ];
             
             conn.line.geometry.setFromPoints(points);
-            conn.line.geometry.verticesNeedUpdate = true;
         });
     }
 
