@@ -297,6 +297,22 @@ function onMouseMove(event) {
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 window.addEventListener('mousemove', onMouseMove, false);
+function createPublicationsVisualization() {
+    // You can copy and modify the dataViz creation or make something new
+    const group = new THREE.Group();
+    
+    // Create a different visualization than the work section
+    // For example, floating documents or citation connections
+    
+    group.position.z = -50;
+    group.visible = false;
+    scene.add(group);
+    
+    return { group };
+}
+
+// Add this after your other visualization creations
+const publicationsViz = createPublicationsVisualization();
 
 // Scroll interaction
 let currentSection = 'home';
