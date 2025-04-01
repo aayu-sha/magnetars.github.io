@@ -126,6 +126,7 @@ body, html {
     mix-blend-mode: difference;
 }
 
+/* Scrolled state */
 .nav.scrolled {
     padding: 1.2rem 5%;
     background: rgba(6, 11, 24, 0.85);
@@ -135,6 +136,7 @@ body, html {
     border-bottom: 1px solid rgba(0, 240, 255, 0.1);
 }
 
+/* Magnetars Logo */
 .logo {
     font-size: 1.6rem;
     font-weight: 700;
@@ -146,6 +148,7 @@ body, html {
     align-items: center;
 }
 
+/* Glowing dot effect */
 .logo::before {
     content: '';
     display: inline-block;
@@ -157,11 +160,13 @@ body, html {
     box-shadow: 0 0 10px var(--primary), 0 0 20px rgba(0, 240, 255, 0.4);
 }
 
+/* Flexbox for Navigation */
 .nav-links {
     display: flex;
     gap: 2.5rem;
 }
 
+/* Styling for Nav Links */
 .nav a {
     color: var(--text-light);
     text-decoration: none;
@@ -174,6 +179,7 @@ body, html {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Hover and Active State Effects */
 .nav a::after {
     content: '';
     position: absolute;
@@ -200,6 +206,15 @@ body, html {
 .nav a.active::after {
     width: 100%;
 }
+
+/* Ensure Nav Uses Full Width */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 
 /* Mobile menu */
 .menu-toggle {
