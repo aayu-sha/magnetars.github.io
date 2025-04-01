@@ -83,7 +83,7 @@ function createNeuralNetworkVisualization() {
     const group = new THREE.Group();
     
     // Nodes
-    const layers = [5, 8, 8, 4];
+    const layers = [5,16, 9, 8, 8,9, 16, 5];
     const nodeGeometry = new THREE.SphereGeometry(1, 16, 16);
     const nodeMaterial = new THREE.MeshStandardMaterial({
         color: 0x62e7d8,
