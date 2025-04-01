@@ -993,7 +993,7 @@ button:hover::before {
 
 /* About Section */
 #about {
-    padding: 50px 30%;
+    padding: 100px 30%;
     /* background-color: #f4f7fa; */
     color: white;
     font-family: 'Arial', sans-serif;
