@@ -269,7 +269,7 @@ section.active .content {
     display: inline-block;
 }
 
-.hero-title::before {
+/* .hero-title::before {
     content: '';
     position: absolute;
     top: -20px;
@@ -293,7 +293,7 @@ section.active .content {
     border-left: none;
     border-top: none;
     opacity: 0.5;
-}
+} */
 
 .hero-subtitle {
     font-size: 2vw;
