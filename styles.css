@@ -1195,8 +1195,7 @@ button:hover::before {
 }
 
 #publications {
-    padding: 40px;
-    background-color: #f9f9f9;
+    padding: 40px
 }
 
 #publications h2 {
