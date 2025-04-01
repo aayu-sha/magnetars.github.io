@@ -274,9 +274,10 @@ section.active .content {
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 3px solid black; /* Cursor effect */
+    border-right: 2px solid black; /* Cursor effect */
     width: 0;
-    animation: typing 4s steps(30) 1s forwards, blink 0.75s step-end infinite;
+    animation: typing 4s steps(40) 1s forwards, blink 0.75s step-end infinite;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for smoothness */
   }
   
   /* Typing animation */
@@ -285,7 +286,7 @@ section.active .content {
       width: 0;
     }
     to {
-      width: 100%;
+      width: 110%;
     }
   }
   
@@ -294,6 +295,11 @@ section.active .content {
     50% {
       border-color: transparent;
     }
+  }
+  
+  /* Optional: Add a subtle text-shadow for smoother appearance */
+  .typing-effect {
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2); /* Light text shadow for smoothness */
   }
   
 /* .hero-title::before {
