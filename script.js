@@ -128,6 +128,7 @@ function createNeuralNetworkVisualization() {
     return { group, nodes, connections };
 }
 
+
 // Star field creation (background for all sections)
 function createStarField() {
     const starGroup = new THREE.Group();
