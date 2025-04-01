@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnetars | Advanced Scientific Research & Consulting</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #7986cb;
+            --accent: #ff4081;
+            --light: #f5f5f5;
+            --dark: #121212;
+            --text: #333333;
+            --gradient: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/600') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: white;
+            transition: 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 70px 0;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* About Us */
+        .about {
+            padding: 100px 0;
+            background: #f9f9f9;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            display: block;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .team-card {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-img {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 25px;
+        }
+        
+        .team-info h3 {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .team-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .team-social {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .team-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .team-social a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* Publications */
+        .publications {
+            padding: 100px 0;
+            background: #f9f9f9;
+        }
+        
+        .publication-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            transition: 0.3s;
+        }
+        
+        .publication-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .publication-card h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .publication-meta {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .publication-card p {
+            margin-bottom: 15px;
+        }
+        
+        .pub-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Projects */
+        .projects {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+        
+        .project-info {
+            padding: 25px;
+        }
+        
+        .project-info h3 {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .project-tag {
+            background: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* Contact */
+        .contact {
+            padding: 100px 0;
+            background: var(--gradient);
+            color: white;
+            position: relative;
+        }
+        
+        .contact::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/600') center/cover no-repeat;
+            opacity: 0.05;
+            z-index: 1;
+        }
+        
+        .contact .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact .section-title h2 {
+            color: white;
+        }
+        
+        .contact .section-title h2::after {
+            background: white;
+        }
+        
+        .contact .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            font-size: 20px;
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <span>M</span>
+                </div>
+                MAGNETARS
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="container hero" id="home">
+            <h1>Advanced Scientific Research & Consulting</h1>
+            <p>Specialized expertise in Astrophysics, Machine Learning, and Quantitative Analysis for research institutions and innovative organizations.</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+    </header>
+    
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We provide specialized scientific and technical consulting to help organizations solve complex problems through data-driven approaches and computational expertise.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔭</div>
+                    <h3>Astrophysical Research</h3>
+                    <p>Expert analysis and research in cosmology, stellar evolution, dark matter interactions, and observational astronomy.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Machine Learning Solutions</h3>
+                    <p>Custom ML models for scientific data analysis, predictive modeling, and intelligent data processing.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Quantitative Trading Analysis</h3>
+                    <p>Rigorous backtesting, strategy development, and optimization for trading algorithms with statistical validation.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3>Technical Documentation</h3>
+                    <p>High-quality technical reports, white papers, and documentation for scientific and technological projects.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Specialized Software Development</h3>
+                    <p>Custom computational tools and software for specific research applications in physics and astronomy.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Technical Workshops & Training</h3>
+                    <p>Specialized workshops on advanced scientific computing, data analysis, and machine learning applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Magnetars</h2>
+                <p>Founded by researchers with a passion for applying computational techniques to solve complex scientific problems.</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="/api/placeholder/600/400" alt="About Magnetars">
+                </div>
+                <div class="about-text">
+                    <h2>Who We Are</h2>
+                    <p>Magnetars is a specialized scientific consulting firm founded by researchers with expertise in astrophysics, computational science, and data analysis. Named after the most powerful magnetic objects in the universe, we bring that same intensity to solving complex research challenges.</p>
+                    <p>Our team combines academic rigor with practical problem-solving to deliver exceptional results for research institutions, technology companies, and organizations working on cutting-edge projects.</p>
+                    <p>With published research in prestigious journals and experience working with leading institutions, we bring a unique combination of scientific expertise and technical implementation that sets us apart in the consulting landscape.</p>
+                    <a href="#team" class="btn">Meet Our Team</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Expert Team</h2>
+                <p>Meet the researchers and technical experts behind Magnetars</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="/api/placeholder/400/500" alt="Aayusha Singh">
+                    </div>
+                    <div class="team-info">
+                        <h3>Aayusha Singh</h3>
+                        <p>Co-founder & Research Director</p>
+                        <p>Specializing in astrophysics, dark matter research, and machine learning applications in scientific computing.</p>
+                        <div class="team-social">
+                            <a href="#"><span>GH</span></a>
+                            <a href="#"><span>RG</span></a>
+                            <a href="#"><span>GS</span></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="/api/placeholder/400/500" alt="Research Partner">
+                    </div>
+                    <div class="team-info">
+                        <h3>Research Partner</h3>
+                        <p>Co-founder & Technical Director</p>
+                        <p>Expert in computational physics, quantitative analysis, and scientific software development.</p>
+                        <div class="team-social">
+                            <a href="#"><span>GH</span></a>
+                            <a href="#"><span>RG</span></a>
+                            <a href="#"><span>GS</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Publications Section -->
+    <section class="publications" id="publications">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Publications</h2>
+                <p>Peer-reviewed research and scientific contributions</p>
+            </div>
+            
+            <div class="publications-list">
+                <div class="publication-card">
+                    <h3>Influence of Interactions between Dark Energy and Dark Matter on Galaxy Formation</h3>
+                    <div class="publication-meta">
+                        <span>Authors: Amrit Roy, Aayusha Singh</span>
+                        <span>Journal: IJASEAT Volume-12, Issue-4 (October 2024)</span>
+                    </div>
+                    <p>This paper explores the complex interactions between dark matter and dark energy, examining their collective influence on galactic formation processes and structural evolution.</p>
+                    <a href="#" class="pub-link">Read Paper →</a>
+                </div>
+                
+                <div class="publication-card">
+                    <h3>From Stellar Birth to Violent Death: A Review on Supernovae</h3>
+                    <div class="publication-meta">
+                        <span>Authors: Aayusha Singh, Amrit Roy</span>
+                        <span>Journal: IJASEAT Volume-12, Issue-3 (July 2024)</span>
+                    </div>
+                    <p>A comprehensive review of supernovae phenomena, covering stellar evolution mechanisms, explosion physics, and observational characteristics across different supernovae types.</p>
+                    <a href="#" class="pub-link">Read Paper →</a>
+                </div>
+                
+                <div class="publication-card">
+                    <h3>Classifying Primary Cosmic Ray Composition using Machine Learning and Deep Learning Models</h3>
+                    <div class="publication-meta">
+                        <span>Authors: Amrit Roy, Aayusha Singh</span>
+                        <span>Conference: RAP 2025, Greece</span>
+                    </div>
+                    <p>This paper presents novel machine learning and deep learning approaches to classify cosmic ray compositions from detector data, improving identification accuracy and processing efficiency.</p>
+                    <a href="#" class="pub-link">Read Paper →</a>
+                </div>
+                
+                <div class="publication-card">
+                    <h3>Formation and Evolution of Galactic Bars: Examining the Influence of Angular Momentum Transfer in Spiral Galaxies</h3>
+                    <div class="publication-meta">
+                        <span>Authors: Aayusha Singh, Amrit Roy</span>
+                        <span>Conference: 56th Division on Dynamical Astronomy Meeting, USA</span>
+                    </div>
+                    <p>An investigation into the dynamics of bar formation in spiral galaxies, focusing on angular momentum transfer mechanisms and their implications for galactic evolution.</p>
+                    <a href="#" class="pub-link">Read Paper →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Projects</h2>
+                <p>Featured research and consulting work</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="ML for Retina Images">
+                    </div>
+                    <div class="project-info">
+                        <h3>Retina Image Enhancement Using Deep Learning</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Deep Learning</span>
+                            <span class="project-tag">Medical Imaging</span>
+                            <span class="project-tag">CNN</span>
+                        </div>
+                        <p>Development of advanced deep learning models for enhancing and denoising retinal images for improved medical diagnostics.</p>
+                        <a href="#" class="pub-link">View Project →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Quantitative Trading">
+                    </div>
+                    <div class="project-info">
+                        <h3>Quantitative Trading Strategy Backtesting</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Financial Analysis</span>
+                            <span class="project-tag">Algorithmic Trading</span>
+                            <span class="project-tag">Python</span>
+                        </div>
+                        <p>Rigorous backtesting framework for evaluating trading strategies with statistical validation and performance optimization.</p>
+                        <a href="#" class="pub-link">View Project →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Plant Disease Classification">
+                    </div>
+                    <div class="project-info">
+                        <h3>BPLD Plant Disease Classification</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Machine Learning</span>
+                            <span class="project-tag">Agriculture</span>
+                            <span class="project-tag">CNN</span>
+                        </div>
+                        <p>Deep learning model for classifying plant leaf diseases using advanced neural network architectures and attention mechanisms.</p>
+                        <a href="#" class="pub-link">View Project →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Space Research">
+                    </div>
+                    <div class="project-info">
+                        <h3>Dark Matter Simulation Model</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Astrophysics</span>
+                            <span class="project-tag">Computational Physics</span>
+                            <span class="project-tag">Dark Matter</span>
+                        </div>
+                        <p>Computational simulation examining dark matter particle behavior and its effects on galactic formation and evolution.</p>
+                        <a href="#" class="pub-link">View Project →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Emotion Detection">
+                    </div>
+                    <div class="project-info">
+                        <h3>Emotion Detection System
