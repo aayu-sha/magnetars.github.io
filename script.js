@@ -1,4 +1,3 @@
-const { active } = require("d3");
 
 // Cursor tracking
 const cursor = document.getElementById('cursor');
@@ -301,16 +300,15 @@ window.addEventListener('mousemove', onMouseMove, false);
 
 // Scroll interaction
 let currentSection = 'home';
-const sections = ['home', 'about', 'work','publications', 'contact'];
+const sections = ['home', 'about', 'work', 'contact'];
 const sectionElements = {};
 const sectionVisualizationStates = {
     'home': { obj: { core, fieldGroup }, active: true },
     'about': { obj: neuralNetwork, active: false },
     'work': { obj: dataViz, active: false },
-    'publications':{obj: dataViz, active:false},
+    'publications': { obj: dataViz, active: false }, 
     'contact': { obj: communication, active: false }
 };
-
 // Get section elements
 sections.forEach(section => {
     sectionElements[section] = document.getElementById(section);
