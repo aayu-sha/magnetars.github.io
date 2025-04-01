@@ -265,20 +265,21 @@ section.active .content {
     line-height: 1;
     text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
     margin-bottom: 1.5rem;
+    text-align: left;
     position: relative;
-    display: inline-block;
+    display: block;
 }
 
 /* Typing effect */
 .typing-effect {
-    display: inline-block;
+    display: block; /* Ensures proper alignment in a block layout */
     overflow: hidden;
     white-space: nowrap;
     border-right: 2px solid black; /* Cursor effect */
     width: 0;
     animation: typing 4s steps(40) 1s forwards, blink 0.75s step-end infinite;
-    font-family: 'Courier New', Courier, monospace; /* Monospace font for smoothness */
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2); /* Light text shadow for smoothness */
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Typing animation */
@@ -287,7 +288,7 @@ section.active .content {
         width: 0;
     }
     to {
-        width: 110%; /* Changed to 100% for a more precise end width */
+        width: 200%; /* Ensures the text expands properly */
     }
 }
 
@@ -297,6 +298,7 @@ section.active .content {
         border-color: transparent;
     }
 }
+
 
   
 /* .hero-title::before {
@@ -987,6 +989,30 @@ button:hover::before {
     transform: scale(1.5);
 }
 
+
+#home {
+    display: flex;
+    align-items: flex-end; /* Aligns content to the bottom */
+    justify-content: flex-start; /* Aligns content to the left */
+    text-align: left; /* Ensures text alignment is left */
+    padding: 0 100px 50px; /* Adds bottom padding */
+    height: 100vh; /* Makes sure it takes the full viewport height */
+    width: 100%; /* Ensures full width */
+    position: relative; /* Allows precise positioning */
+}
+
+#home .content {
+    max-width: 900px; /* Controls text width for readability */
+    position: absolute;
+    bottom: 50px; /* Anchors the content to the bottom */
+    left: 100px; /* Anchors the content to the left */
+}
+
+.hero-title,
+.hero-subtitle,
+#home p {
+    text-align: left; /* Ensures all text is left-aligned */
+}
 
 #about {
     padding: 100px 10%;
