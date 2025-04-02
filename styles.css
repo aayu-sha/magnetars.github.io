@@ -510,7 +510,7 @@ p {
 .project-item h3 {
     color: var(--primary);
     margin-bottom: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.74rem;
     position: relative;
     margin-top: 10px;
 }
@@ -561,7 +561,7 @@ p {
 }
 
 .project-item img {
-    width: 150px; /* Adjust size */
+    width: 300px; /* Adjust size */
     height: auto;
     display: block;
     margin: 0 auto;
