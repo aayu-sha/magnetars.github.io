@@ -240,6 +240,20 @@ function updateActiveSection() {
     }
 }
 
+// Function to navigate to a section when a dot is clicked
+function navigateToSection(event) {
+    const section = event.target.dataset.section;
+    if (section && sectionElements[section]) {
+        sectionElements[section].scrollIntoView({ behavior: "smooth" });
+    }
+}
+
+// Add event listeners to progress dots
+document.querySelectorAll('.progress-dot').forEach(dot => {
+    dot.addEventListener('click', navigateToSection);
+});
+
+
 // Update 3D visualizations based on active section - simplified for home and about only
 function updateVisualizations() {
     if (currentSection === 'home') {
