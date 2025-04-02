@@ -475,7 +475,15 @@ p {
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
+    text-align: center;
 }
+
+.publication-img {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 10px;
+}
+
 
 .project-item::before {
     content: '';
