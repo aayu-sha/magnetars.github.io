@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS visits (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    count INT NOT NULL DEFAULT 1
-);
-
-INSERT INTO visits (id, count) VALUES (1, 1) ON DUPLICATE KEY UPDATE count = count + 1;
