@@ -154,17 +154,6 @@
         Visits: <span id="visitCount">Loading...</span>
     </div>
     
-    <script>
-        function updateVisitCount() {
-            fetch('counter.php')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("visitCount").innerText = data;
-                });
-        }
-    
-        updateVisitCount(); // Fetch the count on page load
-    </script>
     
     
 
