@@ -1234,40 +1234,42 @@ button:hover::before {
   /* Add Font Awesome for icons */
   @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
-
-#publications {
-    display: block;
+  .publication-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
-
-#publications {
-    padding: 40px
+.publication-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
 }
-
-#publications h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
+.publication-item h3 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+    color: #ffffff;
 }
-
-#publications ul {
-    list-style-type: none;
-    padding: 0;
-    max-width: 800px;
-    margin: 0 auto;
+.publication-item p {
+    margin: 0 0 10px;
+    font-style: italic;
+    color: #cccccc;
 }
-
-#publications ul li {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-top: 15px;
+.publication-item a {
+    color: #00ffcc;
+    text-decoration: none;
+    font-weight: 600;
 }
-
-#publications ul li ul {
-    list-style-type: disc;
-    margin-left: 20px;
-    font-weight: normal;
+.publication-item a:hover {
+    text-decoration: underline;
 }
-
-#publications ul li ul li {
-    font-size: 1rem;
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #00ffcc;
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-link:hover {
+    text-decoration: underline;
 }
