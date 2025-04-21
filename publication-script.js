@@ -13,6 +13,15 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('webgl').appendChild(renderer.domElement);
 
+function toggleAbstract(event, id) {
+    event.preventDefault();
+    const content = document.getElementById(id);
+    if (content.style.display === "none" || content.style.display === "") {
+        content.style.display = "block";
+    } else {
+        content.style.display = "none";
+    }
+}
 // Create Star Field (background for all publication pages)
 function createStarField() {
     const starGroup = new THREE.Group();
