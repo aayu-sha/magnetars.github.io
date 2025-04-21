@@ -1233,7 +1233,13 @@ h2:after {
     flex-direction: column;
     gap: 20px;
 }
+.publication-links a {
+    margin-right: 15px; /* Adjust the value (e.g., 10px, 20px) to control spacing */
+}
 
+.publication-links a:last-child {
+    margin-right: 50px; /* Removes extra margin on the last link to avoid unnecessary space at the end */
+}
 .publication-item {
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
