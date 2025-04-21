@@ -1239,6 +1239,12 @@ button:hover::before {
     flex-direction: column;
     gap: 20px;
 }
+
+.publication-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 .publication-item {
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
@@ -1255,13 +1261,36 @@ button:hover::before {
     font-style: italic;
     color: #cccccc;
 }
-.publication-item a {
-    color: #00ffcc;
+.publication-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+.journal-link, .pdf-link {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
 }
-.publication-item a:hover {
-    text-decoration: underline;
+.journal-link {
+    background-color: rgba(0, 255, 204, 0.1);
+    color: #00ffcc;
+    border: 1px solid #00ffcc;
+}
+.journal-link:hover {
+    background-color: rgba(0, 255, 204, 0.2);
+}
+.pdf-link {
+    background-color: rgba(65, 105, 225, 0.1);
+    color: #4169e1;
+    border: 1px solid #4169e1;
+}
+.pdf-link:hover {
+    background-color: rgba(65, 105, 225, 0.2);
 }
 .back-link {
     display: inline-block;
