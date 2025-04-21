@@ -14,6 +14,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('webgl').appendChild(renderer.domElement);
 
+
 // Create Magnetar Visualization for Home section
 function createMagnetarVisualization() {
     const group = new THREE.Group();
