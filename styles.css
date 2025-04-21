@@ -1104,12 +1104,14 @@ h2:after {
 }
 
 /* Profile Section */
+/* Profile Section */
 .profiles {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 50px;
     margin-top: 40px;
+    padding: 20px; /* Added padding for better container spacing */
 }
 
 .profile {
@@ -1119,14 +1121,17 @@ h2:after {
     width: 300px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Default subtle border */
+    position: relative; /* For potential future enhancements */
 }
 
 .profile:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid #1bdaca; /* Highlighted teal border on hover */
+    /* Removed background color change to focus on border highlight */
 }
 
 .profile-img {
@@ -1149,6 +1154,11 @@ h2:after {
     color: #5ecccc;
     margin-bottom: 15px;
     font-weight: 600;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.profile:hover h4 {
+    color: #1bdaca; /* Teal color on hover for name */
 }
 
 .socials {
@@ -1172,6 +1182,7 @@ h2:after {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
 }
 
 .social-icon i {
@@ -1184,6 +1195,36 @@ h2:after {
     background-color: #1bdaca;
     transform: translateY(-2px);
     box-shadow: 0 5px 10px rgba(27, 218, 202, 0.2);
+    text-decoration: underline; /* Added to match publication hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile {
+        width: 100%; /* Full width on smaller screens */
+        max-width: 300px; /* Maintains max width */
+        margin: 0 auto; /* Centers the profile */
+    }
+
+    .profiles {
+        gap: 30px; /* Reduced gap on smaller screens */
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .profile h4 {
+        font-size: 1.2rem;
+    }
+
+    .social-icon {
+        font-size: 0.9rem;
+    }
 }
 
 /* Responsive Design */
