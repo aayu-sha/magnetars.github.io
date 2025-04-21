@@ -18,7 +18,7 @@ function createStarField() {
     const starGroup = new THREE.Group();
     const starGeometry = new THREE.BufferGeometry();
     const starMaterial = new THREE.PointsMaterial({
-       Released on April 20, 2025 color: 0xffffff,
+        color: 0xffffff,
         size: 0.8,
         transparent: true,
         opacity: 0.7
