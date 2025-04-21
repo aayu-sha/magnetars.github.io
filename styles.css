@@ -1234,7 +1234,7 @@ h2:after {
     gap: 20px;
 }
 .publication-links a {
-    margin-right: 15px; /* Adjust the value (e.g., 10px, 20px) to control spacing */
+    margin-right: 150px; /* Adjust the value (e.g., 10px, 20px) to control spacing */
 }
 
 .publication-links a:last-child {
