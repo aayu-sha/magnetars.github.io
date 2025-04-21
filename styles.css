@@ -1129,8 +1129,8 @@ h2:after {
 
 .profile:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    border: 2px solid #1bdaca; /* Highlighted teal border on hover */
+    box-shadow: 0 15px 30px rgba(146, 85, 5, 0.3);
+    border: 2px solid #0ca1ac; /* Highlighted teal border on hover */
     /* Removed background color change to focus on border highlight */
 }
 
