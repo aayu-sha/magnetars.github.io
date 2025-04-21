@@ -681,7 +681,7 @@ p {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     margin-top: 2rem;
-    max-width: 800px;
+    max-width: 1000px;
 }
 
 .contact-form .full-width {
@@ -1046,7 +1046,7 @@ button:hover::before {
     max-width: 900px;
     position: absolute;
     bottom: 50px;
-    left: 100px;
+    left: 110px;
 }
 
 .hero-title,
