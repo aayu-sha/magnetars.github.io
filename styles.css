@@ -573,7 +573,7 @@ p {
 
 
 .project-item img {
-    width: 300px;
+    width: 400px;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -606,8 +606,8 @@ p {
 
 @media (max-width: 600px) {
     .project-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: 2fr;
+        grid-template-rows: repeat(4, 2fr);
     }
 }
 
@@ -1324,7 +1324,7 @@ h2:after {
 
 @media (max-width: 600px) {
     .project-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: 2fr;
+        grid-template-rows: repeat(4, 2fr);
     }
 }
