@@ -441,6 +441,7 @@ p {
     }
 }
 
+
 /* Variables for reusable values */
 :root {
     --primary: rgba(0, 240, 255, 1);
@@ -531,7 +532,7 @@ p {
 /* Image styles */
 .project-img, .publication-img {
     width: 100%;
-    max-width: var(--img-max-width, 300px);
+    max-width: var(--img-max-width, 450px); /* Increased from 300px to 450px */
     height: auto;
     margin-bottom: 16px;
     border-radius: 6px;
@@ -541,7 +542,7 @@ p {
 }
 
 .publication-img {
-    --img-max-width: 200px;
+    --img-max-width: 350px; /* Increased from 200px to 350px */
 }
 
 /* Heading styles */
