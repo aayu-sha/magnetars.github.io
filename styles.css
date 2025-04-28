@@ -440,36 +440,53 @@ p {
         opacity: 0;
     }
 }
+
 .project-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Adjusted for balance, can use 4fr 4fr for wider columns */
-    grid-template-rows: auto auto; /* Changed to auto for content-driven height */
-    gap: 30px; /* Increased gap for better separation */
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    grid-template-rows: auto auto;
+    gap: 40px; /* a bit more gap between big blocks */
     justify-items: center;
-    align-items: start; /* Changed to start to avoid stretching */
-    padding: 30px; /* Increased padding */
-    max-width: 1000px; /* Increased from 800px to 1000px */
+    align-items: start;
+    padding: 10px; /* more padding */
+    max-width: 1300px; /* wider container */
     margin: 3rem auto 0;
 }
 
+.project-grid-publications {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 equal columns */
+    grid-template-rows: auto auto;
+    gap: 10px; /* a bit more gap between big blocks */
+    justify-items: center;
+    align-items: start;
+    padding: 10px; /* more padding */
+    max-width: 1200px; /* wider container */
+    margin: 3rem auto 0;
+}
+
+
 .project-item {
-    background: rgba(6, 11, 24, 0.7);
-    border: 1px solid rgba(0, 240, 255, 0.1);
-    padding: 2rem; /* Increased from 1.5rem to 2rem */
-    border-radius: 20px; /* Slightly larger border-radius */
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(6, 11, 24, 0.8); /* Slightly darker for richer depth */
+    border: 1px solid rgba(0, 240, 255, 0.2); /* Slightly more visible neon border */
+    padding: 2.5rem; /* Slightly more padding for breathing space */
+    border-radius: 24px; /* A bit more rounded */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Slightly faster smooth transition */
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px); /* Enhanced blur for better glass effect */
     text-align: center;
-    min-height: 300px; /* Increased from 250px to 300px */
-    width: 100%; /* Ensure full width of grid cell */
-    max-width: 450px; /* Added to control maximum block width */
+    min-height: 380px; /* Bigger blocks */
+    width: 100%;
+    max-width: 480px; /* Slightly wider blocks */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* Center content horizontally */
+    box-shadow: 0 12px 25px rgba(0, 240, 255, 0.15); /* Soft glow shadow */
 }
+
 
 .project-item::before {
     content: '';
@@ -574,7 +591,7 @@ p {
 /* Media query for smaller screens */
 @media (max-width: 600px) {
     .project-grid {
-        grid-template-columns: 1fr; /* Single column */
+        grid-template-columns: 2fr; /* Single column */
         grid-template-rows: auto; /* Auto rows for content */
         gap: 20px; /* Slightly reduced gap for mobile */
         padding: 20px; /* Slightly reduced padding for mobile */
@@ -1343,8 +1360,8 @@ h2:after {
 
 @media (max-width: 600px) {
     .project-grid {
-        grid-template-columns: 2fr;
-        grid-template-rows: repeat(4, 2fr);
+        grid-template-columns: 3fr;
+        grid-template-rows: repeat(4, 3fr);
     }
 }
 
