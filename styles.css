@@ -482,7 +482,7 @@ p {
     text-align: center;
     min-height: 300px;
     width: 100%;
-    max-width: 990px;
+    max-width: 1100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -532,17 +532,21 @@ p {
 /* Image styles */
 .project-img, .publication-img {
     width: 100%;
-    max-width: var(--img-max-width, 450px); /* Increased from 300px to 450px */
+    max-width: var(--img-max-width, 500px);
+    min-width: 300px; /* Ensure images don't shrink too small */
     height: auto;
     margin-bottom: 16px;
     border-radius: 6px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border: 2px solid red; /* Debugging border */
+    object-fit: contain; /* Prevent distortion */
 }
 
+/* Specific image overrides */
 .publication-img {
-    --img-max-width: 350px; /* Increased from 200px to 350px */
+    --img-max-width: 400px;
 }
 
 /* Heading styles */
