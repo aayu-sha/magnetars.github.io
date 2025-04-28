@@ -477,9 +477,9 @@ p {
     overflow: hidden;
     backdrop-filter: blur(12px); /* Enhanced blur for better glass effect */
     text-align: center;
-    min-height: 380px; /* Bigger blocks */
+    min-height: 300px; /* Bigger blocks */
     width: 100%;
-    max-width: 480px; /* Slightly wider blocks */
+    max-width: 990px; /* Slightly wider blocks */
     display: flex;
     flex-direction: column;
     justify-content: center;
