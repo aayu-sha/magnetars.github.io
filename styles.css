@@ -533,13 +533,13 @@ p {
 .project-img, .publication-img {
     width: 100%;
     max-width: var(--img-max-width, 400px); /* Increased to 400px */
-    height: auto;
-    margin-bottom: 16px;
+    min-width: 200px;
+    height: 150px;
+    margin-bottom: 10px;
     border-radius: 6px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border: 2px solid red; /* Debugging border */
     object-fit: contain;
 }
 
@@ -547,6 +547,7 @@ p {
 .publication-img {
     --img-max-width: 300px; /* Increased to 300px */
     min-width: 250px; /* Ensure small icons scale up */
+    height: 400px;
 }
 
 /* Heading styles */
