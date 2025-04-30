@@ -6,6 +6,40 @@
     <title>CFD | Magnetars</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles.css">
+    <style>
+        /* Flipbook Styles */
+        #flipbook {
+            width: 80vw;
+            max-width: 800px;
+            height: 60vh;
+            max-height: 600px;
+            margin: 50px auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        #flipbook .page {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        #flipbook .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .turn-page {
+            background-color: #f5f5f5;
+        }
+        @media (max-width: 768px) {
+            #flipbook {
+                width: 90vw;
+                height: 50vh;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="cursor"></div>
@@ -24,14 +58,38 @@
     <div id="webgl"></div>
 
     <section id="published" class="active">
-        
-       
+        <h1>CFD Internship Report</h1>
+        <div id="flipbook">
+            <!-- Replace with your actual page images -->
+            <div class="page"><img src="assets/report/page1.jpg" alt="Page 1"></div>
+            <div class="page"><img src="assets/report/page2.jpg" alt="Page 2"></div>
+            <div class="page"><img src="assets/report/page3.jpg" alt="Page 3"></div>
+            <!-- Add more pages as needed -->
+        </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
     <script src="../../publication-script.js"></script>
+    <script>
+        // Initialize turn.js flipbook
+        document.addEventListener('DOMContentLoaded', function() {
+            $("#flipbook").turn({
+                width: '100%',
+                height: '100%',
+                autoCenter: true,
+                gradients: true,
+                acceleration: true,
+                display: 'double', // Use 'single' for single-page view
+                turnCorners: 'bl,br' // Bottom-left and bottom-right corners
+            });
 
-
+            // Optional: Resize flipbook on window resize
+            window.addEventListener('resize', function() {
+                $("#flipbook").turn('size', $("#flipbook").width(), $("#flipbook").height());
+            });
+        });
+    </script>
 </body>
 </html>
