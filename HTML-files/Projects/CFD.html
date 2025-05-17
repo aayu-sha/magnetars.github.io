@@ -14,14 +14,25 @@
             border-radius: 8px;
             margin-bottom: 20px;
         }
+        
+        #published {
+            padding-top: 100px;
+            position: relative;
+            z-index: 10; /* Above #webgl */
+        }
 
         @media (max-width: 768px) {
             .pdf-container {
                 height: 400px;
             }
+            
+            #published {
+                padding-top:60px; /* Adjust for smaller nav on mobile */
+            }
         }
     </style>
 </head>
+
 <body>
     <div id="cursor"></div>
 
@@ -62,8 +73,8 @@
             
         </div>
     </section>
-    
 
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="../../publication-script.js"></script>
