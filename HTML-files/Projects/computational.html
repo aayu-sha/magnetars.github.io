@@ -93,27 +93,27 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <h1 class="text-4xl font-bold text-white text-center mb-8">Computational Tools & Automation</h1>
             
-            <!-- Factor of Safety Project with GUI Result -->
+            <!-- Factor of Safety GUI Project -->
             <div class="project-card">
-                <h2 class="text-2xl font-semibold text-white mb-4">Factor of Safety Analysis GUI for Aerospace Structures</h2>
+                <h2 class="text-2xl font-semibold text-white mb-4">Factor of Safety Analysis GUI</h2>
                 <p class="text-gray-400 mb-4">
-                    This project developed a graphical user interface (GUI) to compute the Factor of Safety (FoS) for aerospace structures, such as spacecraft panels, under various loads. Built with Python (using Tkinter or PyQt), the GUI allows users to input material properties and load conditions, calculating FoS as <code>FoS = ultimate stress / working stress</code> per NASA standards (FoS ≈ 1.5–2.0). The result below shows the GUI displaying computed FoS, stress distributions, and material data. A collaborative effort by Aayusha Singh (GUI development, visualization) and Amrit Roy (algorithm design, validation).
+                    This project developed a graphical user interface (GUI) to calculate the Factor of Safety (FoS) for structural components under various loads. Built with Python (Tkinter), the GUI allows users to input material properties and load conditions, computing FoS as <code>FoS = ultimate stress / working stress</code>. The result below shows the GUI displaying computed FoS, stress values, and input parameters. A collaborative effort by Aayusha Singh (GUI development, visualization) and Amrit Roy (algorithm design, validation).
                 </p>
-                <img src="../../Images/fos_gui_result.png" alt="GUI FoS Result" onclick="openModal('../../Images/fos_gui_result.png', 'GUI Displaying Factor of Safety Calculation for Spacecraft Panel')">
+                <img src="../../Images/fos_gui_result.png" alt="GUI FoS Result" onclick="openModal('../../Images/fos_gui_result.png', 'GUI Displaying Factor of Safety Calculation for Structural Component')">
                 <ul class="list-disc list-inside text-gray-400 mt-4">
-                    <li><a href="https://github.com/aayu-sha/fos-project" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a> - GUI script, Python code, and README.</li>
+                    <li><a href="https://github.com/AmritRoy12/FOS-GUI" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a> - GUI script, Python code, and README.</li>
                     <li><a href="../../assets/fos_results.zip" download class="text-blue-400 hover:underline">Download Results</a> - GUI script, sample inputs, and output data.</li>
                 </ul>
             </div>
 
             <!-- Web Scraping Project -->
             <div class="project-card">
-                <h2 class="text-2xl font-semibold text-white mb-4">Web Scraping for Aerospace Data Automation</h2>
+                <h2 class="text-2xl font-semibold text-white mb-4">Web Scraping for Data Automation</h2>
                 <p class="text-gray-400 mb-4">
-                    This project automated the extraction of aerospace material properties and safety standards from NASA’s Technical Reports Server (NTRS) using Python (BeautifulSoup, Scrapy). Over 100 entries were scraped into CSV and JSON formats, adhering to ethical practices (e.g., robots.txt compliance). Results showcase structured data outputs. A collaborative effort by Aayusha Singh (scraper development, data processing) and Amrit Roy (data validation, automation scripting).
+                    This project automated the extraction of structured data from public websites, such as product details or public records, using Python (BeautifulSoup, Scrapy). Over 100 entries were scraped into CSV and JSON formats, adhering to ethical practices (e.g., robots.txt compliance, rate limiting). Results showcase the scraped data in structured formats. A collaborative effort by Aayusha Singh (scraper development, data processing) and Amrit Roy (data validation, automation scripting).
                 </p>
-                <img src="../../Images/scraped_data_csv.png" alt="Scraped CSV Output" onclick="openModal('../../Images/scraped_data_csv.png', 'Sample CSV of Scraped Material Properties from NASA NTRS')">
-                <img src="../../Images/scraped_json.png" alt="Scraped JSON Output" onclick="openModal('../../Images/scraped_json.png', 'Sample JSON of Aerospace Standards')">
+                <img src="../../Images/scraped_data_csv.png" alt="Scraped CSV Output" onclick="openModal('../../Images/scraped_data_csv.png', 'Sample CSV of Scraped Data')">
+                <img src="../../Images/scraped_json.png" alt="Scraped JSON Output" onclick="openModal('../../Images/scraped_json.png', 'Sample JSON of Scraped Data')">
                 <ul class="list-disc list-inside text-gray-400 mt-4">
                     <li><a href="https://github.com/aayu-sha/web-scraping" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a> - Scraper scripts, sample data, and README.</li>
                     <li><a href="../../assets/scraped_dataset.zip" download class="text-blue-400 hover:underline">Download Dataset</a> - CSV/JSON files with scraped entries.</li>
