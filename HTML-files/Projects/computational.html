@@ -45,6 +45,14 @@
             max-width: 800px;
             border-radius: 8px;
         }
+        .modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+
         .close {
             color: #fff;
             float: right;
@@ -99,7 +107,7 @@
                 <p class="text-gray-400 mb-4">
                     This project developed a graphical user interface (GUI) to calculate the Factor of Safety (FoS) for structural components under various loads. Built with Python (Tkinter), the GUI allows users to input material properties and load conditions, computing FoS as <code>FoS = ultimate stress / working stress</code>. The result below shows the GUI displaying computed FoS, stress values, and input parameters. A collaborative effort by Aayusha Singh (GUI development, visualization) and Amrit Roy (algorithm design, validation).
                 </p>
-                <img src="../../Images/fos_gui_result.png" alt="GUI FoS Result" onclick="openModal('../../Images/fos_gui_result.png', 'GUI Displaying Factor of Safety Calculation for Structural Component')">
+                <img src="../../Projects/Computational/fos-gui.png" alt="GUI FoS Result" onclick="openModal('../../Projects/Computational/fos-gui.png', 'GUI Displaying Factor of Safety Calculation for Structural Component')">
                 <ul class="list-disc list-inside text-gray-400 mt-4">
                     <li><a href="https://github.com/AmritRoy12/FOS-GUI" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a> - GUI script, Python code, and README.</li>
                     <li><a href="../../assets/fos_results.zip" download class="text-blue-400 hover:underline">Download Results</a> - GUI script, sample inputs, and output data.</li>
