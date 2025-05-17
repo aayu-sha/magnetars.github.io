@@ -108,11 +108,50 @@
         </div>
     </section>
 
-
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="../../publication-script.js"></script>
-    
+    <script>
+        // GSAP Animation for gallery images
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.gallery img', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                stagger: 0.1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Modal functions
+        function openModal(src, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            modalImage.src = src;
+            modalCaption.textContent = caption;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside or pressing Esc
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        };
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
