@@ -3,9 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic | Magnetars</title>
+    <title>Academic Projects | Magnetars</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .project-box {
+            background: #1a202c;
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .project-box button {
+            background: #4a5568;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .project-box button:hover {
+            background: #718096;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            margin: 5% auto;
+            padding: 20px;
+            background-color: #1a202c;
+            width: 80%;
+            max-width: 1200px;
+            border-radius: 8px;
+        }
+        .model-block {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .model-block img {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .model-block img:hover {
+            transform: scale(1.05);
+        }
+        .model-details {
+            flex: 1;
+        }
+        .close {
+            color: #fff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #ccc;
+        }
+        #academic {
+            padding-top: 80px; /* Offset for fixed nav */
+            position: relative;
+            z-index: 10; /* Above #webgl */
+        }
+        #imageModal .modal-content img {
+            max-width: 600px; /* Cap the maximum width */
+            max-height: 600px; /* Cap the maximum height */
+            width: auto;
+            height: auto;
+            margin: auto; /* Center the image */
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .project-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .model-block {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .model-block img {
+                width: 100%;
+                height: auto;
+            }
+            .modal-content {
+                width: 90%;
+            }
+            #academic {
+                padding-top: 60px; /* Adjust for mobile nav */
+            }
+            #imageModal .modal-content img {
+                max-width: 100%; /* Ensure it fits smaller screens */
+                max-height: 400px; /* Adjust for smaller screens */
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="cursor"></div>
@@ -23,14 +136,234 @@
 
     <div id="webgl"></div>
 
-    <section id="published" class="active">
-       
+    <section id="academic" class="active">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h1 class="text-4xl font-bold text-white text-center mb-8">Academic Projects</h1>
+            
+            <!-- 1. From Stellar Birth to Violent Death: A Review on Supernovae -->
+            <div class="project-box">
+                <div>
+                    <h2 class="text-2xl font-semibold text-white mb-2">1. From Stellar Birth to Violent Death: A Review on Supernovae</h2>
+                    <p class="text-gray-400">
+                        Singh, A., Roy, A. (2024). International Journal of Advanced Science, Engineering and Technology (IJASEAT), Volume-12, Issue-3 (July 2024). A collaborative effort by Aayusha Singh and Amrit Roy.
+                    </p>
+                </div>
+                <button onclick="openProjectModal('supernovaeModal')">Open Project</button>
+            </div>
+
+            <!-- 2. Influence of Interactions between Dark Energy and Dark Matter on Galaxy Formation -->
+            <div class="project-box">
+                <div>
+                    <h2 class="text-2xl font-semibold text-white mb-2">2. Influence of Interactions between Dark Energy and Dark Matter on Galaxy Formation</h2>
+                    <p class="text-gray-400">
+                        Roy, A., Singh, A. (2024). International Journal of Advanced Science, Engineering and Technology (IJASEAT), Volume-12, Issue-4 (October 2024). A collaborative effort by Aayusha Singh and Amrit Roy.
+                    </p>
+                </div>
+                <button onclick="openProjectModal('galaxyFormationModal')">Open Project</button>
+            </div>
+
+            <!-- 3. Relativistic Effects on Spacecraft in Interstellar Travel -->
+            <div class="project-box">
+                <div>
+                    <h2 class="text-2xl font-semibold text-white mb-2">3. Relativistic Effects on Spacecraft in Interstellar Travel: Examining Time Dilation and Relativistic Energy in Deep Space Missions</h2>
+                    <p class="text-gray-400">
+                        Aayusha Singh<sup>a,*</sup>, Amrit Roy<sup>b</sup>, Om Singh<sup>c</sup><br>
+                        <sup>a</sup> Department of Mechanical Engineering, National Institute of Technology Srinagar, India<br>
+                        <sup>b</sup> Department of Metallurgical and Materials Engineering, National Institute of Technology Srinagar, India<br>
+                        <sup>c</sup> Ludhani Vidya Mandir, Maharashtra, India<br>
+                        *Corresponding author: singh.aayushaa@gmail.com<br>
+                        April 18, 2025<br>
+                        A collaborative effort by Aayusha Singh, Amrit Roy, and Om Singh.
+                    </p>
+                </div>
+                <button onclick="openProjectModal('relativisticEffectsModal')">Open Project</button>
+            </div>
+
+            <!-- 4. Investigating the Behavior of Dark Matter-Analogous Particles in Microgravity Environments -->
+            <div class="project-box">
+                <div>
+                    <h2 class="text-2xl font-semibold text-white mb-2">4. Investigating the Behavior of Dark Matter-Analogous Particles in Microgravity Environments: A Hypothetical Study</h2>
+                    <p class="text-gray-400">
+                        Amrit Roy<sup>a,*</sup>, Aayusha Singh<sup>b</sup>, Om Singh<sup>c</sup><br>
+                        <sup>a</sup> Department of Metallurgical and Materials Engineering, National Institute of Technology Srinagar, India<br>
+                        <sup>b</sup> Department of Mechanical Engineering, National Institute of Technology Srinagar, India<br>
+                        <sup>c</sup> Ludhani Vidya Mandir, Maharashtra, India<br>
+                        *Corresponding author: roy.amrit157@gmail.com<br>
+                        April 18, 2025<br>
+                        A collaborative effort by Aayusha Singh, Amrit Roy, and Om Singh.
+                    </p>
+                </div>
+                <button onclick="openProjectModal('darkMatterModal')">Open Project</button>
+            </div>
+        </div>
     </section>
+
+    <!-- Supernovae Project Modal -->
+    <div id="supernovaeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal('supernovaeModal')">×</span>
+            <h2 class="text-2xl font-semibold text-white mb-4">From Stellar Birth to Violent Death: A Review on Supernovae</h2>
+            <div class="model-block">
+                <img src="../../Images/supernovae_simulation.png" alt="Supernovae Simulation" onclick="openImageModal('../../Images/supernovae_simulation.png', 'Simulated Supernova Evolution Graph')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">Simulation Results</h3>
+                    <p class="text-gray-400">
+                        This section includes graphs and images simulated for the paper, showcasing the evolution of supernovae from stellar birth to explosion.
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Graph of stellar mass vs. luminosity over time.</li>
+                        <li>Simulation of Type Ia supernova light curve.</li>
+                        <li>Energy distribution during the supernova explosion.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Galaxy Formation Project Modal -->
+    <div id="galaxyFormationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal('galaxyFormationModal')">×</span>
+            <h2 class="text-2xl font-semibold text-white mb-4">Influence of Interactions between Dark Energy and Dark Matter on Galaxy Formation</h2>
+            <div class="model-block">
+                <img src="../../Images/galaxy_formation_simulation.png" alt="Galaxy Formation Simulation" onclick="openImageModal('../../Images/galaxy_formation_simulation.png', 'Simulated Galaxy Formation with Dark Matter and Dark Energy')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">Simulation Results</h3>
+                    <p class="text-gray-400">
+                        This section includes graphs and images simulated for the paper, illustrating the impact of dark energy and dark matter interactions on galaxy formation.
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Density distribution of dark matter in a galaxy cluster.</li>
+                        <li>Graph of dark energy influence on galaxy expansion rates.</li>
+                        <li>Simulation of galaxy formation timelines under varying dark energy models.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Relativistic Effects Project Modal -->
+    <div id="relativisticEffectsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal('relativisticEffectsModal')">×</span>
+            <h2 class="text-2xl font-semibold text-white mb-4">Relativistic Effects on Spacecraft in Interstellar Travel: Examining Time Dilation and Relativistic Energy</h2>
+            <div class="model-block">
+                <img src="../../Images/relativistic_effects_simulation.png" alt="Relativistic Effects Simulation" onclick="openImageModal('../../Images/relativistic_effects_simulation.png', 'Simulated Time Dilation Effects on Spacecraft')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">Simulation Results</h3>
+                    <p class="text-gray-400">
+                        This section includes graphs and images simulated for the paper, demonstrating relativistic effects on spacecraft during interstellar travel.
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Graph of time dilation vs. spacecraft velocity (approaching c).</li>
+                        <li>Energy requirements for relativistic speeds in deep space.</li>
+                        <li>Simulation of relativistic effects on spacecraft clock synchronization.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dark Matter Project Modal -->
+    <div id="darkMatterModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal('darkMatterModal')">×</span>
+            <h2 class="text-2xl font-semibold text-white mb-4">Investigating the Behavior of Dark Matter-Analogous Particles in Microgravity Environments: A Hypothetical Study</h2>
+            <div class="model-block">
+                <img src="../../Images/dark_matter_simulation.png" alt="Dark Matter Simulation" onclick="openImageModal('../../Images/dark_matter_simulation.png', 'Simulated Dark Matter Particle Behavior in Microgravity')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">Simulation Results</h3>
+                    <p class="text-gray-400">
+                        This section includes graphs and images simulated for the paper, exploring the behavior of dark matter-analogous particles in microgravity.
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Particle distribution in a microgravity environment over time.</li>
+                        <li>Graph of interaction rates between dark matter-analogous particles.</li>
+                        <li>Simulation of particle clustering under microgravity conditions.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Zoom Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeImageModal()">×</span>
+            <img id="modalImage" src="" alt="" class="rounded-lg">
+            <p id="modalCaption" class="text-center text-gray-400 mt-4"></p>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="../../publication-script.js"></script>
+    <script>
+        // GSAP Animation for project boxes
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.project-box', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        });
 
+        // Project Modal functions
+        function openProjectModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+            gsap.from(modal.querySelectorAll('.model-block'), {
+                opacity: 0,
+                y: 20,
+                duration: 0.5,
+                stagger: 0.1,
+                ease: 'power3.out'
+            });
+        }
 
+        function closeProjectModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Image Modal functions
+        function openImageModal(src, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            modalImage.src = src;
+            modalCaption.textContent = caption;
+            modal.style.display = 'block';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modals when clicking outside or pressing Esc
+        window.onclick = function(event) {
+            const supernovaeModal = document.getElementById('supernovaeModal');
+            const galaxyFormationModal = document.getElementById('galaxyFormationModal');
+            const relativisticEffectsModal = document.getElementById('relativisticEffectsModal');
+            const darkMatterModal = document.getElementById('darkMatterModal');
+            const imageModal = document.getElementById('imageModal');
+            if (event.target == supernovaeModal) closeProjectModal('supernovaeModal');
+            if (event.target == galaxyFormationModal) closeProjectModal('galaxyFormationModal');
+            if (event.target == relativisticEffectsModal) closeProjectModal('relativisticEffectsModal');
+            if (event.target == darkMatterModal) closeProjectModal('darkMatterModal');
+            if (event.target == imageModal) closeImageModal();
+        };
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeProjectModal('supernovaeModal');
+                closeProjectModal('galaxyFormationModal');
+                closeProjectModal('relativisticEffectsModal');
+                closeProjectModal('darkMatterModal');
+                closeImageModal();
+            }
+        });
+    </script>
 </body>
 </html>
