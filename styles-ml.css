@@ -73,17 +73,17 @@
     color: #ccc;
 }
 #ml {
-padding-top: 80px; /* Offset for fixed nav */
-position: relative;
-z-index: 10; /* Above #webgl */
+    padding-top: 80px; /* Offset for fixed nav */
+    position: relative;
+    z-index: 10; /* Above #webgl */
 }
 #imageModal .modal-content img {
-max-width: 600px; /* Cap the maximum width */
-max-height: 600px; /* Cap the maximum height */
-width: auto;
-height: auto;
-margin: auto; /* Center the image */
-display: block;
+    max-width: 600px; /* Cap the maximum width */
+    max-height: 600px; /* Cap the maximum height */
+    width: auto;
+    height: auto;
+    margin: auto; /* Center the image */
+    display: block;
 }
 @media (max-width: 768px) {
     .project-box {
