@@ -85,6 +85,8 @@
     margin: auto; /* Center the image */
     display: block;
 }
+
+
 @media (max-width: 768px) {
     .project-box {
         flex-direction: column;
