@@ -3,9 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machine Learning | Magnetars</title>
+    <title>Machine Learning Projects | Magnetars</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .project-box {
+            background: #1a202c;
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .project-box button {
+            background: #4a5568;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .project-box button:hover {
+            background: #718096;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            margin: 5% auto;
+            padding: 20px;
+            background-color: #1a202c;
+            width: 80%;
+            max-width: 1200px;
+            border-radius: 8px;
+        }
+        .model-block {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .model-block img {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .model-block img:hover {
+            transform: scale(1.05);
+        }
+        .model-details {
+            flex: 1;
+        }
+        .close {
+            color: #fff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #ccc;
+        }
+        #ml {
+            padding-top: 80px; /* Offset for fixed nav */
+            position: relative;
+            z-index: 10; /* Above #webgl */
+        }
+        @media (max-width: 768px) {
+            .project-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .model-block {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .model-block img {
+                width: 100%;
+                height: auto;
+            }
+            .modal-content {
+                width: 90%;
+            }
+            #ml {
+                padding-top: 60px; /* Adjust for mobile nav */
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="cursor"></div>
@@ -23,14 +124,235 @@
 
     <div id="webgl"></div>
 
-    <section id="published" class="active">
-       
+    <section id="ml" class="active">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h1 class="text-4xl font-bold text-white text-center mb-8">Machine Learning Projects</h1>
+            
+            <!-- Retina Image Enhancement Project -->
+            <div class="project-box">
+                <div>
+                    <h2 class="text-2xl font-semibold text-white mb-2">Retina Image Enhancement</h2>
+                    <p class="text-gray-400">
+                        Developed 8 machine learning models to enhance retinal images for improved disease detection (e.g., diabetic retinopathy). Models include denoising, generative, and hybrid approaches, trained on 1000+ retinal images. A collaborative effort by Aayusha Singh (development, modeling) and Amrit Roy (data preprocessing, validation).
+                    </p>
+                </div>
+                <button onclick="openProjectModal('retinaModal')">Open Project</button>
+            </div>
+
+            <!-- BPLD Project -->
+            <div class="project-box">
+                <div>
+                    <h2 class="text-2xl font-semibold text-white mb-2">Brain Pattern Learning and Detection (BPLD)</h2>
+                    <p class="text-gray-400">
+                        Focused on detecting patterns in brain signals (e.g., EEG data) using machine learning for medical diagnostics. Achieved high accuracy on 500+ samples. A collaborative effort by Aayusha Singh (development, modeling) and Amrit Roy (data preprocessing, validation).
+                    </p>
+                </div>
+                <button onclick="openProjectModal('bpldModal')">Open Project</button>
+            </div>
+        </div>
     </section>
+
+    <!-- Retina Project Modal -->
+    <div id="retinaModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal('retinaModal')">×</span>
+            <h2 class="text-2xl font-semibold text-white mb-4">Retina Image Enhancement Models</h2>
+            
+            <!-- 1. Variational Autoencoder (VAE) -->
+            <div class="model-block">
+                <img src="../../Images/vae_result.png" alt="VAE Result" onclick="openImageModal('../../Images/vae_result.png', 'Enhanced Retinal Image using Variational Autoencoder')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">1. Variational Autoencoder (VAE)</h3>
+                    <p class="text-gray-400">
+                        A generative model that learns latent representations of retinal images for enhancement, improving contrast and clarity. Reference: <a href="https://ar5iv.labs.arxiv.org/html/1606.05908" target="_blank" class="text-blue-400 hover:underline">Kingma & Welling, 2016</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/retina-image-enhancement" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. Total Variational De-noising (TVD) -->
+            <div class="model-block">
+                <img src="../../Images/tvd_result.png" alt="TVD Result" onclick="openImageModal('../../Images/tvd_result.png', 'Denoised Retinal Image using Total Variational De-noising')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">2. Total Variational De-noising (TVD)</h3>
+                    <p class="text-gray-400">
+                        Reduces noise in retinal images by minimizing total variation, preserving edges. Reference: <a href="https://www.researchgate.net/publication/222469583_Nonlinear_total_variation_based_noise_removal_algorithms" target="_blank" class="text-blue-400 hover:underline">Rudin et al., 1992</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/retina-image-enhancement" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3. Spatial Pyramid Pooling Networks (SPP) -->
+            <div class="model-block">
+                <img src="../../Images/spp_result.png" alt="SPP Result" onclick="openImageModal('../../Images/spp_result.png', 'Enhanced Retinal Image using Spatial Pyramid Pooling Networks')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">3. Spatial Pyramid Pooling Networks (SPP)</h3>
+                    <p class="text-gray-400">
+                        Uses multi-scale feature extraction to enhance retinal images, improving robustness to varying image sizes. Reference: <a href="https://arxiv.org/abs/1406.4729" target="_blank" class="text-blue-400 hover:underline">He et al., 2014</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/retina-image-enhancement" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4. Auto Regressive Model -->
+            <div class="model-block">
+                <img src="../../Images/ar_result.png" alt="AR Result" onclick="openImageModal('../../Images/ar_result.png', 'Enhanced Retinal Image using Auto Regressive Model')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">4. Auto Regressive Model</h3>
+                    <p class="text-gray-400">
+                        Models pixel dependencies in retinal images for enhancement, focusing on statistical patterns. Reference: <a href="https://ieeexplore.ieee.org/document/1100705" target="_blank" class="text-blue-400 hover:underline">Jain, 1981</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/retina-image-enhancement" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5. Normalizing Flows -->
+            <div class="model-block">
+                <img src="../../Images/nf_result.png" alt="NF Result" onclick="openImageModal('../../Images/nf_result.png', 'Enhanced Retinal Image using Normalizing Flows')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">5. Normalizing Flows</h3>
+                    <p class="text-gray-400">
+                        A generative approach using invertible transformations to enhance retinal images, preserving details. Reference: <a href="http://proceedings.mlr.press/v37/rezende15.pdf" target="_blank" class="text-blue-400 hover:underline">Rezende & Mohamed, 2015</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/retina-image-enhancement" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 6. Energy Based Model (EBM) -->
+            <div class="model-block">
+                <img src="../../Images/ebm_result.png" alt="EBM Result" onclick="openImageModal('../../Images/ebm_result.png', 'Enhanced Retinal Image using Energy Based Model')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">6. Energy Based Model (EBM)</h3>
+                    <p class="text-gray-400">
+                        Uses energy functions to model and enhance retinal images, focusing on noise reduction. Reference: <a href="https://arxiv.org/abs/1903.08689" target="_blank" class="text-blue-400 hover:underline">Du & Mordatch, 2019</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/retina-image-enhancement" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 7. Diffusion Model -->
+            <div class="model-block">
+                <img src="../../Images/diffusion_result.png" alt="Diffusion Result" onclick="openImageModal('../../Images/diffusion_result.png', 'Enhanced Retinal Image using Diffusion Model')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">7. Diffusion Model</h3>
+                    <p class="text-gray-400">
+                        Applies iterative denoising to enhance retinal images, improving quality for medical analysis. Reference: <a href="https://arxiv.org/abs/2006.11239" target="_blank" class="text-blue-400 hover:underline">Ho et al., 2020</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/retina-image-enhancement" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 8. Hybrid Model (ALM-CNN) -->
+            <div class="model-block">
+                <img src="../../Images/alm_cnn_result.png" alt="ALM-CNN Result" onclick="openImageModal('../../Images/alm_cnn_result.png', 'Enhanced Retinal Image using Adaptive Local Means CNN')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">8. Adaptive Local Means CNN (ALM-CNN)</h3>
+                    <p class="text-gray-400">
+                        Combines Adaptive Local Means Denoising with a CNN to enhance retinal images, balancing noise reduction and detail preservation. A collaborative design by the team.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/retina-image-enhancement" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BPLD Project Modal (Placeholder) -->
+    <div id="bpldModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal('bpldModal')">×</span>
+            <h2 class="text-2xl font-semibold text-white mb-4">Brain Pattern Learning and Detection Models</h2>
+            <p class="text-gray-400">Details coming soon...</p>
+        </div>
+    </div>
+
+    <!-- Image Zoom Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeImageModal()">×</span>
+            <img id="modalImage" src="" alt="" class="w-full rounded-lg">
+            <p id="modalCaption" class="text-center text-gray-400 mt-4"></p>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="../../publication-script.js"></script>
+    <script>
+        // GSAP Animation for project boxes
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.project-box', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        });
 
+        // Project Modal functions
+        function openProjectModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+            gsap.from(modal.querySelectorAll('.model-block'), {
+                opacity: 0,
+                y: 20,
+                duration: 0.5,
+                stagger: 0.1,
+                ease: 'power3.out'
+            });
+        }
 
+        function closeProjectModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Image Modal functions
+        function openImageModal(src, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            modalImage.src = src;
+            modalCaption.textContent = caption;
+            modal.style.display = 'block';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modals when clicking outside or pressing Esc
+        window.onclick = function(event) {
+            const retinaModal = document.getElementById('retinaModal');
+            const bpldModal = document.getElementById('bpldModal');
+            const imageModal = document.getElementById('imageModal');
+            if (event.target == retinaModal) closeProjectModal('retinaModal');
+            if (event.target == bpldModal) closeProjectModal('bpldModal');
+            if (event.target == imageModal) closeImageModal();
+        };
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeProjectModal('retinaModal');
+                closeProjectModal('bpldModal');
+                closeImageModal();
+            }
+        });
+    </script>
 </body>
 </html>
