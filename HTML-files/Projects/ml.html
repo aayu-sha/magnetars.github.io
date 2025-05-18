@@ -165,8 +165,119 @@
     <div id="bpldModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeProjectModal('bpldModal')">×</span>
-            <h2 class="text-2xl font-semibold text-white mb-4">Brain Pattern Learning and Detection Models</h2>
-            <p class="text-gray-400">Details coming soon...</p>
+            <h2 class="text-2xl font-semibold text-white mb-4">Black Gram Plant Leaf Disease Classification Models</h2>
+            
+            <!-- 1. CNN -->
+            <div class="model-block">
+                <img src="../../Images/cnn_result.png" alt="CNN Result" onclick="openImageModal('../../Images/cnn_result.png', 'Classified Leaf Image using CNN')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">1. Convolutional Neural Network (CNN)</h3>
+                    <p class="text-gray-400">
+                        A foundational deep learning model using convolutional layers to classify leaf diseases, effective for feature extraction. Reference: Krizhevsky et al., 2012. <a href="https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/bpld-classification" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. DenseNet -->
+            <div class="model-block">
+                <img src="../../Images/densenet_result.png" alt="DenseNet Result" onclick="openImageModal('../../Images/densenet_result.png', 'Classified Leaf Image using DenseNet')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">2. DenseNet</h3>
+                    <p class="text-gray-400">
+                        Uses dense connectivity between layers to improve gradient flow and feature reuse for leaf disease classification. Reference: Huang et al., 2016. <a href="https://arxiv.org/abs/1608.06993" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/bpld-classification" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3. NASNet -->
+            <div class="model-block">
+                <img src="../../Images/nasnet_result.png" alt="NASNet Result" onclick="openImageModal('../../Images/nasnet_result.png', 'Classified Leaf Image using NASNet')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">3. NASNet</h3>
+                    <p class="text-gray-400">
+                        Employs neural architecture search to design an efficient network for classifying leaf diseases. Reference: Zoph et al., 2016. <a href="https://arxiv.org/abs/1611.01578" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/bpld-classification" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4. ResNeXt -->
+            <div class="model-block">
+                <img src="../../Images/resnext_result.png" alt="ResNeXt Result" onclick="openImageModal('../../Images/resnext_result.png', 'Classified Leaf Image using ResNeXt')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">4. ResNeXt</h3>
+                    <p class="text-gray-400">
+                        Introduces cardinality to ResNet, enhancing feature learning for leaf disease classification. Reference: Xie et al., 2016. <a href="https://arxiv.org/abs/1611.05431" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/bpld-classification" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5. TRESNet -->
+            <div class="model-block">
+                <img src="../../Images/tresnet_result.png" alt="TRESNet Result" onclick="openImageModal('../../Images/tresnet_result.png', 'Classified Leaf Image using TRESNet')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">5. TRESNet</h3>
+                    <p class="text-gray-400">
+                        A transformer-based architecture optimized for efficient leaf disease classification. Reference: Ridnik et al., 2020. <a href="https://arxiv.org/abs/2003.13630" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/bpld-classification" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 6. VGGNet -->
+            <div class="model-block">
+                <img src="../../Images/vggnet_result.png" alt="VGGNet Result" onclick="openImageModal('../../Images/vggnet_result.png', 'Classified Leaf Image using VGGNet')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">6. VGGNet</h3>
+                    <p class="text-gray-400">
+                        A deep convolutional network with small filters, effective for classifying leaf diseases. Reference: Simonyan & Zisserman, 2014. <a href="https://arxiv.org/abs/1409.1556" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/bpld-classification" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 7. Xception -->
+            <div class="model-block">
+                <img src="../../Images/xception_result.png" alt="Xception Result" onclick="openImageModal('../../Images/xception_result.png', 'Classified Leaf Image using Xception')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">7. Xception</h3>
+                    <p class="text-gray-400">
+                        Uses depthwise separable convolutions for efficient leaf disease classification. Reference: Chollet, 2016. <a href="https://arxiv.org/abs/1610.02357" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/bpld-classification" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 8. DRPA-Net -->
+            <div class="model-block">
+                <img src="../../Images/drpa_net_result.png" alt="DRPA-Net Result" onclick="openImageModal('../../Images/drpa_net_result.png', 'Classified Leaf Image using DRPA-Net')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">8. Dense Residual Paths with Attention (DRPA-Net)</h3>
+                    <p class="text-gray-400">
+                        Combines DenseNet’s reuse, ResNeXt’s cardinality, and attention mechanisms, using transfer learning from pre-trained DenseNet121 for leaf disease classification. A collaborative design by the team.
+                    </p>
+                    <p class="text-gray-400">
+                        <a href="https://github.com/aayu-sha/bpld-classification" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
