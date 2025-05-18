@@ -78,8 +78,8 @@
     z-index: 10; /* Above #webgl */
 }
 #imageModal .modal-content img {
-    max-width: 600px; /* Cap the maximum width */
-    max-height: 600px; /* Cap the maximum height */
+    max-width: 1000px; /* Cap the maximum width */
+    max-height: 1000px; /* Cap the maximum height */
     width: auto;
     height: auto;
     margin: auto; /* Center the image */
