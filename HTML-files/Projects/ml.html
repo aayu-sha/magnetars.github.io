@@ -169,96 +169,129 @@
             
             <!-- 1. CNN -->
             <div class="model-block">
-                <img src="../../Images/cnn_result.png" alt="CNN Result" onclick="openImageModal('../../Images/cnn_result.png', 'Classified Leaf Image using CNN')">
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">1. Convolutional Neural Network (CNN)</h3>
                     <p class="text-gray-400">
-                        A foundational deep learning model using convolutional layers to classify leaf diseases, effective for feature extraction. Reference: Krizhevsky et al., 2012. <a href="https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                        A foundational deep learning model using convolutional layers to classify leaf diseases, effective for feature extraction. Reference: Krizhevsky et al., 2012. <a href="https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
                     </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Utilizes multiple convolutional layers to extract spatial features from leaf images.</li>
+                        <li>Achieves high accuracy in detecting diseases like anthracnose and powdery mildew.</li>
+                        <li>Trained on a dataset of 1000+ leaf images with data augmentation for robustness.</li>
+                    </ul>
                     
                 </div>
             </div>
 
             <!-- 2. DenseNet -->
             <div class="model-block">
-                <img src="../../Images/densenet_result.png" alt="DenseNet Result" onclick="openImageModal('../../Images/densenet_result.png', 'Classified Leaf Image using DenseNet')">
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">2. DenseNet</h3>
                     <p class="text-gray-400">
-                        Uses dense connectivity between layers to improve gradient flow and feature reuse for leaf disease classification. Reference: Huang et al., 2016. <a href="https://arxiv.org/abs/1608.06993" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                        Uses dense connectivity between layers to improve gradient flow and feature reuse for leaf disease classification. Reference: Huang et al., 2016. <a href="https://arxiv.org/abs/1608.06993" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
                     </p>
-                   
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Each layer receives inputs from all previous layers, enhancing feature propagation.</li>
+                        <li>Reduces the number of parameters compared to traditional CNNs, improving efficiency.</li>
+                        <li>Performs well on small datasets due to its dense connectivity pattern.</li>
+                    </ul>
+                    
                 </div>
             </div>
 
             <!-- 3. NASNet -->
             <div class="model-block">
-                <img src="../../Images/nasnet_result.png" alt="NASNet Result" onclick="openImageModal('../../Images/nasnet_result.png', 'Classified Leaf Image using NASNet')">
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">3. NASNet</h3>
                     <p class="text-gray-400">
-                        Employs neural architecture search to design an efficient network for classifying leaf diseases. Reference: Zoph et al., 2016. <a href="https://arxiv.org/abs/1611.01578" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                        Employs neural architecture search to design an efficient network for classifying leaf diseases. Reference: Zoph et al., 2016. <a href="https://arxiv.org/abs/1611.01578" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
                     </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Automatically designs network architecture optimized for leaf disease classification.</li>
+                        <li>Outperforms manually designed models in terms of accuracy and computational efficiency.</li>
+                        <li>Utilizes a search space with recurrent neural networks to find optimal configurations.</li>
+                    </ul>
                     
                 </div>
             </div>
 
             <!-- 4. ResNeXt -->
             <div class="model-block">
-                <img src="../../Images/resnext_result.png" alt="ResNeXt Result" onclick="openImageModal('../../Images/resnext_result.png', 'Classified Leaf Image using ResNeXt')">
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">4. ResNeXt</h3>
                     <p class="text-gray-400">
-                        Introduces cardinality to ResNet, enhancing feature learning for leaf disease classification. Reference: Xie et al., 2016. <a href="https://arxiv.org/abs/1611.05431" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                        Introduces cardinality to ResNet, enhancing feature learning for leaf disease classification. Reference: Xie et al., 2016. <a href="https://arxiv.org/abs/1611.05431" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
                     </p>
-                    
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Improves ResNet by adding a cardinality dimension for better feature extraction.</li>
+                        <li>Effective in identifying complex disease patterns in black gram leaves.</li>
+                        <li>Reduces overfitting through skip connections and batch normalization.</li>
+                    </ul>
+                   
                 </div>
             </div>
 
             <!-- 5. TRESNet -->
             <div class="model-block">
-                <img src="../../Images/tresnet_result.png" alt="TRESNet Result" onclick="openImageModal('../../Images/tresnet_result.png', 'Classified Leaf Image using TRESNet')">
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">5. TRESNet</h3>
                     <p class="text-gray-400">
-                        A transformer-based architecture optimized for efficient leaf disease classification. Reference: Ridnik et al., 2020. <a href="https://arxiv.org/abs/2003.13630" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                        A transformer-based architecture optimized for efficient leaf disease classification. Reference: Ridnik et al., 2020. <a href="https://arxiv.org/abs/2003.13630" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
                     </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Leverages transformer blocks for global feature learning in leaf images.</li>
+                        <li>Optimized for speed and accuracy, suitable for real-time agricultural applications.</li>
+                        <li>Reduces computational overhead while maintaining high classification accuracy.</li>
+                    </ul>
                     
                 </div>
             </div>
 
             <!-- 6. VGGNet -->
             <div class="model-block">
-                <img src="../../Images/vggnet_result.png" alt="VGGNet Result" onclick="openImageModal('../../Images/vggnet_result.png', 'Classified Leaf Image using VGGNet')">
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">6. VGGNet</h3>
                     <p class="text-gray-400">
-                        A deep convolutional network with small filters, effective for classifying leaf diseases. Reference: Simonyan & Zisserman, 2014. <a href="https://arxiv.org/abs/1409.1556" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                        A deep convolutional network with small filters, effective for classifying leaf diseases. Reference: Simonyan & Zisserman, 2014. <a href="https://arxiv.org/abs/1409.1556" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
                     </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Employs small 3x3 filters in deep layers to capture fine-grained leaf disease patterns.</li>
+                        <li>High depth (16-19 layers) improves feature representation for classification.</li>
+                        <li>Effective but computationally intensive due to its uniform architecture.</li>
+                    </ul>
                     
                 </div>
             </div>
 
             <!-- 7. Xception -->
             <div class="model-block">
-                <img src="../../Images/xception_result.png" alt="Xception Result" onclick="openImageModal('../../Images/xception_result.png', 'Classified Leaf Image using Xception')">
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">7. Xception</h3>
                     <p class="text-gray-400">
-                        Uses depthwise separable convolutions for efficient leaf disease classification. Reference: Chollet, 2016. <a href="https://arxiv.org/abs/1610.02357" target="_blank" class="text-blue-400 hover:underline">Reference</a>.
+                        Uses depthwise separable convolutions for efficient leaf disease classification. Reference: Chollet, 2016. <a href="https://arxiv.org/abs/1610.02357" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
                     </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Replaces standard convolutions with depthwise separable convolutions for efficiency.</li>
+                        <li>Improves accuracy by focusing on cross-channel correlations in leaf images.</li>
+                        <li>Reduces the number of parameters while maintaining high performance.</li>
+                    </ul>
                     
                 </div>
             </div>
 
             <!-- 8. DRPA-Net -->
             <div class="model-block">
-                <img src="../../Images/drpa_net_result.png" alt="DRPA-Net Result" onclick="openImageModal('../../Images/drpa_net_result.png', 'Classified Leaf Image using DRPA-Net')">
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">8. Dense Residual Paths with Attention (DRPA-Net)</h3>
                     <p class="text-gray-400">
                         Combines DenseNet’s reuse, ResNeXt’s cardinality, and attention mechanisms, using transfer learning from pre-trained DenseNet121 for leaf disease classification. A collaborative design by the team.
                     </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Integrates dense connections and residual paths for enhanced feature learning.</li>
+                        <li>Uses attention mechanisms to focus on disease-relevant regions in leaf images.</li>
+                        <li>Leverages transfer learning from DenseNet121 for improved performance on small datasets.</li>
+                        <li>Achieves state-of-the-art accuracy in black gram leaf disease classification.</li>
+                    </ul>
                     
                 </div>
             </div>
