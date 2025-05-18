@@ -6,80 +6,7 @@
     <title>Computational Tools & Automation | Magnetars</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles.css">
-    <style>
-        .project-card {
-            background: #1a202c;
-            border: 2px solid #4a5568;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .project-card img {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            margin: 10px auto;
-            display: block;
-        }
-        .project-card img:hover {
-            transform: scale(1.05);
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-        }
-        .modal-content {
-            margin: 5% auto;
-            padding: 20px;
-            background-color: #1a202c;
-            width: 80%;
-            max-width: 800px;
-            border-radius: 8px;
-        }
-        .modal-content img {
-            max-width: 100%;
-            max-height: 80vh;
-            display: block;
-            margin: 0 auto;
-            object-fit: contain;
-        }
-
-        .close {
-            color: #fff;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close:hover {
-            color: #ccc;
-        }
-        #tools {
-            padding-top: 80px; /* Offset for fixed nav */
-            position: relative;
-            z-index: 10; /* Above #webgl */
-        }
-        @media (max-width: 768px) {
-            .project-card img {
-                max-width: 300px;
-            }
-            .modal-content {
-                width: 90%;
-            }
-            #tools {
-                padding-top: 60px; /* Adjust for mobile nav */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../../styles-projects.css">
 </head>
 <body>
     <div id="cursor"></div>
@@ -115,15 +42,11 @@
 
             <!-- Web Scraping Project -->
             <div class="project-card">
-                <h2 class="text-2xl font-semibold text-white mb-4">Web Scraping for Data Automation</h2>
+                <h2 class="text-2xl font-semibold text-white mb-4">Web Scraping for Asian Food Data</h2>
                 <p class="text-gray-400 mb-4">
-                    This project automated the extraction of structured data from public websites, such as product details or public records, using Python (BeautifulSoup, Scrapy). Over 100 entries were scraped into CSV and JSON formats, adhering to ethical practices (e.g., robots.txt compliance, rate limiting). Results showcase the scraped data in structured formats. A collaborative effort by Aayusha Singh (scraper development, data processing) and Amrit Roy (data validation, automation scripting).
-                </p>
-                <img src="../../Images/scraped_data_csv.png" alt="Scraped CSV Output" onclick="openModal('../../Images/scraped_data_csv.png', 'Sample CSV of Scraped Data')">
-                <img src="../../Images/scraped_json.png" alt="Scraped JSON Output" onclick="openModal('../../Images/scraped_json.png', 'Sample JSON of Scraped Data')">
+                    This project automated the extraction of Asian food data, such as recipes and ingredients, from public websites using Python (BeautifulSoup, Scrapy). Over 1200 images were processed by first extracting the dataset, then using machine learning (e.g., OpenCV, TensorFlow) to remove backgrounds, followed by removing initial logos and adding a new logo for improved accuracy. The process adhered to ethical practices (e.g., robots.txt compliance, rate limiting). Results showcase the scraped and processed data in structured formats. A collaborative effort by Aayusha Singh (scraper development, data processing) and Amrit Roy (data validation, automation scripting).</p>
                 <ul class="list-disc list-inside text-gray-400 mt-4">
-                    <li><a href="https://github.com/aayu-sha/web-scraping" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a> - Scraper scripts, sample data, and README.</li>
-                    <li><a href="../../assets/scraped_dataset.zip" download class="text-blue-400 hover:underline">Download Dataset</a> - CSV/JSON files with scraped entries.</li>
+                    <li><a href="https://github.com/aayu-sha/asian_food" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a> - Scraper scripts, image processing code, sample data, and README.</li>
                 </ul>
             </div>
         </div>
