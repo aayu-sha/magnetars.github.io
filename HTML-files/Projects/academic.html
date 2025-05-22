@@ -205,16 +205,25 @@
             <span class="close" onclick="closeProjectModal('supernovaeModal')">×</span>
             <h2 class="text-2xl font-semibold text-white mb-4">From Stellar Birth to Violent Death: A Review on Supernovae</h2>
             <div class="model-block">
-                <img src="../../Images/supernovae_simulation.png" alt="Supernovae Simulation" onclick="openImageModal('../../Images/supernovae_simulation.png', 'Simulated Supernova Evolution Graph')">
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div>
+                        <img src="../../Images/supernovae_blueshift.png" alt="Blue-shifted Emission Lines" onclick="openImageModal('../../Images/supernovae_blueshift.png', 'Blue-shifted Emission Lines of a Supernova')">
+                        <p class="text-gray-400 text-center mt-2">Figure 1: Blue-shifted Emission Lines of a Supernova</p>
+                    </div>
+                    <div>
+                        <img src="../../Images/supernovae_lightcurve.png" alt="Light Curve of Type Ia Supernova" onclick="openImageModal('../../Images/supernovae_lightcurve.png', 'Light Curve of a Type Ia Supernova')">
+                        <p class="text-gray-400 text-center mt-2">Figure 2: Light Curve of a Type Ia Supernova</p>
+                    </div>
+                </div>
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">Simulation Results</h3>
                     <p class="text-gray-400">
                         This section includes graphs and images simulated for the paper, showcasing the evolution of supernovae from stellar birth to explosion.
                     </p>
                     <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Graph of stellar mass vs. luminosity over time.</li>
-                        <li>Simulation of Type Ia supernova light curve.</li>
-                        <li>Energy distribution during the supernova explosion.</li>
+                        <li>Figure 1 shows the blue-shifted emission lines, indicating high-velocity ejecta from the supernova.</li>
+                        <li>Figure 2 illustrates the light curve of a Type Ia supernova, highlighting its peak luminosity and decline.</li>
+                        <li>Energy distribution during the supernova explosion derived from spectral analysis.</li>
                     </ul>
                 </div>
             </div>
