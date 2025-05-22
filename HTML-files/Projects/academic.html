@@ -342,16 +342,33 @@
             <span class="close" onclick="closeProjectModal('darkMatterModal')">×</span>
             <h2 class="text-2xl font-semibold text-white mb-4">Investigating the Behavior of Dark Matter-Analogous Particles in Microgravity Environments: A Hypothetical Study</h2>
             <div class="model-block">
-                <img src="../../Images/dark_matter_simulation.png" alt="Dark Matter Simulation" onclick="openImageModal('../../Images/dark_matter_simulation.png', 'Simulated Dark Matter Particle Behavior in Microgravity')">
+                <!-- Image Section -->
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 10px; min-width: 340px; margin-bottom: 20px;">
+                    <!-- Row 1: Figure 1 and Figure 2 -->
+                    <div style="width: 150px; text-align: center; margin: 10px;">
+                        <img src="../../Projects/Academic/Microgravity-dark-matter/dark_matter_simulation.png" alt="DM Simulation Microgravity" onclick="openImageModal('../../Projects/Academic/Microgravity-dark-matter/dark_matter_simulation.png', 'Simulation of Dark Matter Particle in Microgravity Environment')" style="width: 150px; height: 150px; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 1: Simulation of dark matter particle in microgravity: trajectory and speed evolution.</p>
+                    </div>
+                    <div style="width: 150px; text-align: center; margin: 10px;">
+                        <img src="../../Projects/Academic/Microgravity-dark-matter/N-body-simulation.png" alt="N-body Simulation" onclick="openImageModal('../../Projects/Academic/Microgravity-dark-matter/N-body-simulation.png', 'N-body Simulation of Dark Matter Particles in Microgravity')" style="width: 150px; height: 150px; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 2: N-body simulation of two dark matter particles orbiting a baryonic center.</p>
+                    </div>
+                    <!-- Row 2: Figure 3 -->
+                    <div style="width: 150px; text-align: center; margin: 10px;">
+                        <img src="../../Projects/Academic/DarkMatter/dm_trajectories_comparison.png" alt="DM Trajectories Comparison" onclick="openImageModal('../../Projects/Academic/DarkMatter/dm_trajectories_comparison.png', 'Comparative Simulation of Dark Matter Particle Trajectories')" style="width: 150px; height: 150px; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 3: Comparison of particle trajectories in microgravity vs. Earth’s gravity.</p>
+                    </div>
+                </div>
+                <!-- Text Section -->
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">Simulation Results</h3>
                     <p class="text-gray-400">
                         This section includes graphs and images simulated for the paper, exploring the behavior of dark matter-analogous particles in microgravity.
                     </p>
                     <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Particle distribution in a microgravity environment over time.</li>
-                        <li>Graph of interaction rates between dark matter-analogous particles.</li>
-                        <li>Simulation of particle clustering under microgravity conditions.</li>
+                        <li>Figure 1: Simulation of a dark matter particle in a microgravity environment (m = 1×10⁻²⁶ kg, g = 9.8×10⁻⁶ m/s², k = 1×10⁻³⁰ N/(m/s)), showing the particle’s trajectory in the xy-plane with a downward curve and the time evolution of its speed (mm/s), which decreases initially and then gradually increases due to gravitational acceleration.</li>
+                        <li>Figure 2: N-body simulation in microgravity (Python, NumPy), showing two particles (masses 100 GeV, initial velocities 0.02 m/s) orbiting a baryonic center over 500 time steps using a leapfrog integrator. The blue trajectory forms a near-circular orbit, while the orange trajectory is elongated, indicating enhanced weak interactions.</li>
+                        <li>Figure 3: Comparative simulation of dark matter-analogous particle trajectories (Python, NumPy, SciPy) for axions (m = 10⁻²² eV) and WIMPs (m = 100 GeV) with initial velocities of 0.01 m/s over 1000 time steps. The image compares trajectories in microgravity (showing deviations due to enhanced weak interactions) and under Earth’s gravity (where effects are suppressed).</li>
                     </ul>
                 </div>
             </div>
