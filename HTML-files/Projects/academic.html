@@ -287,16 +287,49 @@
             <span class="close" onclick="closeProjectModal('relativisticEffectsModal')">×</span>
             <h2 class="text-2xl font-semibold text-white mb-4">Relativistic Effects on Spacecraft in Interstellar Travel: Examining Time Dilation and Relativistic Energy</h2>
             <div class="model-block">
-                <img src="../../Images/relativistic_effects_simulation.png" alt="Relativistic Effects Simulation" onclick="openImageModal('../../Images/relativistic_effects_simulation.png', 'Simulated Time Dilation Effects on Spacecraft')">
+                <!-- Image Section -->
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 10px; min-width: 340px; margin-bottom: 20px;">
+                    <!-- Row 1: Figure 1 and Figure 2a -->
+                    <div style="width: 150px; text-align: center; margin: 10px;">
+                        <img src="../../Projects/Academic/Relativistic effects/time_dilation.png" alt="Time Dilation vs. Velocity" onclick="openImageModal('../../Projects/Academic/Relativistic effects/time_dilation.png', 'Time Dilation as a Function of Velocity Fraction')" style="width: 150px; height: 150px; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 1: Time dilation vs. velocity fraction (blue: crew proper time τ = 10/γ, red: 10-year Earth time).</p>
+                    </div>
+                    <div style="width: 150px; text-align: center; margin: 10px;">
+                        <img src="../../Projects/Academic/RelativisticEffects/pic_particle_positions.png" alt="PIC Particle Positions" onclick="openImageModal('../../Projects/Academic/RelativisticEffects/pic_particle_positions.png', 'PIC Simulation: Particle Positions Colored by Velocity (v/c)')" style="width: 150px; height: 150px; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 2a: PIC simulation: particle positions colored by velocity (v/c).</p>
+                    </div>
+                    <!-- Row 2: Figure 2b and Figure 2c -->
+                    <div style="width: 150px; text-align: center; margin: 10px;">
+                        <img src="../../Projects/Academic/RelativisticEffects/pic_electric_field.png" alt="PIC Electric Field" onclick="openImageModal('../../Projects/Academic/RelativisticEffects/pic_electric_field.png', 'PIC Simulation: Electric Field Magnitude (|E|, V/m)')" style="width: 150px; height: 150px; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 2b: PIC simulation: electric field magnitude (|E|, V/m).</p>
+                    </div>
+                    <div style="width: 150px; text-align: center; margin: 10px;">
+                        <img src="../../Projects/Academic/RelativisticEffects/pic_energy_evolution.png" alt="PIC Energy Evolution" onclick="openImageModal('../../Projects/Academic/RelativisticEffects/pic_energy_evolution.png', 'PIC Simulation: Energy Evolution (Kinetic, Electric, Magnetic, Total)')" style="width: 150px; height: 150px; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 2c: PIC simulation: energy evolution (kinetic, electric, magnetic, total).</p>
+                    </div>
+                   
+                    <div style="width: 150px; text-align: center; margin: 10px;">
+                        <img src="../../Projects/Academic/Relativistic effects/thermomechanical_fdm_optimized.png" alt="Thermomechanical Simulation" onclick="openImageModal('../../Projects/Academic/Relativistic effects/thermomechanical_fdm_optimized.png', 'Coupled Thermomechanical Simulation of Spacecraft Panel')" style="width: 150px; height: 150px; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 3: Thermomechanical simulation: (a) temperature, (b) displacement, (c) von Mises stress.</p>
+                    </div>
+                </div>
+                <!-- Text Section -->
                 <div class="model-details">
                     <h3 class="text-xl font-semibold text-white">Simulation Results</h3>
                     <p class="text-gray-400">
                         This section includes graphs and images simulated for the paper, demonstrating relativistic effects on spacecraft during interstellar travel.
                     </p>
                     <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Graph of time dilation vs. spacecraft velocity (approaching c).</li>
-                        <li>Energy requirements for relativistic speeds in deep space.</li>
-                        <li>Simulation of relativistic effects on spacecraft clock synchronization.</li>
+                        <li>Figure 1: Time dilation as a function of velocity fraction, showing crew proper time (τ = 10/γ) vs. Earth time, with points like 4.36 years at 0.9c.</li>
+                        <li>Figure 2: Relativistic PIC simulation of plasma in the interstellar medium under an electric field pulse (t = 50∆t to t = 60∆t) and a relativistic electron beam (injected at t = 50∆t):
+                            <ul class="list-circle list-inside ml-4">
+                                <li>Figure 2a: Particle positions colored by velocity (v/c).</li>
+                                <li>Figure 2b: Electric field magnitude (|E|, V/m).</li>
+                                <li>Figure 2c: Energy evolution (kinetic: Σ(γi − 1)mic², electric: 0.5ϵ0∫|E|²dV, magnetic: 0.5μ₀⁻¹∫|B|²dV, total).</li>
+                                <li>Figure 2d: Velocity distribution.</li>
+                            </ul>
+                        </li>
+                        <li>Figure 3: Thermomechanical simulation of a spacecraft panel, showing temperature distribution (T, K), displacement (√(u_x² + u_y²), m), and von Mises stress (σ_vM, Pa).</li>
                     </ul>
                 </div>
             </div>
