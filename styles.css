@@ -293,24 +293,25 @@ section.active .content {
 }
 
 .typing-effect {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 2px solid black;
-    width: 0;
-    animation: typing 4s steps(40) 1s forwards, blink 0.75s step-end infinite;
-    font-family: 'Courier New', Courier, monospace;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid black; /* cursor effect */
+  width: 0;
+  animation: typing 4s steps(40) 1s forwards, remove-cursor 0s 5s forwards;
+  font-family: 'Courier New', Courier, monospace;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes typing {
-    from { width: 0; }
-    to { width: 200%; }
+  from { width: 0; }
+  to { width: 42ch; } 
 }
 
-@keyframes blink {
-    50% { border-color: transparent; }
+@keyframes remove-cursor {
+  to { border-right: none; }
 }
+
 
 /* Buttons and Badges */
 .badge {
@@ -854,7 +855,6 @@ button:hover::before {
     color: var(--text-dim);
     letter-spacing: 1px;
 }
-
 /* Animation for Section Content */
 .fade-up {
     opacity: 0;
@@ -1168,6 +1168,28 @@ button:hover::before {
     #published {
         padding-top: 60px;
     }
+    
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(6, 11, 24, 0.95);
+        padding: 1rem;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .menu-toggle {
+        display: flex;
+    }
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 @media (max-width: 600px) {
@@ -1214,6 +1236,19 @@ button:hover::before {
 
     .social-icon {
         font-size: 0.9rem;
+    }
+    .hero-title {
+        font-size: 10vw;
+    }
+    .hero-subtitle {
+        font-size: 4vw;
+    }
+    #home {
+        padding: 0 5% 30px;
+    }
+    #home .content {
+        left: 5%;
+        bottom: 30px;
     }
 }
 
