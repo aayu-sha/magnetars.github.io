@@ -1,3 +1,12 @@
+
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+menuToggle.addEventListener("click", () => {
+navLinks.classList.toggle("active");
+});
+
+
 const cursor = document.getElementById('cursor');
 document.addEventListener('mousemove', (e) => {
     gsap.to(cursor, {
