@@ -182,7 +182,7 @@ body, html {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     padding: 0.5rem 0;
     position: relative;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -281,7 +281,7 @@ section.active .content {
 #home .content {
     max-width: 900px;
     position: absolute;
-    bottom: 50px;
+    bottom: 30px;
     left: 10px;
 }
 
@@ -304,11 +304,11 @@ section.active .content {
 }
 
 .hero-description {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: var(--text-dim);
     margin: 1.5rem 0 2rem 0;
     line-height: 1.6;
-    max-width: 600px;
+    max-width: 2000px;
     text-align: left;  /* Add this line */
 }
 
@@ -460,7 +460,7 @@ p {
 .project-grid-publications {
     --columns: 2;
     --gap: 20px;
-    --max-width: 1300px;
+    --max-width: 1000px;
 }
 
 .project-item {
@@ -472,7 +472,7 @@ p {
     cursor: pointer;
     backdrop-filter: blur(12px);
     text-align: center;
-    min-height: 300px;
+    min-height: 200px;
     width: 100%;
     max-width: 1100px;
     display: flex;
@@ -537,9 +537,9 @@ p {
 }
 
 .publication-img {
-    --img-max-width: 300px;
-    min-width: 250px;
-    height: 400px;
+    --img-max-width: 200px;  /* Reduced from 300px */
+    min-width: 125px;  /* Reduced from 250px */
+    height: 200px;  /* Reduced from 400px */
 }
 
 .project-item h3 {
