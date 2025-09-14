@@ -1200,46 +1200,46 @@ button:hover::before {
 /* Fix the mobile navigation styling - update the mobile media query section: */
 
 @media (max-width: 768px) {
-    /* Navigation Mobile Styles */
     .nav {
         padding: 1rem 5%;
         mix-blend-mode: normal;
-        background: rgba(6, 11, 24, 0.98); /* Made more opaque */
+        background: rgba(6, 11, 24, 0.95);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(0, 240, 255, 0.2);
     }
     
+    .menu-toggle {
+        display: flex;
+    }
+    
     .nav-links {
-        display: none;
-        flex-direction: column;
         position: fixed;
         top: 0;
         right: 0;
-        width: 100vw; /* Full width instead of 280px */
+        width: 100vw;
         height: 100vh;
-        background: rgba(6, 11, 24, 0.98); /* Changed from the green tint */
+        background: rgba(6, 11, 24, 0.98);
         backdrop-filter: blur(20px);
-        padding: 100px 30px 30px; /* Increased top padding */
-        border: none; /* Removed the left border */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
         z-index: 1000;
-        gap: 0;
-        justify-content: flex-start;
-        align-items: center; /* Center the links */
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
     }
 
     .nav-links.active {
-        display: flex;
         transform: translateX(0);
     }
 
     .nav-links a {
         color: var(--text-light);
-        padding: 20px 0; /* Increased padding for better touch targets */
-        font-size: 1.4rem; /* Slightly larger for mobile */
+        padding: 20px 0;
+        font-size: 1.4rem;
         width: 100%;
-        text-align: center; /* Center the text */
+        text-align: center;
         border-bottom: 1px solid rgba(0, 240, 255, 0.1);
         transition: all 0.3s ease;
     }
@@ -1251,21 +1251,7 @@ button:hover::before {
     .nav-links a:hover,
     .nav-links a.active {
         color: var(--primary);
-        background: rgba(0, 240, 255, 0.05); /* Subtle background on hover */
-        padding-left: 0; /* Remove the left padding shift */
-    }
-
-    .menu-toggle {
-        display: flex;
-        z-index: 1001;
-    }
-}
-
-
-@media (max-width: 480px) {
-    .nav-links a {
-        font-size: 1.2rem;
-        padding: 15px 0;
+        background: rgba(0, 240, 255, 0.05);
     }
 }
 
@@ -1274,15 +1260,6 @@ button:hover::before {
         grid-template-columns: 1fr;
         gap: 20px;
         padding: 10px;
-    }
-
-    .nav-links {
-        padding: 120px 20px 30px; /* Even more top padding for smaller screens */
-    }
-    
-    .nav-links a {
-        font-size: 1.3rem;
-        padding: 18px 0;
     }
 
     .project-item {
@@ -1301,14 +1278,27 @@ button:hover::before {
         margin-top: 10px;
         margin-bottom: 0.75rem;
     }
+
+    .hero-title {
+        font-size: 14vw;
+    }
     
-    .nav-links {
-        width: 100vw;
-        padding: 80px 20px 30px;
+    .hero-subtitle {
+        font-size: 5vw;
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 15px 0;
     }
 }
 
 @media (max-width: 480px) {
+    .nav-links a {
+        font-size: 1rem;
+        padding: 12px 0;
+    }
+
     h2 {
         font-size: 2rem;
     }
@@ -1331,20 +1321,8 @@ button:hover::before {
         font-size: 0.9rem;
         padding: 6px 12px;
     }
-    
-    .hero-title {
-        font-size: 14vw;
-    }
-    
-    .hero-subtitle {
-        font-size: 5vw;
-    }
-    
-    .nav-links a {
-        font-size: 1rem;
-        padding: 12px 0;
-    }
 }
+
 
 /* Mobile Menu Overlay */
 .menu-overlay {

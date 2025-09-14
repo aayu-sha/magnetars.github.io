@@ -11,7 +11,7 @@
     <meta property="og:title" content="Magnetars | Interactive 3D Portfolio">
     <meta property="og:description" content="Advanced Scientific Research & Consulting">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:url" content="https://magnetars.com">
     
     <title>Magnetars | Interactive 3D Portfolio</title>
     
@@ -114,6 +114,121 @@
             color: var(--text-dim);
             letter-spacing: 1px;
         }
+
+        .skip-to-content {
+                position: absolute;
+                top: -40px;
+                left: 6px;
+                background: var(--primary);
+                color: var(--bg-darker);
+                padding: 8px;
+                border-radius: 4px;
+                text-decoration: none;
+                z-index: 10000;
+                transition: top 0.3s;
+            }
+            
+            .skip-to-content:focus {
+                top: 6px;
+            }
+            
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
+            }
+            
+            .form-group {
+                position: relative;
+            }
+            
+            .error-message {
+                color: var(--secondary);
+                font-size: 0.8rem;
+                margin-top: 0.5rem;
+                display: none;
+            }
+            
+            .form-group input.error,
+            .form-group textarea.error {
+                border-color: var(--secondary);
+                box-shadow: 0 0 10px rgba(255, 94, 148, 0.3);
+            }
+            
+            .form-group input.error + .error-message,
+            .form-group textarea.error + .error-message {
+                display: block;
+            }
+            
+            .submit-btn {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .submit-btn.loading {
+                pointer-events: none;
+            }
+            
+            .btn-loader {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 20px;
+                height: 20px;
+                border: 2px solid transparent;
+                border-top: 2px solid var(--bg-darker);
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                display: none;
+            }
+            
+            @keyframes spin {
+                0% { transform: translate(-50%, -50%) rotate(0deg); }
+                100% { transform: translate(-50%, -50%) rotate(360deg); }
+            }
+            
+            .form-status {
+                margin-top: 1rem;
+                padding: 1rem;
+                border-radius: 8px;
+                display: none;
+                text-align: center;
+                font-weight: 500;
+            }
+            
+            .form-status.success {
+                background: rgba(0, 240, 255, 0.1);
+                color: var(--primary);
+                border: 1px solid var(--primary);
+            }
+            
+            .form-status.error {
+                background: rgba(255, 94, 148, 0.1);
+                color: var(--secondary);
+                border: 1px solid var(--secondary);
+            }
+            
+            .footer-bottom {
+                text-align: center;
+                padding-top: 2rem;
+                margin-top: 2rem;
+                border-top: 1px solid rgba(0, 240, 255, 0.1);
+                color: var(--text-dim);
+                font-size: 0.9rem;
+            }
+            
+            @media (max-width: 768px) {
+                .nav-links.active {
+                    display: flex;
+                }
+            }
     </style>
 </head>
 
