@@ -1,4 +1,3 @@
-// Enhanced JavaScript with better error handling and performance
 class Portfolio3D {
     constructor() {
         this.scene = null;
@@ -10,17 +9,19 @@ class Portfolio3D {
         this.mouse = new THREE.Vector2();
         this.visualizations = {};
         this.isMobile = window.innerWidth <= 768;
+        this.isTablet = window.innerWidth <= 1024;
         this.isMenuOpen = false;
-        
         this.init();
     }
     
     async init() {
         try {
             await this.initLoading();
-            this.initScene();
+            if (!this.isMobile) {
+                this.initScene();
+                this.createVisualizations();
+            }
             this.initEventListeners();
-            this.createVisualizations();
             this.animate();
             await this.finishLoading();
         } catch (error) {
@@ -37,7 +38,6 @@ class Portfolio3D {
             'Generating Star Fields...',
             'Finalizing Experience...'
         ];
-        
         for (let i = 0; i < loadingSteps.length; i++) {
             await this.updateLoadingProgress((i + 1) / loadingSteps.length, loadingSteps[i]);
             await new Promise(resolve => setTimeout(resolve, 300));
@@ -48,10 +48,8 @@ class Portfolio3D {
         this.loadingProgress = progress;
         const progressBar = document.getElementById('progressBar');
         const loadingText = document.getElementById('loadingText');
-        
         if (progressBar) progressBar.style.width = `${progress * 100}%`;
         if (loadingText) loadingText.textContent = text;
-        
         return Promise.resolve();
     }
     
@@ -69,13 +67,8 @@ class Portfolio3D {
     }
     
     initScene() {
-        // Skip 3D initialization on very small screens for performance
-        if (window.innerWidth < 480) {
-            return;
-        }
-        
+        if (window.innerWidth < 480) return;
         try {
-            // Scene setup
             this.scene = new THREE.Scene();
             this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             this.renderer = new THREE.WebGLRenderer({ 
@@ -83,22 +76,15 @@ class Portfolio3D {
                 alpha: true,
                 powerPreference: this.isMobile ? 'low-power' : 'high-performance'
             });
-            
             this.renderer.setSize(window.innerWidth, window.innerHeight);
             this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, this.isMobile ? 1.5 : 2));
-            
             const webglContainer = document.getElementById('webgl');
             if (webglContainer) {
                 webglContainer.appendChild(this.renderer.domElement);
             }
-            
-            // Camera position
             this.camera.position.z = this.isMobile ? 150 : 100;
-            
-            // Lighting
             const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
             this.scene.add(ambientLight);
-            
             const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
             directionalLight.position.set(1, 1, 1);
             this.scene.add(directionalLight);
@@ -109,7 +95,6 @@ class Portfolio3D {
     
     createVisualizations() {
         if (!this.scene) return;
-        
         try {
             this.visualizations.magnetar = this.createMagnetarVisualization();
             this.visualizations.neuralNetwork = this.createNeuralNetworkVisualization();
@@ -121,8 +106,6 @@ class Portfolio3D {
     
     createMagnetarVisualization() {
         const group = new THREE.Group();
-
-        // Core of the magnetar
         const coreGeometry = new THREE.IcosahedronGeometry(20, this.isMobile ? 5 : 10);
         const coreMaterial = new THREE.MeshStandardMaterial({
             color: 0x62e7d8,
@@ -133,12 +116,9 @@ class Portfolio3D {
         });
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         group.add(core);
-
-        // Magnetic field lines (fewer on mobile)
         const fieldGroup = new THREE.Group();
         const fieldColors = [0x62e7d8, 0x00ffff, 0x4169e1];
         const fieldLineCount = this.isMobile ? 30 : 100;
-
         for (let i = 0; i < fieldLineCount; i++) {
             const lineGeometry = new THREE.BufferGeometry();
             const lineMaterial = new THREE.LineBasicMaterial({ 
@@ -146,12 +126,10 @@ class Portfolio3D {
                 transparent: true, 
                 opacity: 0.3 
             });
-            
             const positions = [];
             const radius = 90 + Math.random() * 10;
             const twists = 10 + Math.random() * 3;
             const pointCount = this.isMobile ? 50 : 100;
-
             for (let j = 0; j < pointCount; j++) {
                 const t = j / (pointCount - 1);
                 const angle = t * Math.PI * twists * 2;
@@ -160,21 +138,17 @@ class Portfolio3D {
                 const z = t * 50 - 25 + Math.sin(t * Math.PI * 4) * 10;
                 positions.push(x, y, z);
             }
-            
             lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
             const line = new THREE.Line(lineGeometry, lineMaterial);
             fieldGroup.add(line);
         }
-
         group.add(fieldGroup);
         this.scene.add(group);
-
         return { core, fieldGroup, group };
     }
     
     createNeuralNetworkVisualization() {
         const group = new THREE.Group();
-        
         const layers = this.isMobile ? [3, 8, 5, 4, 5, 8, 3] : [5, 16, 9, 8, 8, 9, 16, 5];
         const nodeGeometry = new THREE.SphereGeometry(1, this.isMobile ? 8 : 16, this.isMobile ? 8 : 16);
         const nodeMaterial = new THREE.MeshStandardMaterial({
@@ -182,22 +156,18 @@ class Portfolio3D {
             emissive: 0x006060,
             emissiveIntensity: 0.5
         });
-        
         const nodes = [];
         const connections = [];
-        
         for (let l = 0; l < layers.length; l++) {
             const layerNodes = [];
             const layerSize = layers[l];
             const xPos = (l - (layers.length - 1) / 2) * (this.isMobile ? 20 : 30);
-            
             for (let i = 0; i < layerSize; i++) {
                 const yPos = (i - (layerSize - 1) / 2) * (this.isMobile ? 8 : 10);
                 const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
                 node.position.set(xPos, yPos, 0);
                 group.add(node);
                 layerNodes.push(node);
-                
                 if (l > 0) {
                     const prevLayer = nodes[l - 1];
                     for (let j = 0; j < prevLayer.length; j++) {
@@ -207,12 +177,10 @@ class Portfolio3D {
                             transparent: true,
                             opacity: 0.2
                         });
-                        
                         const points = [
                             prevLayer[j].position.clone(),
                             node.position.clone()
                         ];
-                        
                         connectionGeometry.setFromPoints(points);
                         const line = new THREE.Line(connectionGeometry, lineMaterial);
                         group.add(line);
@@ -222,14 +190,12 @@ class Portfolio3D {
             }
             nodes.push(layerNodes);
         }
-        
         group.position.z = -50;
         group.visible = false;
         this.scene.add(group);
-        
         return { group, nodes, connections };
     }
-
+    
     createStarField() {
         const starGroup = new THREE.Group();
         const starGeometry = new THREE.BufferGeometry();
@@ -239,52 +205,33 @@ class Portfolio3D {
             transparent: true,
             opacity: 0.7
         });
-
         const starVertices = [];
         const starCount = this.isMobile ? 5000 : 10000;
-        
         for (let i = 0; i < starCount; i++) {
             const x = (Math.random() - 0.5) * 1000;
             const y = (Math.random() - 0.5) * 1000;
             const z = (Math.random() - 0.5) * 1000;
             starVertices.push(x, y, z);
         }
-
         starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
         const starField = new THREE.Points(starGeometry, starMaterial);
         starGroup.add(starField);
         this.scene.add(starGroup);
-
         return starGroup;
     }
     
     initEventListeners() {
-        // Mouse movement (only on desktop)
         if (!this.isMobile) {
             window.addEventListener('mousemove', (e) => this.onMouseMove(e), { passive: true });
         }
-        
-        // Window resize
         window.addEventListener('resize', () => this.onWindowResize(), false);
-        
-        // Scroll events
         window.addEventListener('scroll', () => this.onScroll(), { passive: true });
-        
-        // Navigation
         this.initNavigation();
-        
-        // Custom cursor (desktop only)
         if (!this.isMobile) {
             this.initCustomCursor();
         }
-        
-        // Contact form
         this.initContactForm();
-        
-        // Intersection Observer for animations
         this.initIntersectionObserver();
-        
-        // Touch events for mobile
         if (this.isMobile) {
             this.initTouchEvents();
         }
@@ -297,7 +244,6 @@ class Portfolio3D {
         const progressDots = document.querySelectorAll('.progress-dot');
         const menuOverlay = document.getElementById('menuOverlay');
         
-        // Mobile menu toggle
         if (menuToggle && navLinks) {
             menuToggle.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -306,24 +252,21 @@ class Portfolio3D {
             });
         }
         
-        // Menu overlay click to close menu
         if (menuOverlay) {
             menuOverlay.addEventListener('click', () => {
                 this.closeMobileMenu();
             });
         }
         
-        // Navigation link clicks
         navLinksItems.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const section = link.getAttribute('href').substring(1);  // Change: Use href.substring(1) instead of data-section
+                const section = link.getAttribute('data-section');
                 this.navigateToSection(section);
                 this.closeMobileMenu();
             });
         });
         
-        // Progress dot clicks
         progressDots.forEach(dot => {
             dot.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -332,14 +275,12 @@ class Portfolio3D {
             });
         });
         
-        // Close menu on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.isMenuOpen) {
                 this.closeMobileMenu();
             }
         });
         
-        // Prevent body scroll when menu is open
         document.addEventListener('touchmove', (e) => {
             if (this.isMenuOpen) {
                 e.preventDefault();
@@ -358,22 +299,17 @@ class Portfolio3D {
             menuToggle.classList.toggle('active');
             menuToggle.setAttribute('aria-expanded', this.isMenuOpen);
         }
-        
         if (navLinks) {
             navLinks.classList.toggle('active');
         }
-        
         if (menuOverlay) {
             menuOverlay.classList.toggle('active');
         }
-        
-        // Prevent body scroll when menu is open
         document.body.style.overflow = this.isMenuOpen ? 'hidden' : '';
     }
     
     closeMobileMenu() {
         if (!this.isMenuOpen) return;
-        
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         const menuOverlay = document.getElementById('menuOverlay');
@@ -384,44 +320,34 @@ class Portfolio3D {
             menuToggle.classList.remove('active');
             menuToggle.setAttribute('aria-expanded', 'false');
         }
-        
         if (navLinks) {
             navLinks.classList.remove('active');
         }
-        
         if (menuOverlay) {
             menuOverlay.classList.remove('active');
         }
-        
         document.body.style.overflow = '';
     }
     
     initCustomCursor() {
-        if ('ontouchstart' in window) return; // Skip on touch devices
-        
+        if ('ontouchstart' in window) return;
         const cursor = document.getElementById('cursor');
         if (!cursor) return;
-        
         let mouseX = 0;
         let mouseY = 0;
         let cursorX = 0;
         let cursorY = 0;
-        
         const updateCursor = () => {
             cursorX += (mouseX - cursorX) * 0.1;
             cursorY += (mouseY - cursorY) * 0.1;
             cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
             requestAnimationFrame(updateCursor);
         };
-        
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX - 8;
             mouseY = e.clientY - 8;
         });
-        
         updateCursor();
-        
-        // Hover effects
         const hoverElements = document.querySelectorAll('a, button, .project-item');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
@@ -430,61 +356,44 @@ class Portfolio3D {
     }
     
     initTouchEvents() {
-        // Smooth scrolling for touch devices
         let touchStartY = 0;
         let touchStartTime = 0;
-        
         document.addEventListener('touchstart', (e) => {
             touchStartY = e.touches[0].clientY;
             touchStartTime = Date.now();
         }, { passive: true });
-        
         document.addEventListener('touchend', (e) => {
             const touchEndY = e.changedTouches[0].clientY;
             const touchEndTime = Date.now();
             const deltaY = touchEndY - touchStartY;
             const deltaTime = touchEndTime - touchStartTime;
-            
-            // Swipe detection for quick navigation
             if (Math.abs(deltaY) > 50 && deltaTime < 300) {
-                // Add swipe navigation logic here if needed
             }
         }, { passive: true });
     }
     
     initContactForm() {
         const form = document.getElementById('contactForm');
-        
         if (!form) return;
-        
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             if (!this.validateForm(form)) return;
-            
             this.setFormLoading(true);
-            
             try {
-                // Simulate form submission
                 await new Promise(resolve => setTimeout(resolve, 2000));
-                
                 this.showFormStatus('Message sent successfully!', 'success');
                 form.reset();
-                
             } catch (error) {
                 this.showFormStatus('Failed to send message. Please try again.', 'error');
             } finally {
                 this.setFormLoading(false);
             }
         });
-        
-        // Real-time validation
         const fields = form.querySelectorAll('input, textarea');
         fields.forEach(field => {
             field.addEventListener('blur', () => {
                 this.validateField(field);
             });
-            
             field.addEventListener('input', () => {
                 if (field.classList.contains('error')) {
                     this.validateField(field);
@@ -496,26 +405,21 @@ class Portfolio3D {
     validateForm(form) {
         const fields = ['name', 'email', 'subject', 'message'];
         let isValid = true;
-        
         fields.forEach(fieldName => {
             const field = form.querySelector(`[name="${fieldName}"]`);
             if (field && !this.validateField(field)) {
                 isValid = false;
             }
         });
-        
         return isValid;
     }
     
     validateField(field) {
         const fieldName = field.name;
         const errorElement = document.getElementById(`${fieldName}-error`);
-        
         if (!errorElement) return true;
-        
         const value = field.value.trim();
         let errorMessage = '';
-        
         if (!value) {
             errorMessage = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
         } else if (fieldName === 'email' && !this.isValidEmail(value)) {
@@ -523,7 +427,6 @@ class Portfolio3D {
         } else if (fieldName === 'message' && value.length < 10) {
             errorMessage = 'Message must be at least 10 characters long';
         }
-        
         if (errorMessage) {
             errorElement.textContent = errorMessage;
             field.classList.add('error');
@@ -542,10 +445,8 @@ class Portfolio3D {
     setFormLoading(loading) {
         const submitBtn = document.getElementById('submitBtn');
         if (!submitBtn) return;
-        
         const btnText = submitBtn.querySelector('.btn-text');
         const btnLoader = submitBtn.querySelector('.btn-loader');
-        
         if (loading) {
             submitBtn.disabled = true;
             submitBtn.classList.add('loading');
@@ -562,11 +463,9 @@ class Portfolio3D {
     showFormStatus(message, type) {
         const formStatus = document.getElementById('formStatus');
         if (!formStatus) return;
-        
         formStatus.textContent = message;
         formStatus.className = `form-status ${type}`;
         formStatus.style.display = 'block';
-        
         setTimeout(() => {
             formStatus.style.display = 'none';
         }, 5000);
@@ -579,31 +478,23 @@ class Portfolio3D {
         const sectionObserver = new IntersectionObserver((entries) => {
             let maxRatio = 0;
             let activeEntry = null;
-        
-            // Find the entry with the highest intersection ratio to handle potential overlaps
             entries.forEach(entry => {
                 if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
                     maxRatio = entry.intersectionRatio;
                     activeEntry = entry;
                 }
             });
-        
             if (activeEntry) {
                 const section = activeEntry.target.id;
-        
-                // Remove active from all sections
                 document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-        
-                // Add active to the most visible section
                 activeEntry.target.classList.add('active');
-        
                 this.updateActiveSection(section);
             }
         }, { 
             threshold: this.isMobile ? 0.3 : 0.5,
             rootMargin: this.isMobile ? '-20% 0px -20% 0px' : '-30% 0px -30% 0px'
         });
-
+        
         const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -621,32 +512,28 @@ class Portfolio3D {
     
     onMouseMove(event) {
         if (this.isMobile) return;
-        
         this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     }
     
     onWindowResize() {
         const wasMobile = this.isMobile;
+        const wasTablet = this.isTablet;
         this.isMobile = window.innerWidth <= 768;
+        this.isTablet = window.innerWidth <= 1024;
         
-        // Close mobile menu if switching to desktop
         if (wasMobile && !this.isMobile && this.isMenuOpen) {
             this.closeMobileMenu();
         }
         
         if (!this.camera || !this.renderer) return;
-        
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        
-        // Adjust camera position based on screen size
         this.camera.position.z = this.isMobile ? 150 : 100;
     }
     
     onScroll() {
-        // Throttle scroll events
         if (!this.scrollTimeout) {
             this.scrollTimeout = setTimeout(() => {
                 this.updateScrollProgress();
@@ -660,14 +547,11 @@ class Portfolio3D {
         const scrollTop = window.pageYOffset;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const scrollPercent = scrollTop / docHeight;
-        
-        // Update scroll-based animations or indicators here
     }
     
     updateNavigation() {
         const nav = document.querySelector('.nav');
         if (!nav) return;
-        
         if (window.scrollY > 100) {
             nav.classList.add('scrolled');
         } else {
@@ -680,7 +564,6 @@ class Portfolio3D {
         if (element) {
             const headerHeight = this.isMobile ? 80 : 100;
             const targetPosition = element.offsetTop - headerHeight;
-            
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
@@ -690,20 +573,15 @@ class Portfolio3D {
     
     updateActiveSection(section) {
         if (section === this.currentSection) return;
-        
         this.currentSection = section;
-        
-        // Update navigation
         document.querySelectorAll('.nav-link').forEach(link => {
-            const targetSection = link.getAttribute('href').substring(1);  // Change: Use href.substring(1) instead of data-section
+            const targetSection = link.getAttribute('data-section');
             if (targetSection === section) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
             }
         });
-        
-        // Update progress dots
         document.querySelectorAll('.progress-dot').forEach(dot => {
             if (dot.getAttribute('data-section') === section) {
                 dot.classList.add('active');
@@ -711,20 +589,15 @@ class Portfolio3D {
                 dot.classList.remove('active');
             }
         });
-        
-        // Update 3D visualizations
-        if (!this.isMobile) {
+        if (!this.isMobile && !this.isTablet) {
             this.updateVisualizations();
         }
     }
     
     updateVisualizations() {
         if (!window.gsap || !this.visualizations) return;
-        
         const { magnetar, neuralNetwork } = this.visualizations;
-        
         if (this.currentSection === 'home' && magnetar) {
-            // Show magnetar visualization
             gsap.to(magnetar.core.position, { 
                 x: 0, y: 0, z: 0, 
                 duration: 1.5, 
@@ -735,8 +608,6 @@ class Portfolio3D {
                 duration: 1.5, 
                 ease: "power2.inOut" 
             });
-            
-            // Hide neural network
             if (neuralNetwork) {
                 neuralNetwork.group.visible = false;
                 gsap.to(neuralNetwork.group.position, { 
@@ -745,17 +616,13 @@ class Portfolio3D {
                     ease: "power2.inOut" 
                 });
             }
-        } 
-        else if (this.currentSection === 'about' && neuralNetwork) {
-            // Show neural network visualization
+        } else if (this.currentSection === 'about' && neuralNetwork) {
             neuralNetwork.group.visible = true;
             gsap.to(neuralNetwork.group.position, { 
                 z: -50, 
                 duration: 1.5, 
                 ease: "power2.inOut" 
             });
-            
-            // Hide magnetar
             if (magnetar) {
                 gsap.to(magnetar.core.position, { 
                     z: 200, 
@@ -768,9 +635,7 @@ class Portfolio3D {
                     ease: "power2.inOut" 
                 });
             }
-        }
-        else {
-            // Hide both visualizations for other sections
+        } else {
             if (magnetar) {
                 gsap.to(magnetar.core.position, { 
                     z: 200, 
@@ -783,7 +648,6 @@ class Portfolio3D {
                     ease: "power2.inOut" 
                 });
             }
-            
             if (neuralNetwork) {
                 gsap.to(neuralNetwork.group.position, { 
                     z: -200, 
@@ -796,13 +660,10 @@ class Portfolio3D {
     }
     
     triggerSectionAnimations() {
-        // Trigger initial animations after loading
         const activeSection = document.querySelector('.section.active .fade-up');
         if (activeSection) {
             activeSection.classList.add('active');
         }
-        
-        // Add stagger effect to multiple fade elements
         const fadeElements = document.querySelectorAll('.fade-up');
         fadeElements.forEach((element, index) => {
             setTimeout(() => {
@@ -814,27 +675,22 @@ class Portfolio3D {
     }
     
     animate() {
-        if (!this.renderer || !this.scene || !this.camera) return;
-        
+        if (!this.renderer || !this.scene || !this.camera) {
+            requestAnimationFrame(() => this.animate());
+            return;
+        }
         requestAnimationFrame(() => this.animate());
-        
         const time = Date.now() * 0.001;
-        
-        // Animate visualizations (reduced frequency on mobile)
         const animationSpeed = this.isMobile ? 0.002 : 0.005;
         const { magnetar, neuralNetwork, starField } = this.visualizations;
-        
         if (magnetar && magnetar.core) {
             magnetar.core.rotation.x += animationSpeed;
             magnetar.core.rotation.y += animationSpeed * 0.6;
             magnetar.fieldGroup.rotation.x += animationSpeed;
             magnetar.fieldGroup.rotation.y += animationSpeed * 0.6;
         }
-        
         if (neuralNetwork && this.currentSection === 'about') {
             neuralNetwork.group.rotation.y += animationSpeed;
-            
-            // Pulse nodes (less frequent on mobile)
             if (!this.isMobile || Math.floor(time * 10) % 3 === 0) {
                 neuralNetwork.nodes.forEach((layer, i) => {
                     layer.forEach((node, j) => {
@@ -844,18 +700,14 @@ class Portfolio3D {
                 });
             }
         }
-        
         if (starField) {
             starField.rotation.y += 0.0001;
         }
-        
-        // Subtle camera movement based on mouse (desktop only)
         if (this.camera && !this.isMobile) {
             this.camera.position.x += (this.mouse.x * 20 - this.camera.position.x) * 0.05;
             this.camera.position.y += (this.mouse.y * 20 - this.camera.position.y) * 0.05;
             this.camera.lookAt(this.scene.position);
         }
-        
         try {
             this.renderer.render(this.scene, this.camera);
         } catch (error) {
@@ -867,11 +719,9 @@ class Portfolio3D {
         console.error('Portfolio error:', error);
         const loadingScreen = document.getElementById('loadingScreen');
         const loadingText = document.getElementById('loadingText');
-        
         if (loadingText) {
             loadingText.textContent = 'Error loading 3D content. Continuing with 2D version...';
         }
-        
         setTimeout(() => {
             if (loadingScreen) {
                 loadingScreen.classList.add('hidden');
@@ -881,9 +731,7 @@ class Portfolio3D {
     }
 }
 
-// Utility functions for enhanced mobile experience
 const Utils = {
-    // Debounce function for performance optimization
     debounce(func, wait, immediate) {
         let timeout;
         return function executedFunction(...args) {
@@ -897,8 +745,6 @@ const Utils = {
             if (callNow) func(...args);
         };
     },
-    
-    // Throttle function for scroll events
     throttle(func, limit) {
         let inThrottle;
         return function() {
@@ -911,8 +757,6 @@ const Utils = {
             }
         };
     },
-    
-    // Check if element is in viewport
     isInViewport(element) {
         const rect = element.getBoundingClientRect();
         return (
@@ -922,37 +766,28 @@ const Utils = {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
     },
-    
-    // Smooth scroll polyfill for older browsers
     smoothScrollTo(element, offset = 0) {
         const targetPosition = element.offsetTop - offset;
         const startPosition = window.pageYOffset;
         const distance = targetPosition - startPosition;
-        const duration = Math.min(Math.abs(distance) / 2, 800); // Max 800ms
+        const duration = Math.min(Math.abs(distance) / 2, 800);
         let start = null;
-        
         function step(timestamp) {
             if (!start) start = timestamp;
             const progress = timestamp - start;
             const progressPercentage = Math.min(progress / duration, 1);
-            
-            // Easing function
             const easeInOutCubic = progressPercentage < 0.5 
                 ? 4 * progressPercentage * progressPercentage * progressPercentage 
                 : (progressPercentage - 1) * (2 * progressPercentage - 2) * (2 * progressPercentage - 2) + 1;
-            
             window.scrollTo(0, startPosition + distance * easeInOutCubic);
-            
             if (progress < duration) {
                 window.requestAnimationFrame(step);
             }
         }
-        
         window.requestAnimationFrame(step);
     }
 };
 
-// Enhanced performance monitoring
 const PerformanceMonitor = {
     init() {
         if ('PerformanceObserver' in window) {
@@ -961,7 +796,6 @@ const PerformanceMonitor = {
         }
         this.monitorFPS();
     },
-    
     observeLCP() {
         const observer = new PerformanceObserver((entryList) => {
             const entries = entryList.getEntries();
@@ -970,7 +804,6 @@ const PerformanceMonitor = {
         });
         observer.observe({ entryTypes: ['largest-contentful-paint'] });
     },
-    
     observeFID() {
         const observer = new PerformanceObserver((entryList) => {
             const entries = entryList.getEntries();
@@ -980,51 +813,36 @@ const PerformanceMonitor = {
         });
         observer.observe({ entryTypes: ['first-input'] });
     },
-    
     monitorFPS() {
         let lastTime = performance.now();
         let frames = 0;
-        
         function updateFPS() {
             const now = performance.now();
             frames++;
-            
             if (now >= lastTime + 1000) {
                 const fps = Math.round((frames * 1000) / (now - lastTime));
-                
-                // Log low FPS warnings
                 if (fps < 30) {
                     console.warn('Low FPS detected:', fps);
                 }
-                
                 frames = 0;
                 lastTime = now;
             }
-            
             requestAnimationFrame(updateFPS);
         }
-        
         updateFPS();
     }
 };
 
-// Initialize enhanced features
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize main portfolio
     const portfolio = new Portfolio3D();
-    
-    // Initialize performance monitoring in development
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         PerformanceMonitor.init();
     }
-    
-    // Add enhanced scroll behavior
     const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
     smoothScrollLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
             if (targetId === '#') return;
-            
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
@@ -1033,8 +851,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    
-    // Add lazy loading for images
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -1048,35 +864,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-        
         const lazyImages = document.querySelectorAll('img[data-src]');
         lazyImages.forEach(img => imageObserver.observe(img));
     }
-    
-    // Add touch feedback for mobile
     if ('ontouchstart' in window) {
         const touchElements = document.querySelectorAll('button, .project-item, .cta-button');
         touchElements.forEach(element => {
             element.addEventListener('touchstart', () => {
                 element.style.transform = 'scale(0.95)';
             }, { passive: true });
-            
             element.addEventListener('touchend', () => {
                 element.style.transform = '';
             }, { passive: true });
         });
     }
-    
-    // Add connection status monitoring
     window.addEventListener('online', () => {
         console.log('Connection restored');
     });
-    
     window.addEventListener('offline', () => {
         console.log('Connection lost');
     });
-    
-    // Optimize animations based on user preferences
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.style.setProperty('--animation-duration', '0.01s');
         console.log('Reduced motion preference detected');

@@ -6,27 +6,19 @@
     <meta name="description" content="Magnetars - Advanced Scientific Research & Consulting in Astrophysics, Machine Learning, and Quantitative Analysis">
     <meta name="keywords" content="astrophysics, machine learning, scientific research, magnetars, consulting">
     <meta name="author" content="Aayusha Singh, Amrit Roy">
-    
-    <!-- Open Graph meta tags -->
     <meta property="og:title" content="Magnetars | Interactive 3D Portfolio">
     <meta property="og:description" content="Advanced Scientific Research & Consulting">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://magnetars.com">
-    
     <title>Magnetars | Interactive 3D Portfolio</title>
-    
-    <!-- Preload critical resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" as="style">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" as="script">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js" as="script">
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-logo">Magnetars</div>
         <div class="progress-bar">
@@ -34,14 +26,8 @@
         </div>
         <div class="loading-text" id="loadingText">Initializing 3D Environment...</div>
     </div>
-    
-    <!-- Custom Cursor -->
     <div id="cursor" aria-hidden="true"></div>
-    
-    <!-- Skip to content link for accessibility -->
     <a href="#main-content" class="skip-to-content" tabindex="1">Skip to main content</a>
-    
-    <!-- Navigation -->
     <nav class="nav" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <a href="#home" class="logo" aria-label="Magnetars Home">
@@ -62,16 +48,9 @@
             </button>
         </div>
     </nav>
-    
-    <!-- Mobile Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay"></div>
-    
-    <!-- 3D Canvas Container -->
     <div id="webgl" aria-hidden="true"></div>
-    
-    <!-- Main Content -->
     <main id="main-content">
-        <!-- Hero Section -->
         <section id="home" class="section active" aria-labelledby="hero-title">
             <div class="content fade-up">
                 <h1 class="hero-title" id="hero-title">Magnetars</h1>
@@ -91,12 +70,9 @@
                 <div class="scroll-icon"></div>
             </div>
         </section>
-        
-        <!-- About Section -->
         <section id="about" class="section" aria-labelledby="about-title">
             <div class="content fade-up">
                 <h2 id="about-title">About Us</h2>
-                
                 <div class="what-we-do-together">
                     <p>
                         As a team, we are dedicated to advancing our understanding of the cosmos. 
@@ -105,7 +81,6 @@
                         of extreme cosmic phenomena and develop innovative solutions for scientific challenges.
                     </p>
                 </div>
-                
                 <div class="profiles">
                     <article class="profile">
                         <img src="Images/1685511464885(1).jpg" 
@@ -172,7 +147,6 @@
                             </a>
                         </div>
                     </article>
-                    
                     <article class="profile">
                         <img src="Images/LInkedin-image.jpeg" 
                              alt="Portrait of Amrit Roy" 
@@ -241,13 +215,10 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Projects Section -->
         <section id="work" class="section" aria-labelledby="work-title">
             <div class="content fade-up">
                 <h2 id="work-title">Projects</h2>
                 <p>Explore our pioneering research and technological innovations across different domains:</p>
-                
                 <div class="project-grid" role="list">
                     <article class="project-item" role="listitem">
                         <a href="HTML-files/Projects/academic.html" aria-label="View Academic Research Projects">
@@ -260,7 +231,6 @@
                             <h3>Academic Research</h3>
                         </a>
                     </article>
-
                     <article class="project-item" role="listitem">
                         <a href="HTML-files/Projects/CFD.html" aria-label="View CFD and Aerospace Simulations">
                             <img src="Images/cfd.jpg" 
@@ -272,7 +242,6 @@
                             <h3>CFD and Aerospace Simulations</h3>
                         </a>
                     </article>
-
                     <article class="project-item" role="listitem">
                         <a href="HTML-files/Projects/computational.html" aria-label="View Computational Tools and Automation">
                             <img src="Images/computational.jpg" 
@@ -284,7 +253,6 @@
                             <h3>Computational Tools and Automation</h3>
                         </a>
                     </article>
-
                     <article class="project-item" role="listitem">
                         <a href="HTML-files/Projects/ml.html" aria-label="View Machine Learning and AI Projects">
                             <img src="Images/machinelearning-projects.jpg" 
@@ -296,7 +264,6 @@
                             <h3>Machine Learning & AI</h3>
                         </a>
                     </article>
-
                     <article class="project-item" role="listitem">
                         <a href="HTML-files/Projects/quantfinance.html" aria-label="View Quantitative Finance Projects">
                             <img src="Images/quantfinance-projects.jpg" 
@@ -308,7 +275,6 @@
                             <h3>Quantitative Finance</h3>
                         </a>
                     </article>
-
                     <article class="project-item" role="listitem">
                         <a href="HTML-files/Projects/other.html" aria-label="View Other Projects">
                             <img src="Images/other-projects.jpeg" 
@@ -323,8 +289,6 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Publications Section -->
         <section id="publications" class="section" aria-labelledby="publications-title">
             <div class="content fade-up">
                 <h2 id="publications-title">Publications</h2>
@@ -340,7 +304,6 @@
                             <h3>Published Papers</h3>
                         </a>
                     </article>
-                    
                     <article class="project-item" role="listitem">
                         <a href="HTML-files/Publications/accepted.html" aria-label="View Accepted Abstracts">
                             <img src="Images/accepted.png" 
@@ -352,7 +315,6 @@
                             <h3>Accepted Abstracts</h3>
                         </a>
                     </article>
-                    
                     <article class="project-item" role="listitem">
                         <a href="HTML-files/Publications/submitted.html" aria-label="View Abstract Submitted">
                             <img src="Images/abstract.png" 
@@ -364,7 +326,6 @@
                             <h3>Abstract Submitted</h3>
                         </a>
                     </article>
-                    
                     <article class="project-item" role="listitem">
                         <a href="HTML-files/Publications/preparation.html" aria-label="View In-Preparation Papers">
                             <img src="Images/preparation.png" 
@@ -379,13 +340,10 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Contact Section -->
         <section id="contact" class="section" aria-labelledby="contact-title">
             <div class="content fade-up">
                 <h2 id="contact-title">Contact Us</h2>
                 <p>Interested in collaborating or learning more about our work? Reach out to us using the form below.</p>
-                
                 <form class="contact-form" id="contactForm" novalidate>
                     <div class="form-group">
                         <label for="name" class="sr-only">Your Name</label>
@@ -397,7 +355,6 @@
                                aria-describedby="name-error">
                         <div class="error-message" id="name-error" role="alert"></div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="email" class="sr-only">Your Email</label>
                         <input type="email" 
@@ -408,7 +365,6 @@
                                aria-describedby="email-error">
                         <div class="error-message" id="email-error" role="alert"></div>
                     </div>
-                    
                     <div class="form-group full-width">
                         <label for="subject" class="sr-only">Subject</label>
                         <input type="text" 
@@ -419,7 +375,6 @@
                                aria-describedby="subject-error">
                         <div class="error-message" id="subject-error" role="alert"></div>
                     </div>
-                    
                     <div class="form-group full-width">
                         <label for="message" class="sr-only">Your Message</label>
                         <textarea id="message" 
@@ -429,21 +384,17 @@
                                   aria-describedby="message-error"></textarea>
                         <div class="error-message" id="message-error" role="alert"></div>
                     </div>
-                    
                     <div class="full-width">
                         <button type="submit" class="submit-btn" id="submitBtn">
                             <span class="btn-text">Send Message</span>
                             <div class="btn-loader" aria-hidden="true"></div>
                         </button>
                     </div>
-                    
                     <div class="form-status" id="formStatus" role="alert"></div>
                 </form>
             </div>
         </section>
     </main>
-
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -472,8 +423,6 @@
             <p>&copy; 2024 Magnetars. All rights reserved.</p>
         </div>
     </footer>
-    
-    <!-- Progress Indicator -->
     <nav class="progress-container" role="navigation" aria-label="Page sections">
         <button class="progress-dot active" 
                 data-section="home" 
@@ -496,8 +445,6 @@
                 aria-label="Go to Contact section"
                 type="button"></button>
     </nav>
-
-    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="script.js"></script>
