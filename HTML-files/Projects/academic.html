@@ -11,14 +11,25 @@
 <body>
     <div id="cursor"></div>
 
-    <nav class="nav">
-        <div class="nav-brand">MAGNETARS</div>
-        <div class="nav-links">
-            <a href="../../index.html#home">Home</a>
-            <a href="../../index.html#about">About</a>
-            <a href="../../index.html#work">Projects</a>
-            <a href="../../index.html#publications">Publications</a>
-            <a href="../../index.html#contact">Contact</a>
+    <!-- Updated Navigation to match index.html -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="../../index.html#home" class="logo" aria-label="Magnetars Home">
+                <span aria-hidden="true"></span>
+                Magnetars
+            </a>
+            <ul class="nav-links" id="navLinks" role="menubar">
+                <li role="none"><a href="../../index.html#home" class="nav-link" role="menuitem" data-section="home">Home</a></li>
+                <li role="none"><a href="../../index.html#about" class="nav-link" role="menuitem" data-section="about">About</a></li>
+                <li role="none"><a href="../../index.html#work" class="nav-link active" role="menuitem" data-section="work">Projects</a></li>
+                <li role="none"><a href="../../index.html#publications" class="nav-link" role="menuitem" data-section="publications">Publications</a></li>
+                <li role="none"><a href="../../index.html#contact" class="nav-link" role="menuitem" data-section="contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -26,7 +37,7 @@
 
     <section id="academic" class="active">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <h1 class="text-4xl font-bold text-white text-center mb-8">Academic Projects</h1>
+            <h1 class="text-5xl font-bold text-white text-center mb-8">Academic Projects</h1>
             
             <!-- 1. From Stellar Birth to Violent Death: A Review on Supernovae -->
             <div class="project-box">
@@ -217,7 +228,7 @@
                             <ul class="list-circle list-inside ml-4">
                                 <li>Figure 2a: Particle positions colored by velocity (v/c).</li>
                                 <li>Figure 2b: Electric field magnitude (|E|, V/m).</li>
-                                <li>Figure 2c: Energy evolution (kinetic: Σ(γi − 1)mic², electric: 0.5ϵ0∫|E|²dV, magnetic: 0.5μ₀⁻¹∫|B|²dV, total).</li>
+                                <li>Figure 2c: Energy evolution (kinetic: Σ(γi − 1)mic², electric: 0.5ε₀∫|E|²dV, magnetic: 0.5μ₀⁻¹∫|B|²dV, total).</li>
                                 <li>Figure 2d: Velocity distribution.</li>
                             </ul>
                         </li>
@@ -248,7 +259,7 @@
                     <!-- Row 2: Figure 3 -->
                     <div style="width: 150px; text-align: center; margin: 10px;">
                         <img src="../../Projects/Academic/Microgravity-dark-matter/dm_simulation3D.png" alt="DM Trajectories Comparison" onclick="openImageModal('../../Projects/Academic/Microgravity-dark-matter/dm_simulation3D.png', 'Comparative Simulation of Dark Matter Particle Trajectories')" style="width: 150px; height: 150px; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
-                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 3: Comparison of particle trajectories in microgravity vs. Earth’s gravity.</p>
+                        <p class="text-gray-400 text-center mt-2" style="font-size: 0.9rem; line-height: 1.2; height: 60px; overflow: hidden;">Figure 3: Comparison of particle trajectories in microgravity vs. Earth's gravity.</p>
                     </div>
                 </div>
                 <!-- Text Section -->
@@ -258,9 +269,9 @@
                         This section includes graphs and images simulated for the paper, exploring the behavior of dark matter-analogous particles in microgravity.
                     </p>
                     <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Figure 1: Simulation of a dark matter particle in a microgravity environment (m = 1×10⁻²⁶ kg, g = 9.8×10⁻⁶ m/s², k = 1×10⁻³⁰ N/(m/s)), showing the particle’s trajectory in the xy-plane with a downward curve and the time evolution of its speed (mm/s), which decreases initially and then gradually increases due to gravitational acceleration.</li>
+                        <li>Figure 1: Simulation of a dark matter particle in a microgravity environment (m = 1×10⁻²⁶ kg, g = 9.8×10⁻⁶ m/s², k = 1×10⁻³⁰ N/(m/s)), showing the particle's trajectory in the xy-plane with a downward curve and the time evolution of its speed (mm/s), which decreases initially and then gradually increases due to gravitational acceleration.</li>
                         <li>Figure 2: N-body simulation in microgravity (Python, NumPy), showing two particles (masses 100 GeV, initial velocities 0.02 m/s) orbiting a baryonic center over 500 time steps using a leapfrog integrator. The blue trajectory forms a near-circular orbit, while the orange trajectory is elongated, indicating enhanced weak interactions.</li>
-                        <li>Figure 3: Comparative simulation of dark matter-analogous particle trajectories (Python, NumPy, SciPy) for axions (m = 10⁻²² eV) and WIMPs (m = 100 GeV) with initial velocities of 0.01 m/s over 1000 time steps. The image compares trajectories in microgravity (showing deviations due to enhanced weak interactions) and under Earth’s gravity (where effects are suppressed).</li>
+                        <li>Figure 3: Comparative simulation of dark matter-analogous particle trajectories (Python, NumPy, SciPy) for axions (m = 10⁻²² eV) and WIMPs (m = 100 GeV) with initial velocities of 0.01 m/s over 1000 time steps. The image compares trajectories in microgravity (showing deviations due to enhanced weak interactions) and under Earth's gravity (where effects are suppressed).</li>
                     </ul>
                 </div>
             </div>
@@ -345,6 +356,19 @@
                 closeImageModal();
             }
         });
+
+        // Mobile menu toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', 
+                    menuToggle.getAttribute('aria-expanded') === 'false' ? 'true' : 'false'
+                );
+            });
+        }
     </script>
 </body>
 </html>
