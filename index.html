@@ -458,7 +458,7 @@
                         <i class="fab fa-twitter"></i>
                     </a>
                     <a href="#" 
-                       class="social-link" 
+                       class="social-link" 2024 Magnetars. All rights reserved
                        aria-label="Connect with us on LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>
@@ -510,8 +510,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+    // Initialize EmailJS with your public key
+    emailjs.init("MwdgukY1_dUck1umu"); // Replace with your actual public key
+
+    // Form submission handler
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const formStatus = document.getElementById('formStatus');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoader = submitBtn.querySelector('.btn-loader');
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.textContent = 'Sending...';
+        btnLoader.style.display = 'block';
+        formStatus.innerHTML = '';
+        
+        // Send email
+        emailjs.sendForm('service_3nggsrx', 'template_0qsryr9', this) // Replace with your IDs
+            .then(function(response) {
+                console.log('Success:', response);
+                formStatus.innerHTML = '<p style="color: #4ecdc4; margin-top: 1rem;">✓ Message sent successfully! We\'ll get back to you soon.</p>';
+                document.getElementById('contactForm').reset();
+            })
+            .catch(function(error) {
+                console.log('Error:', error);
+                formStatus.innerHTML = '<p style="color: #ff6b6b; margin-top: 1rem;">✗ Error sending message. Please try again or contact us directly.</p>';
+            })
+            .finally(function() {
+                // Reset button state
+                submitBtn.disabled = false;
+                btnText.textContent = 'Send Message';
+                btnLoader.style.display = 'none';
+            });
+    });
+    </script>
 </body>
 </html>
