@@ -516,42 +516,61 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-    // Initialize EmailJS with your public key
-    emailjs.init("MwdgukY1_dUck1umu"); // Replace with your actual public key
+        // Initialize EmailJS with your public key
+        emailjs.init("MwdgukY1_dUck1umu");
 
-    // Form submission handler
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const submitBtn = document.getElementById('submitBtn');
-        const formStatus = document.getElementById('formStatus');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const btnLoader = submitBtn.querySelector('.btn-loader');
-        
-        // Show loading state
-        submitBtn.disabled = true;
-        btnText.textContent = 'Sending...';
-        btnLoader.style.display = 'block';
-        formStatus.innerHTML = '';
-        
-        // Send email
-        emailjs.sendForm('service_3nggsrx', 'template_0qsryr9', this) // Replace with your IDs
-            .then(function(response) {
-                console.log('Success:', response);
-                formStatus.innerHTML = '<p style="color: #4ecdc4; margin-top: 1rem;">✓ Message sent successfully! We\'ll get back to you soon.</p>';
-                document.getElementById('contactForm').reset();
-            })
-            .catch(function(error) {
-                console.log('Error:', error);
-                formStatus.innerHTML = '<p style="color: #ff6b6b; margin-top: 1rem;">✗ Error sending message. Please try again or contact us directly.</p>';
-            })
-            .finally(function() {
-                // Reset button state
-                submitBtn.disabled = false;
-                btnText.textContent = 'Send Message';
-                btnLoader.style.display = 'none';
-            });
-    });
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const formStatus = document.getElementById('formStatus');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoader = submitBtn.querySelector('.btn-loader');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.textContent = 'Sending...';
+            btnLoader.style.display = 'block';
+            formStatus.innerHTML = '';
+            
+            // Prepare template parameters
+            const templateParams = {
+                from_name: this.name.value,
+                reply_to: this.email.value,
+                subject: this.subject.value,
+                message: this.message.value,
+                to_name: 'Magnetars Team' // Optional: your name
+            };
+            
+            // Send email using template parameters instead of form directly
+            emailjs.send('service_3nggsrx', 'template_0qsryr9', templateParams)
+                .then(function(response) {
+                    console.log('Success:', response);
+                    formStatus.innerHTML = `
+                        <div style="color: #4ecdc4; margin-top: 1rem; padding: 1rem; background: rgba(78, 205, 196, 0.1); border-radius: 8px; border-left: 4px solid #4ecdc4;">
+                            <strong>✓ Message sent successfully!</strong><br>
+                            Thank you for contacting us. We'll get back to you within 24 hours.
+                        </div>
+                    `;
+                    document.getElementById('contactForm').reset();
+                })
+                .catch(function(error) {
+                    console.log('Error:', error);
+                    formStatus.innerHTML = `
+                        <div style="color: #ff6b6b; margin-top: 1rem; padding: 1rem; background: rgba(255, 107, 107, 0.1); border-radius: 8px; border-left: 4px solid #ff6b6b;">
+                            <strong>✗ Error sending message.</strong><br>
+                            Please try again or contact us directly.
+                        </div>
+                    `;
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Send Message';
+                    btnLoader.style.display = 'none';
+                });
+        });
     </script>
 </body>
 </html>
