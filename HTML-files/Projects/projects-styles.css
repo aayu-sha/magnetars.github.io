@@ -450,7 +450,7 @@ h1, h2 {
 
 .image-item {
     width: 150px;
-    text-align: center;
+    text-align: center;<!-- <link rel="stylesheet" href="../../styles.css"> -->
     margin: 10px;
 }
 

@@ -1,0 +1,521 @@
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight, Rocket, Clock, Zap, Atom, ExternalLink } from 'lucide-react';
+
+const InteractiveResearchPoster = () => {
+  const [activeSection, setActiveSection] = useState(0);
+
+  const sections = [
+    {
+      title: "Introduction & Scientific Background",
+      icon: <Rocket className="w-8 h-8" />,
+      content: (
+        <div className="space-y-6">
+          <h3 className="text-2xl font-bold text-blue-400 mb-4">Exploring the physics of time and energy when tomorrow is light-years away</h3>
+          
+          <div className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-6 rounded-lg border border-purple-500/20">
+            <p className="text-lg mb-4">Interstellar travel demands speeds approaching a significant fraction of the speed of light (c).</p>
+            <p className="text-lg">At these velocities, <span className="text-purple-400 font-semibold">relativistic effects</span> become critical for mission success and crew survival.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-blue-900/20 p-6 rounded-lg border border-blue-500/30">
+              <h4 className="text-xl font-bold text-blue-300 mb-3">⏱️ Time Dilation</h4>
+              <p>Time slows down for travelers relative to observers on Earth.</p>
+            </div>
+            <div className="bg-purple-900/20 p-6 rounded-lg border border-purple-500/30">
+              <h4 className="text-xl font-bold text-purple-300 mb-3">⚡ Relativistic Energy</h4>
+              <p>As velocity increases, required energy rises non-linearly (E=γmc²)</p>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <h4 className="text-xl font-bold text-cyan-400 mb-4">These effects influence:</h4>
+            <ul className="space-y-3 text-lg">
+              <li className="flex items-start">
+                <span className="text-cyan-400 mr-3">→</span>
+                <span>Astronaut aging and onboard mission duration</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-cyan-400 mr-3">→</span>
+                <span>Communication latency with Earth</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-cyan-400 mr-3">→</span>
+                <span>Engineering constraints on propulsion and fuel</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 p-6 rounded-lg border border-orange-500/30 mt-6">
+            <p className="text-lg font-semibold">Understanding relativistic physics is essential for designing viable, sustainable deep space missions to Proxima Centauri and beyond.</p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Time Dilation in Deep Space Missions",
+      icon: <Clock className="w-8 h-8" />,
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-6 rounded-lg border border-blue-500/20">
+            <h3 className="text-2xl font-bold text-blue-400 mb-4">The Twin Paradox Effect</h3>
+            <p className="text-lg mb-4">Time Dilation is a relativistic effect where time passes slower for objects moving at speeds close to the speed of light compared to stationary observers.</p>
+            
+            <div className="bg-black/40 p-4 rounded-lg text-center text-2xl text-cyan-400 font-mono my-4">
+              t' = t√(1−v²/c²)
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-purple-900/20 p-6 rounded-lg border border-purple-500/30">
+              <h4 className="text-xl font-bold text-purple-300 mb-4">Impact on Astronauts</h4>
+              <p className="mb-3">Crew members aboard a relativistic spacecraft would age slower than people on Earth.</p>
+              <div className="bg-purple-800/30 p-4 rounded-lg">
+                <p className="text-lg font-semibold">Example:</p>
+                <p className="text-purple-300 mt-2">10 years for astronauts = Decades on Earth</p>
+              </div>
+            </div>
+
+            <div className="bg-blue-900/20 p-6 rounded-lg border border-blue-500/30">
+              <h4 className="text-xl font-bold text-blue-300 mb-4">Communication Challenges</h4>
+              <p className="mb-3">As spacecraft travel farther at high velocities, communication delays increase.</p>
+              <div className="bg-blue-800/30 p-4 rounded-lg">
+                <p className="text-lg font-semibold">Result:</p>
+                <p className="text-blue-300 mt-2">Two-way communication becomes impractical, requiring autonomous systems</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h4 className="text-2xl font-bold text-center mb-6 text-cyan-400">Time Experienced at Different Velocities</h4>
+            <div className="space-y-4">
+              {[
+                { speed: '0.5c', earthYears: 10, crewYears: 8.66, color: 'blue' },
+                { speed: '0.7c', earthYears: 10, crewYears: 7.14, color: 'purple' },
+                { speed: '0.9c', earthYears: 10, crewYears: 4.36, color: 'pink' },
+                { speed: '0.99c', earthYears: 10, crewYears: 1.41, color: 'red' }
+              ].map((item, i) => (
+                <div key={i} className={`bg-${item.color}-900/20 p-4 rounded-lg border border-${item.color}-500/30 flex items-center justify-between`}>
+                  <span className="text-xl font-bold text-white">{item.speed}</span>
+                  <div className="flex-1 mx-6">
+                    <div className="h-4 bg-gray-700 rounded-full overflow-hidden">
+                      <div 
+                        className={`h-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-300`}
+                        style={{ width: `${(item.crewYears / item.earthYears) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                  <span className="text-lg">
+                    <span className="text-gray-400">{item.earthYears} Earth years = </span>
+                    <span className="text-cyan-400 font-bold">{item.crewYears} crew years</span>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "The Energy Barrier",
+      icon: <Zap className="w-8 h-8" />,
+      content: (
+        <div className="space-y-6">
+          <h3 className="text-2xl font-bold text-yellow-400 mb-4">Pushing Mass Toward Light Speed</h3>
+          
+          <div className="bg-gradient-to-r from-yellow-900/30 to-red-900/30 p-6 rounded-lg border border-yellow-500/20">
+            <p className="text-lg mb-4">According to Einstein's extended energy equation:</p>
+            <div className="bg-black/40 p-6 rounded-lg text-center space-y-3">
+              <div className="text-3xl text-yellow-400 font-mono">E = γmc²</div>
+              <div className="text-xl text-gray-300 font-mono">where: γ = 1/√(1−v²/c²)</div>
+            </div>
+            <p className="text-lg mt-4">As spacecraft velocity approaches the speed of light, <span className="text-yellow-400 font-bold">γ increases dramatically</span>, making energy requirements skyrocket.</p>
+          </div>
+
+          <div className="mt-8">
+            <h4 className="text-2xl font-bold text-center mb-6 text-red-400">Energy Requirements vs Velocity</h4>
+            <div className="space-y-4">
+              {[
+                { speed: '0.1c', energy: '0.5 ZJ', bar: 10, color: 'green' },
+                { speed: '0.3c', energy: '4.6 ZJ', bar: 20, color: 'yellow' },
+                { speed: '0.5c', energy: '13.9 ZJ', bar: 35, color: 'orange' },
+                { speed: '0.7c', energy: '42.4 ZJ', bar: 55, color: 'red' },
+                { speed: '0.9c', energy: '116.5 ZJ', bar: 75, color: 'purple' },
+                { speed: '0.99c', energy: '548 ZJ', bar: 100, color: 'pink' }
+              ].map((item, i) => (
+                <div key={i} className={`bg-${item.color}-900/20 p-4 rounded-lg border border-${item.color}-500/30`}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xl font-bold text-white">{item.speed}</span>
+                    <span className="text-lg text-cyan-400 font-bold">{item.energy}</span>
+                  </div>
+                  <div className="h-6 bg-gray-700 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-300 transition-all duration-1000`}
+                      style={{ width: `${item.bar}%` }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mt-8">
+            <div className="bg-red-900/20 p-6 rounded-lg border border-red-500/30">
+              <h4 className="text-xl font-bold text-red-300 mb-4">⚠️ The Challenge</h4>
+              <p>Even small increases in velocity near light speed require exponentially more energy.</p>
+            </div>
+            <div className="bg-orange-900/20 p-6 rounded-lg border border-orange-500/30">
+              <h4 className="text-xl font-bold text-orange-300 mb-4">🔋 Fuel Implications</h4>
+              <p>Conventional fuels become impractical. Requires exotic energy sources like antimatter or advanced fusion.</p>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Propulsion Technologies",
+      icon: <Atom className="w-8 h-8" />,
+      content: (
+        <div className="space-y-6">
+          <h3 className="text-2xl font-bold text-purple-400 mb-6">Comparing Future Propulsion Systems</h3>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-purple-900/20 p-6 rounded-lg border border-purple-500/30 hover:border-purple-400/50 transition-all">
+              <div className="text-4xl mb-4">⚛️</div>
+              <h4 className="text-xl font-bold text-purple-300 mb-4">Antimatter Propulsion</h4>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-2">✓</span>
+                  <span>Extremely high energy density</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-2">✓</span>
+                  <span>Theoretical efficiency near relativistic speeds</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-400 mr-2">✗</span>
+                  <span>Production, storage, and control challenges</span>
+                </li>
+              </ul>
+              <div className="mt-4 pt-4 border-t border-purple-500/30">
+                <p className="text-purple-400 font-semibold">Timeline: Future</p>
+              </div>
+            </div>
+
+            <div className="bg-blue-900/20 p-6 rounded-lg border border-blue-500/30 hover:border-blue-400/50 transition-all">
+              <div className="text-4xl mb-4">🌀</div>
+              <h4 className="text-xl font-bold text-blue-300 mb-4">Warp Drives</h4>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-2">✓</span>
+                  <span>Contracts space in front, expands behind</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-2">✓</span>
+                  <span>Allows FTL travel without exceeding c locally</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-400 mr-2">✗</span>
+                  <span>Requires exotic negative energy</span>
+                </li>
+              </ul>
+              <div className="mt-4 pt-4 border-t border-blue-500/30">
+                <p className="text-blue-400 font-semibold">Timeline: Hypothetical</p>
+              </div>
+            </div>
+
+            <div className="bg-green-900/20 p-6 rounded-lg border border-green-500/30 hover:border-green-400/50 transition-all">
+              <div className="text-4xl mb-4">⚡</div>
+              <h4 className="text-xl font-bold text-green-300 mb-4">Ion Propulsion</h4>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-2">✓</span>
+                  <span>High efficiency, proven technology</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-400 mr-2">✓</span>
+                  <span>Ideal for long missions</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-400 mr-2">✗</span>
+                  <span>Low thrust, too slow for interstellar</span>
+                </li>
+              </ul>
+              <div className="mt-4 pt-4 border-t border-green-500/30">
+                <p className="text-green-400 font-semibold">Timeline: Current</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 bg-gradient-to-r from-indigo-900/30 to-purple-900/30 p-6 rounded-lg border border-indigo-500/20">
+            <h4 className="text-xl font-bold text-indigo-400 mb-4">Technology Readiness Comparison</h4>
+            <div className="space-y-4">
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span>Ion Propulsion</span>
+                  <span className="text-green-400">TRL 9 - Flight Proven</span>
+                </div>
+                <div className="h-3 bg-gray-700 rounded-full overflow-hidden">
+                  <div className="h-full bg-green-500" style={{ width: '90%' }}></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span>Antimatter Propulsion</span>
+                  <span className="text-yellow-400">TRL 3 - Proof of Concept</span>
+                </div>
+                <div className="h-3 bg-gray-700 rounded-full overflow-hidden">
+                  <div className="h-full bg-yellow-500" style={{ width: '30%' }}></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span>Warp Drives</span>
+                  <span className="text-red-400">TRL 1 - Basic Principles</span>
+                </div>
+                <div className="h-3 bg-gray-700 rounded-full overflow-hidden">
+                  <div className="h-full bg-red-500" style={{ width: '10%' }}></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Computational Models & Simulations",
+      icon: <Rocket className="w-8 h-8" />,
+      content: (
+        <div className="space-y-6">
+          <h3 className="text-2xl font-bold text-cyan-400 mb-6">Modeling Time, Energy & Motion</h3>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-blue-900/20 p-6 rounded-lg border border-blue-500/30">
+              <h4 className="text-xl font-bold text-blue-300 mb-4">🕐 Time Dilation Model</h4>
+              <p className="mb-4">Examines how time slows down for travelers nearing light speed (Lorentz factor γ):</p>
+              <div className="space-y-2 bg-black/40 p-4 rounded-lg text-sm">
+                <div><span className="text-blue-400">At 0.5c →</span> 10 Earth years = <span className="text-cyan-400 font-bold">8.66 crew years</span></div>
+                <div><span className="text-purple-400">At 0.9c →</span> 10 Earth years = <span className="text-cyan-400 font-bold">4.36 crew years</span></div>
+                <div><span className="text-pink-400">At 0.99c →</span> 10 Earth years = <span className="text-cyan-400 font-bold">1.41 crew years</span></div>
+              </div>
+            </div>
+
+            <div className="bg-purple-900/20 p-6 rounded-lg border border-purple-500/30">
+              <h4 className="text-xl font-bold text-purple-300 mb-4">⚡ Relativistic Energy Model</h4>
+              <p className="mb-4">Calculates energy needs to reach various fractions of c:</p>
+              <div className="space-y-2 bg-black/40 p-4 rounded-lg text-sm">
+                <div><span className="text-green-400">At 0.5c →</span> ~<span className="text-yellow-400 font-bold">13.9 ZJ</span></div>
+                <div><span className="text-orange-400">At 0.9c →</span> ~<span className="text-yellow-400 font-bold">116.47 ZJ</span></div>
+                <div><span className="text-red-400">At 0.99c →</span> ~<span className="text-yellow-400 font-bold">548 ZJ</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 p-6 rounded-lg border border-cyan-500/20 mt-6">
+            <h4 className="text-xl font-bold text-cyan-300 mb-4">📊 Combined Simulation Results</h4>
+            <p className="mb-4">Correlates energy cost with time dilation benefits:</p>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <span className="text-cyan-400 mr-3">→</span>
+                <span>Exponential energy growth vs. perceived time savings</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-cyan-400 mr-3">→</span>
+                <span>Engineering challenges counterbalanced by time-saving benefits</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-cyan-400 mr-3">→</span>
+                <span>Critical insights for future mission planning and design</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 p-6 rounded-lg border border-yellow-500/30 mt-6">
+            <h4 className="text-xl font-bold text-yellow-400 mb-3">🎯 Key Takeaway</h4>
+            <p className="text-lg">Significant engineering challenges are counterbalanced by time-saving benefits, vital for mission planning. Understanding these trade-offs is essential for the future of interstellar exploration.</p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Authors & References",
+      icon: <ExternalLink className="w-8 h-8" />,
+      content: (
+        <div className="space-y-6">
+          <h3 className="text-2xl font-bold text-purple-400 mb-6">Research Team</h3>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-blue-900/20 p-6 rounded-lg border border-blue-500/30 text-center">
+              <div className="text-6xl mb-4">👨‍🔬</div>
+              <h4 className="text-xl font-bold text-blue-300 mb-2">Aayusha Singh</h4>
+              <p className="text-gray-400 mb-3">Lead Researcher</p>
+              <p className="text-sm text-gray-300 mb-4">National Institute of Technology Srinagar</p>
+              <a href="#" className="inline-flex items-center text-blue-400 hover:text-blue-300">
+                <ExternalLink className="w-4 h-4 mr-2" />
+                ResearchGate
+              </a>
+            </div>
+
+            <div className="bg-purple-900/20 p-6 rounded-lg border border-purple-500/30 text-center">
+              <div className="text-6xl mb-4">👨‍🔬</div>
+              <h4 className="text-xl font-bold text-purple-300 mb-2">Amrit Roy</h4>
+              <p className="text-gray-400 mb-3">Co-Researcher</p>
+              <p className="text-sm text-gray-300 mb-4">National Institute of Technology Srinagar</p>
+              <a href="#" className="inline-flex items-center text-purple-400 hover:text-purple-300">
+                <ExternalLink className="w-4 h-4 mr-2" />
+                ResearchGate
+              </a>
+            </div>
+
+            <div className="bg-green-900/20 p-6 rounded-lg border border-green-500/30 text-center">
+              <div className="text-6xl mb-4">👨‍🔬</div>
+              <h4 className="text-xl font-bold text-green-300 mb-2">Om Singh</h4>
+              <p className="text-gray-400 mb-3">Co-Researcher</p>
+              <p className="text-sm text-gray-300 mb-4">Ludhani Vidya Mandir</p>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h3 className="text-2xl font-bold text-cyan-400 mb-6">References</h3>
+            <div className="space-y-4">
+              <div className="bg-gray-800/50 p-5 rounded-lg border border-gray-700">
+                <p className="text-gray-300">
+                  <span className="text-cyan-400 font-bold">[1]</span> Einstein, A., "Die Grundlage der allgemeinen Relativitätstheorie", Königlich Preußische Akademie der Wissenschaften (Berlin). Sitzungsberichte, 1915, 844–847.
+                </p>
+              </div>
+              <div className="bg-gray-800/50 p-5 rounded-lg border border-gray-700">
+                <p className="text-gray-300">
+                  <span className="text-cyan-400 font-bold">[2]</span> NASA, "Interstellar Probe: A Mission to the Stars", NASA, 2021.
+                </p>
+              </div>
+              <div className="bg-gray-800/50 p-5 rounded-lg border border-gray-700">
+                <p className="text-gray-300">
+                  <span className="text-cyan-400 font-bold">[3]</span> A.K. Singhal, "Is interstellar space travel possible?", 2013.
+                </p>
+              </div>
+              <div className="bg-gray-800/50 p-5 rounded-lg border border-gray-700">
+                <p className="text-gray-300">
+                  <span className="text-cyan-400 font-bold">[4]</span> Twin Paradox - Source: Wikipedia
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-6 rounded-lg border border-blue-500/20 text-center">
+            <h4 className="text-xl font-bold text-blue-300 mb-4">Presented at GLEX 2025</h4>
+            <p className="text-gray-300 mb-6">IAF Global Space Exploration Conference</p>
+            <a 
+              href="https://glex2025-iaf.ipostersessions.com/Default.aspx?s=D1-87-6D-57-5D-4E-2C-75-A6-C4-C0-22-72-D5-A9-56" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all"
+            >
+              <ExternalLink className="w-5 h-5 mr-2" />
+              View Original Poster
+            </a>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12 animate-fade-in">
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Relativistic Effects on Spacecraft in Interstellar Travel
+          </h1>
+          <p className="text-xl text-gray-300 mb-2">Exploring the physics of time and energy when tomorrow is light-years away</p>
+          <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
+            <span>Aayusha Singh</span>
+            <span>•</span>
+            <span>Amrit Roy</span>
+            <span>•</span>
+            <span>Om Singh</span>
+          </div>
+          <div className="mt-4 inline-block px-4 py-2 bg-blue-900/30 rounded-full border border-blue-500/30">
+            <span className="text-blue-300">GLEX 2025 - IAF Conference</span>
+          </div>
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {sections.map((section, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveSection(index)}
+              className={`px-4 py-2 rounded-lg flex items-center gap-2 transition-all ${
+                activeSection === index
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                  : 'bg-gray-800/50 hover:bg-gray-700/50 text-gray-300'
+              }`}
+            >
+              {section.icon}
+              <span className="hidden md:inline">{section.title}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Content Area */}
+        <div className="bg-gray-800/30 backdrop-blur-lg rounded-2xl border border-gray-700 p-8 mb-8 min-h-[600px]">
+          <div className="animate-fade-in">
+            {sections[activeSection].content}
+          </div>
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center">
+          <button
+            onClick={() => setActiveSection(Math.max(0, activeSection - 1))}
+            disabled={activeSection === 0}
+            className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
+              activeSection === 0
+                ? 'bg-gray-800/30 text-gray-600 cursor-not-allowed'
+                : 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600'
+            }`}
+          >
+            <ChevronLeft className="w-5 h-5" />
+            Previous
+          </button>
+
+          <div className="text-gray-400">
+            {activeSection + 1} / {sections.length}
+          </div>
+
+          <button
+            onClick={() => setActiveSection(Math.min(sections.length - 1, activeSection + 1))}
+            disabled={activeSection === sections.length - 1}
+            className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
+              activeSection === sections.length - 1
+                ? 'bg-gray-800/30 text-gray-600 cursor-not-allowed'
+                : 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600'
+            }`}
+          >
+            Next
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.5s ease;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default InteractiveResearchPoster;
