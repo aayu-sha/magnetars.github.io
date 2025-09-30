@@ -7,8 +7,12 @@ class Portfolio3D {
         this.isLoading = true;
         this.loadingProgress = 0;
         this.mouse = new THREE.Vector2();
+        this.targetMouse = new THREE.Vector2(); // Smoothed mouse position
         this.visualizations = {};
         this.isMobile = this.detectMobile();
+        this.scrollTimeout = null;
+        this.resizeTimeout = null;
+        this.ticking = false;
         
         this.init();
     }
@@ -86,7 +90,11 @@ class Portfolio3D {
         // Scene setup
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        this.renderer = new THREE.WebGLRenderer({ 
+            antialias: true, 
+            alpha: true,
+            powerPreference: 'high-performance' // Better GPU usage
+        });
         
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -476,31 +484,36 @@ class Portfolio3D {
     }
     
     onMouseMove(event) {
-        // Only update mouse position if not on mobile
+        // Smoothly interpolate mouse position for buttery smooth camera movement
         if (!this.isMobile) {
-            this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            this.targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            this.targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
         }
     }
     
     onWindowResize() {
         if (!this.camera || !this.renderer) return;
         
-        this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.updateProjectionMatrix();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        
-        // Update mobile detection on resize
-        this.isMobile = this.detectMobile();
+        // Debounce resize to prevent jank
+        clearTimeout(this.resizeTimeout);
+        this.resizeTimeout = setTimeout(() => {
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            // Update mobile detection on resize
+            this.isMobile = this.detectMobile();
+        }, 100);
     }
     
     onScroll() {
-        // Throttle scroll events
-        if (!this.scrollTimeout) {
-            this.scrollTimeout = setTimeout(() => {
+        // Use requestAnimationFrame for smooth scroll handling
+        if (!this.ticking) {
+            window.requestAnimationFrame(() => {
                 this.updateScrollProgress();
-                this.scrollTimeout = null;
-            }, 16);
+                this.ticking = false;
+            });
+            this.ticking = true;
         }
     }
     
@@ -609,6 +622,12 @@ class Portfolio3D {
         
         const time = Date.now() * 0.001;
         
+        // Smooth mouse interpolation for buttery camera movement
+        if (!this.isMobile) {
+            this.mouse.x += (this.targetMouse.x - this.mouse.x) * 0.05;
+            this.mouse.y += (this.targetMouse.y - this.mouse.y) * 0.05;
+        }
+        
         // Animate visualizations
         const { magnetar, neuralNetwork, starField } = this.visualizations;
         
@@ -622,23 +641,28 @@ class Portfolio3D {
         if (neuralNetwork && this.currentSection === 'about') {
             neuralNetwork.group.rotation.y += 0.005;
             
-            // Pulse nodes
-            neuralNetwork.nodes.forEach((layer, i) => {
-                layer.forEach((node, j) => {
-                    const scale = 0.9 + Math.sin(time * 2 + i + j) * 0.2;
-                    node.scale.set(scale, scale, scale);
+            // Optimized pulse - only update visible nodes
+            if (neuralNetwork.group.visible) {
+                neuralNetwork.nodes.forEach((layer, i) => {
+                    layer.forEach((node, j) => {
+                        const scale = 0.9 + Math.sin(time * 2 + i + j) * 0.2;
+                        node.scale.set(scale, scale, scale);
+                    });
                 });
-            });
+            }
         }
         
         if (starField) {
             starField.rotation.y += 0.0001;
         }
         
-        // Subtle camera movement based on mouse (only on non-mobile)
+        // Smooth camera movement based on mouse (only on non-mobile)
         if (this.camera && !this.isMobile) {
-            this.camera.position.x += (this.mouse.x * 20 - this.camera.position.x) * 0.05;
-            this.camera.position.y += (this.mouse.y * 20 - this.camera.position.y) * 0.05;
+            const targetX = this.mouse.x * 20;
+            const targetY = this.mouse.y * 20;
+            
+            this.camera.position.x += (targetX - this.camera.position.x) * 0.05;
+            this.camera.position.y += (targetY - this.camera.position.y) * 0.05;
             this.camera.lookAt(this.scene.position);
         }
         
