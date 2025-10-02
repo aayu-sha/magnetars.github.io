@@ -1416,3 +1416,109 @@ button:hover::before {
     align-items: center;
     justify-content: center;
 }
+
+/* ==========================================
+   TECH STACK SECTION STYLES
+   Add this to your styles.css file
+   ========================================== */
+
+.tech-categories {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tech-category {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.tech-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.category-icon {
+    font-size: 2rem;
+}
+
+.category-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.tech-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tech-item:hover {
+    transform: scale(1.05);
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+
+.tech-icon {
+    font-size: 2.5rem;
+    filter: grayscale(0.5);
+    transition: filter 0.3s ease;
+}
+
+.tech-item:hover .tech-icon {
+    filter: grayscale(0);
+}
+
+.tech-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #d1d5db;
+    text-align: center;
+}
+
+/* Responsive adjustments for tech stack */
+@media (max-width: 768px) {
+    .tech-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .tech-item {
+        padding: 1rem;
+    }
+
+    .tech-icon {
+        font-size: 2rem;
+    }
+
+    .category-header h3 {
+        font-size: 1.25rem;
+    }
+}

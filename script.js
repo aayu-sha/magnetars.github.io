@@ -469,7 +469,7 @@ class Portfolio3D {
                     this.updateActiveSection(section);
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
         
         const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
