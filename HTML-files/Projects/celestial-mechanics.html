@@ -3,12 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CFD and Aerospace Simulations | Magnetars</title>
+    <title>Celestial Mechanics Simulations | Magnetars</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
     <link rel="stylesheet" href="projects-styles.css">
-    
-</head>
+    <style>
+        .images-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
 
+        .preview-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .preview-content {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .images-container img,
+        .images-container iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+        }
+
+        .preview-item:hover .preview-content {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .preview-label {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .images-container img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .notes-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .notes-btn:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .images-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-content {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
 <body>
     <div id="cursor"></div>
 
@@ -26,52 +110,79 @@
     <div id="webgl"></div>
 
     <section id="published" class="active">
-        <div class="max-w-7xl mx-auto px-4 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <h1 class="text-4xl font-bold text-white text-center mb-8">Celestial Mechanics Simulations</h1>
-
+            
             <!-- Overview -->
             <div class="mb-12">
                 <h2 class="text-2xl font-semibold text-white mb-4">Overview</h2>
                 <p class="text-gray-400">These projects, carried out under the mentorship of Professor Seppo Mikkola, introduced us to advanced celestial mechanics simulations. By studying and experimenting with his codes, we built a strong foundation in N-body dynamics and the numerical techniques used in astrophysical research.</p>
             </div>
-
+            
             <!-- project 1 -->
             <div class="project-card">
                 <h2 class="text-2xl font-semibold text-white mb-4">
                     Lyapunov Exponent Analysis
                 </h2>
                 <p class="text-gray-400 mb-4">
-                    Investigated the stability and chaotic behavior of dynamical systems using Lyapunov exponents. 
-                    Implemented algorithms to compute and visualize results in Python, gaining hands-on experience 
-                    in analyzing system stability and chaos theory.
+                    Investigated the stability and chaotic behavior of dynamical systems using Lyapunov exponents.
+                    Implemented algorithms to compute and visualize results in Python, gaining hands-on experience
+                    in analyzing system stability and chaos theory. The project involves compiling Fortran code 
+                    and processing the 'Pythagorean' three-body problem to generate orbital trajectories.
                 </p>
-                <img src="../../Images/projects/CelestialMechanics/Lyapunov/2D-plot.png" 
-                    alt="Lyapunov Exponent Visualization in 2D" 
-                    onclick="openModal('../../Images/projects/CelestialMechanics/Lyapunov/2D-plot.png', 
-                    'Visualization of Lyapunov Exponent Analysis in 2D')">
-                <img src="../../Images/projects/CelestialMechanics/Lyapunov/3D-plot.png" 
-                alt="Lyapunov Exponent Visualization in 3D" 
-                onclick="openModal('../../Images/projects/CelestialMechanics/Lyapunov/3D-plot.png', 
-                'Visualization of Lyapunov Exponent Analysis in 3D')">
-                <ul class="list-disc list-inside text-gray-400 mt-4">
-                    <li>
-                        <a href="notes/lyapunov_notes.pdf" target="_blank" 
-                        class="text-blue-400 hover:underline">
-                        Project Notes & Understanding
-                        </a> - Theoretical notes summarizing chaos theory, Lyapunov exponents, and algorithms.
-                    </li>
-                </ul>
+                
+                <!-- Images and PDF Preview in 3 columns -->
+                <div class="images-container">
+                    <div class="preview-item">
+                        <div class="preview-content">
+                            <img src="../../Images/projects/CelestialMechanics/Lyapunov/2D-plot.png"
+                                alt="Lyapunov Exponent Visualization in 2D"
+                                onclick="openModal('../../Images/projects/CelestialMechanics/Lyapunov/2D-plot.png',
+                                'Visualization of Lyapunov Exponent Analysis in 2D')">
+                        </div>
+                        <p class="preview-label">2D Plot</p>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-content">
+                            <img src="../../Images/projects/CelestialMechanics/Lyapunov/3D-plot.png"
+                                alt="Lyapunov Exponent Visualization in 3D"
+                                onclick="openModal('../../Images/projects/CelestialMechanics/Lyapunov/3D-plot.png',
+                                'Visualization of Lyapunov Exponent Analysis in 3D')">
+                        </div>
+                        <p class="preview-label">3D Plot</p>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-content">
+                            <iframe src="../../Notes/Celestial-Mechanics/Lyapunov Exponent.pdf" 
+                                frameborder="0"></iframe>
+                        </div>
+                        <p class="preview-label">
+                            <a href="../../Notes/Celestial-Mechanics/Lyapunov Exponent.pdf" 
+                               target="_blank" 
+                               class="text-blue-400 hover:underline">
+                                📄 Project Notes
+                            </a>
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            
+            <a href="../../index.html#work" class="back-link">Back to Projects</a>
         </div>
-       
     </section>
+
+    <!-- Modal for Image Zoom -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">×</span>
+            <img id="modalImage" src="" alt="" class="w-full rounded-lg">
+            <p id="modalCaption" class="text-center text-gray-400 mt-4"></p>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="../../publication-script.js"></script>
-
-
+    <script src="../../script.js"></script>
 </body>
 </html>
