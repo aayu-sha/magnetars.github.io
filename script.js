@@ -7,12 +7,13 @@ class Portfolio3D {
         this.isLoading = true;
         this.loadingProgress = 0;
         this.mouse = new THREE.Vector2();
-        this.targetMouse = new THREE.Vector2(); // Smoothed mouse position
+        this.targetMouse = new THREE.Vector2();
         this.visualizations = {};
         this.isMobile = this.detectMobile();
         this.scrollTimeout = null;
         this.resizeTimeout = null;
         this.ticking = false;
+        this.frameCount = 0;
         
         this.init();
     }
@@ -25,7 +26,6 @@ class Portfolio3D {
     
     async init() {
         try {
-            // Show loading screen immediately
             this.showLoadingScreen();
             await this.initLoading();
             this.initScene();
@@ -87,27 +87,26 @@ class Portfolio3D {
     }
     
     initScene() {
-        // Scene setup
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        
         this.renderer = new THREE.WebGLRenderer({ 
-            antialias: true, 
+            antialias: !this.isMobile,
             alpha: true,
-            powerPreference: 'high-performance' // Better GPU usage
+            powerPreference: 'high-performance',
+            stencil: false
         });
         
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, this.isMobile ? 1.5 : 2));
         
         const webglContainer = document.getElementById('webgl');
         if (webglContainer) {
             webglContainer.appendChild(this.renderer.domElement);
         }
         
-        // Camera position
         this.camera.position.z = 100;
         
-        // Lighting
         const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
         this.scene.add(ambientLight);
         
@@ -139,20 +138,31 @@ class Portfolio3D {
         });
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
         group.add(core);
+        
         const fieldGroup = new THREE.Group();
         const fieldColors = [0x62e7d8, 0x00ffff, 0x4169e1];
         const fieldLineCount = this.isMobile ? 30 : 100;
-        for (let i = 0; i < fieldLineCount; i++) {
-            const lineGeometry = new THREE.BufferGeometry();
-            const lineMaterial = new THREE.LineBasicMaterial({ 
-                color: fieldColors[i % fieldColors.length], 
+        
+        // Create shared materials for better performance
+        const lineMaterials = {};
+        fieldColors.forEach(color => {
+            lineMaterials[color] = new THREE.LineBasicMaterial({ 
+                color, 
                 transparent: true, 
                 opacity: 0.3 
             });
+        });
+        
+        for (let i = 0; i < fieldLineCount; i++) {
+            const lineGeometry = new THREE.BufferGeometry();
+            const color = fieldColors[i % fieldColors.length];
+            const lineMaterial = lineMaterials[color];
+            
             const positions = [];
             const radius = 90 + Math.random() * 10;
             const twists = 10 + Math.random() * 3;
             const pointCount = this.isMobile ? 50 : 100;
+            
             for (let j = 0; j < pointCount; j++) {
                 const t = j / (pointCount - 1);
                 const angle = t * Math.PI * twists * 2;
@@ -161,10 +171,12 @@ class Portfolio3D {
                 const z = t * 50 - 25 + Math.sin(t * Math.PI * 4) * 10;
                 positions.push(x, y, z);
             }
+            
             lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
             const line = new THREE.Line(lineGeometry, lineMaterial);
             fieldGroup.add(line);
         }
+        
         group.add(fieldGroup);
         this.scene.add(group);
         return { core, fieldGroup, group };
@@ -173,33 +185,39 @@ class Portfolio3D {
     createNeuralNetworkVisualization() {
         const group = new THREE.Group();
         const layers = this.isMobile ? [3, 8, 5, 4, 5, 8, 3] : [5, 16, 9, 8, 8, 9, 16, 5];
+        
         const nodeGeometry = new THREE.SphereGeometry(1, this.isMobile ? 8 : 16, this.isMobile ? 8 : 16);
         const nodeMaterial = new THREE.MeshStandardMaterial({
             color: 0x62e7d8,
             emissive: 0x006060,
             emissiveIntensity: 0.5
         });
+        
+        const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x4169e1,
+            transparent: true,
+            opacity: 0.2
+        });
+        
         const nodes = [];
         const connections = [];
+        
         for (let l = 0; l < layers.length; l++) {
             const layerNodes = [];
             const layerSize = layers[l];
             const xPos = (l - (layers.length - 1) / 2) * (this.isMobile ? 20 : 30);
+            
             for (let i = 0; i < layerSize; i++) {
                 const yPos = (i - (layerSize - 1) / 2) * (this.isMobile ? 8 : 10);
                 const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
                 node.position.set(xPos, yPos, 0);
                 group.add(node);
                 layerNodes.push(node);
+                
                 if (l > 0) {
                     const prevLayer = nodes[l - 1];
                     for (let j = 0; j < prevLayer.length; j++) {
                         const connectionGeometry = new THREE.BufferGeometry();
-                        const lineMaterial = new THREE.LineBasicMaterial({
-                            color: 0x4169e1,
-                            transparent: true,
-                            opacity: 0.2
-                        });
                         const points = [
                             prevLayer[j].position.clone(),
                             node.position.clone()
@@ -213,6 +231,7 @@ class Portfolio3D {
             }
             nodes.push(layerNodes);
         }
+        
         group.position.z = -50;
         group.visible = false;
         this.scene.add(group);
@@ -228,15 +247,18 @@ class Portfolio3D {
             transparent: true,
             opacity: 0.7
         });
-        const starVertices = [];
+        
         const starCount = this.isMobile ? 5000 : 10000;
+        const starVertices = new Float32Array(starCount * 3);
+        
         for (let i = 0; i < starCount; i++) {
-            const x = (Math.random() - 0.5) * 1000;
-            const y = (Math.random() - 0.5) * 1000;
-            const z = (Math.random() - 0.5) * 1000;
-            starVertices.push(x, y, z);
+            const i3 = i * 3;
+            starVertices[i3] = (Math.random() - 0.5) * 1000;
+            starVertices[i3 + 1] = (Math.random() - 0.5) * 1000;
+            starVertices[i3 + 2] = (Math.random() - 0.5) * 1000;
         }
-        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+        
+        starGeometry.setAttribute('position', new THREE.BufferAttribute(starVertices, 3));
         const starField = new THREE.Points(starGeometry, starMaterial);
         starGroup.add(starField);
         this.scene.add(starGroup);
@@ -244,29 +266,20 @@ class Portfolio3D {
     }
     
     initEventListeners() {
-        // Mouse movement - only for non-touch devices
         if (!this.isMobile) {
-            window.addEventListener('mousemove', (e) => this.onMouseMove(e), false);
+            window.addEventListener('mousemove', (e) => this.onMouseMove(e), { passive: true });
         }
         
-        // Window resize
-        window.addEventListener('resize', () => this.onWindowResize(), false);
-        
-        // Scroll events
+        window.addEventListener('resize', () => this.onWindowResize(), { passive: true });
         window.addEventListener('scroll', () => this.onScroll(), { passive: true });
         
-        // Navigation
         this.initNavigation();
         
-        // Custom cursor - only for non-mobile devices
         if (!this.isMobile) {
             this.initCustomCursor();
         }
         
-        // Contact form
         this.initContactForm();
-        
-        // Intersection Observer for animations
         this.initIntersectionObserver();
     }
     
@@ -276,7 +289,6 @@ class Portfolio3D {
         const navLinksItems = document.querySelectorAll('.nav-link');
         const progressDots = document.querySelectorAll('.progress-dot');
         
-        // Mobile menu toggle
         if (menuToggle && navLinks) {
             menuToggle.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -287,7 +299,6 @@ class Portfolio3D {
                 navLinks.classList.toggle('active');
                 menuToggle.classList.toggle('active');
                 
-                // Prevent body scroll when menu is open
                 if (!isExpanded) {
                     document.body.style.overflow = 'hidden';
                 } else {
@@ -295,7 +306,6 @@ class Portfolio3D {
                 }
             });
             
-            // Close menu when clicking outside
             document.addEventListener('click', (e) => {
                 if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
                     navLinks.classList.remove('active');
@@ -306,14 +316,12 @@ class Portfolio3D {
             });
         }
         
-        // Navigation link clicks
         navLinksItems.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const section = link.getAttribute('data-section');
                 this.navigateToSection(section);
                 
-                // Close mobile menu
                 if (navLinks) {
                     navLinks.classList.remove('active');
                     document.body.style.overflow = '';
@@ -325,7 +333,6 @@ class Portfolio3D {
             });
         });
         
-        // Progress dot clicks
         progressDots.forEach(dot => {
             dot.addEventListener('click', () => {
                 const section = dot.getAttribute('data-section');
@@ -335,7 +342,6 @@ class Portfolio3D {
     }
     
     initCustomCursor() {
-        // Skip cursor initialization on touch devices
         if (this.isMobile) return;
         
         const cursor = document.getElementById('cursor');
@@ -350,9 +356,8 @@ class Portfolio3D {
                     ease: "power2.out"
                 });
             }
-        });
+        }, { passive: true });
         
-        // Hover effects
         const hoverElements = document.querySelectorAll('a, button, .project-item');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
@@ -375,7 +380,6 @@ class Portfolio3D {
             this.setFormLoading(true);
             
             try {
-                // Simulate form submission
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 
                 this.showFormStatus('Message sent successfully!', 'success');
@@ -484,7 +488,6 @@ class Portfolio3D {
     }
     
     onMouseMove(event) {
-        // Smoothly interpolate mouse position for buttery smooth camera movement
         if (!this.isMobile) {
             this.targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             this.targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -494,20 +497,16 @@ class Portfolio3D {
     onWindowResize() {
         if (!this.camera || !this.renderer) return;
         
-        // Debounce resize to prevent jank
         clearTimeout(this.resizeTimeout);
         this.resizeTimeout = setTimeout(() => {
             this.camera.aspect = window.innerWidth / window.innerHeight;
             this.camera.updateProjectionMatrix();
             this.renderer.setSize(window.innerWidth, window.innerHeight);
-            
-            // Update mobile detection on resize
             this.isMobile = this.detectMobile();
         }, 100);
     }
     
     onScroll() {
-        // Use requestAnimationFrame for smooth scroll handling
         if (!this.ticking) {
             window.requestAnimationFrame(() => {
                 this.updateScrollProgress();
@@ -521,8 +520,6 @@ class Portfolio3D {
         const scrollTop = window.pageYOffset;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const scrollPercent = scrollTop / docHeight;
-        
-        // Update any scroll-based animations here
     }
     
     navigateToSection(section) {
@@ -540,7 +537,6 @@ class Portfolio3D {
         
         this.currentSection = section;
         
-        // Update navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             if (link.getAttribute('data-section') === section) {
                 link.classList.add('active');
@@ -549,7 +545,6 @@ class Portfolio3D {
             }
         });
         
-        // Update progress dots
         document.querySelectorAll('.progress-dot').forEach(dot => {
             if (dot.getAttribute('data-section') === section) {
                 dot.classList.add('active');
@@ -558,7 +553,6 @@ class Portfolio3D {
             }
         });
         
-        // Update 3D visualizations
         this.updateVisualizations();
     }
     
@@ -568,29 +562,24 @@ class Portfolio3D {
         const { magnetar, neuralNetwork } = this.visualizations;
         
         if (this.currentSection === 'home' && magnetar) {
-            // Show magnetar visualization
             gsap.to(magnetar.core.position, { x: 0, y: 0, z: 0, duration: 1.5, ease: "power2.inOut" });
             gsap.to(magnetar.fieldGroup.position, { x: 0, y: 0, z: 0, duration: 1.5, ease: "power2.inOut" });
             
-            // Hide neural network
             if (neuralNetwork) {
                 neuralNetwork.group.visible = false;
                 gsap.to(neuralNetwork.group.position, { z: -200, duration: 1.5, ease: "power2.inOut" });
             }
         } 
         else if (this.currentSection === 'about' && neuralNetwork) {
-            // Show neural network visualization
             neuralNetwork.group.visible = true;
             gsap.to(neuralNetwork.group.position, { z: -50, duration: 1.5, ease: "power2.inOut" });
             
-            // Hide magnetar
             if (magnetar) {
                 gsap.to(magnetar.core.position, { z: 200, duration: 1.5, ease: "power2.inOut" });
                 gsap.to(magnetar.fieldGroup.position, { z: 200, duration: 1.5, ease: "power2.inOut" });
             }
         }
         else {
-            // Hide both visualizations for other sections
             if (magnetar) {
                 gsap.to(magnetar.core.position, { z: 200, duration: 1.5, ease: "power2.inOut" });
                 gsap.to(magnetar.fieldGroup.position, { z: 200, duration: 1.5, ease: "power2.inOut" });
@@ -608,7 +597,6 @@ class Portfolio3D {
     }
     
     triggerSectionAnimations() {
-        // Trigger initial animations after loading
         const activeSection = document.querySelector('.section.active .fade-up');
         if (activeSection) {
             activeSection.classList.add('active');
@@ -622,13 +610,11 @@ class Portfolio3D {
         
         const time = Date.now() * 0.001;
         
-        // Smooth mouse interpolation for buttery camera movement
         if (!this.isMobile) {
             this.mouse.x += (this.targetMouse.x - this.mouse.x) * 0.05;
             this.mouse.y += (this.targetMouse.y - this.mouse.y) * 0.05;
         }
         
-        // Animate visualizations
         const { magnetar, neuralNetwork, starField } = this.visualizations;
         
         if (magnetar && magnetar.core) {
@@ -641,12 +627,11 @@ class Portfolio3D {
         if (neuralNetwork && this.currentSection === 'about') {
             neuralNetwork.group.rotation.y += 0.005;
             
-            // Optimized pulse - only update visible nodes
-            if (neuralNetwork.group.visible) {
+            if (neuralNetwork.group.visible && this.frameCount % 2 === 0) {
                 neuralNetwork.nodes.forEach((layer, i) => {
                     layer.forEach((node, j) => {
                         const scale = 0.9 + Math.sin(time * 2 + i + j) * 0.2;
-                        node.scale.set(scale, scale, scale);
+                        node.scale.setScalar(scale);
                     });
                 });
             }
@@ -656,7 +641,6 @@ class Portfolio3D {
             starField.rotation.y += 0.0001;
         }
         
-        // Smooth camera movement based on mouse (only on non-mobile)
         if (this.camera && !this.isMobile) {
             const targetX = this.mouse.x * 20;
             const targetY = this.mouse.y * 20;
@@ -667,6 +651,7 @@ class Portfolio3D {
         }
         
         this.renderer.render(this.scene, this.camera);
+        this.frameCount++;
     }
     
     handleError(error) {
@@ -687,12 +672,10 @@ class Portfolio3D {
     }
 }
 
-// Initialize the portfolio when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new Portfolio3D();
 });
 
-// Add CSS for additional styles not in external stylesheet
 const additionalStyles = `
     .skip-to-content {
         position: absolute;

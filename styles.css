@@ -283,6 +283,35 @@ body, html {
     z-index: 1;
 }
 
+ /* Add at the end of your styles.css */
+#webgl canvas {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.nav, .progress-container, .project-item {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Optimize animations */
+.fade-up.active {
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) translateZ(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+    }
+}
+
 .overlay-gradient {
     position: fixed;
     top: 0;
