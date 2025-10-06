@@ -119,7 +119,7 @@
                 <p class="text-gray-400">These projects, carried out under the mentorship of Professor Seppo Mikkola, introduced us to advanced celestial mechanics simulations. By studying and experimenting with his codes, we built a strong foundation in N-body dynamics and the numerical techniques used in astrophysical research.</p>
             </div>
             
-            <!-- Project 1 - Lyapunov Exponent -->
+            <!-- Project 1: Lyapunov Exponent -->
             <div class="project-card">
                 <h2 class="text-2xl font-semibold text-white mb-4">
                     Lyapunov Exponent Analysis
@@ -131,7 +131,6 @@
                     and processing the 'Pythagorean' three-body problem to generate orbital trajectories.
                 </p>
                 
-                <!-- Images and PDF Preview in 3 columns -->
                 <div class="images-container">
                     <div class="preview-item">
                         <div class="preview-content">
@@ -169,43 +168,43 @@
 
             <!-- Project 2: Algorithmic Regularization Chain (ARC) -->
             <div class="project-card">
-            <h2 class="text-2xl font-semibold text-white mb-4">
-            Algorithmic Regularization Chain (ARC)
-            </h2>
-            <p class="text-gray-400 mb-4">
-            Implemented the Algorithmic Regularization Chain method for N-body simulations, which uses numerical 
-            time transformations to handle close encounters and singularities. The ARC method employs a TTL (Time 
-            Transformation Logic) function that automatically slows down integration near collisions, combined with 
-            Bulirsch-Stoer extrapolation for high accuracy. Achieved ~10⁻¹³ energy conservation in simulations of 
-            black hole binaries with post-Newtonian corrections and spin effects.
-            </p>
-
+                <h2 class="text-2xl font-semibold text-white mb-4">
+                    Algorithmic Regularization Chain (ARC)
+                </h2>
+                <p class="text-gray-400 mb-4">
+                    Implemented the Algorithmic Regularization Chain method for N-body simulations, which uses numerical 
+                    time transformations to handle close encounters and singularities. The ARC method employs a TTL (Time 
+                    Transformation Logic) function that automatically slows down integration near collisions, combined with 
+                    Bulirsch-Stoer extrapolation for high accuracy. Achieved ~10⁻¹³ energy conservation in simulations of 
+                    black hole binaries with post-Newtonian corrections and spin effects.
+                </p>
+                
                 <div class="images-container">
                     <div class="preview-item">
                         <div class="preview-content">
                             <img src="../../Images/projects/CelestialMechanics/ARC/2D-ARC.png"
-                                alt="Lyapunov Exponent Visualization in 2D"
+                                alt="ARC Simulation Visualization in 2D"
                                 onclick="openModal('../../Images/projects/CelestialMechanics/ARC/2D-ARC.png',
-                                'Visualization of Algorithmic Regularization Chain in 2D')">
+                                'Algorithmic Regularization Chain - 2D Trajectory Plot')">
                         </div>
                         <p class="preview-label">2D Plot</p>
                     </div>
                     <div class="preview-item">
                         <div class="preview-content">
                             <img src="../../Images/projects/CelestialMechanics/ARC/3D-ARC.png"
-                                alt="Lyapunov Exponent Visualization in 3D"
+                                alt="ARC Simulation Visualization in 3D"
                                 onclick="openModal('../../Images/projects/CelestialMechanics/ARC/3D-ARC.png',
-                                'Visualization of Algorithmic Regularization Chain in 3D')">
+                                'Algorithmic Regularization Chain - 3D Trajectory Plot')">
                         </div>
                         <p class="preview-label">3D Plot</p>
                     </div>
                     <!-- <div class="preview-item">
                         <div class="preview-content">
-                            <iframe src="../../Notes/Celestial-Mechanics/Lyapunov Exponent.pdf" 
+                            <iframe src="../../Notes/Celestial-Mechanics/ARC-KSC-Review.pdf" 
                                 frameborder="0"></iframe>
                         </div>
                         <p class="preview-label">
-                            <a href="../../Notes/Celestial-Mechanics/Lyapunov Exponent.pdf" 
+                            <a href="../../Notes/Celestial-Mechanics/ARC-KSC-Review.pdf" 
                                target="_blank" 
                                class="text-blue-400 hover:underline">
                                 📄 Project Notes
@@ -217,52 +216,53 @@
 
             <!-- Project 3: Kustaanheimo-Stiefel Chain (KSC) -->
             <div class="project-card">
-            <h2 class="text-2xl font-semibold text-white mb-4">
-            Kustaanheimo-Stiefel Chain (KSC)
-            </h2>
-            <p class="text-gray-400 mb-4">
-            Explored the Kustaanheimo-Stiefel regularization technique, a geometric method that lifts 3D space to 4D 
-            to eliminate singularities in the two-body problem. The KS transformation converts the singular Kepler 
-            problem into a smooth harmonic oscillator in 4D space. Extended to N-body systems using chain coordinates, 
-            this method excels at handling extremely close encounters (r ~ 10⁻⁸) and tight binary systems with 
-            remarkable stability and energy conservation.
-            </p>
-            <div class="images-container">
-                <div class="preview-item">
-                    <div class="preview-content">
-                        <img src="../../Images/projects/CelestialMechanics/KSC/2D-KSC.png"
-                            alt="Lyapunov Exponent Visualization in 2D"
-                            onclick="openModal('../../Images/projects/CelestialMechanics/ARC/2D-ARC.png',
-                            'Visualization of Algorithmic Regularization Chain in 2D')">
+                <h2 class="text-2xl font-semibold text-white mb-4">
+                    Kustaanheimo-Stiefel Chain (KSC)
+                </h2>
+                <p class="text-gray-400 mb-4">
+                    Explored the Kustaanheimo-Stiefel regularization technique, a geometric method that lifts 3D space to 4D 
+                    to eliminate singularities in the two-body problem. The KS transformation converts the singular Kepler 
+                    problem into a smooth harmonic oscillator in 4D space. Extended to N-body systems using chain coordinates, 
+                    this method excels at handling extremely close encounters (r ~ 10⁻⁸) and tight binary systems with 
+                    remarkable stability and energy conservation.
+                </p>
+                
+                <div class="images-container">
+                    <div class="preview-item">
+                        <div class="preview-content">
+                            <img src="../../Images/projects/CelestialMechanics/KSC/2D-KSC.png"
+                                alt="KSC Simulation Visualization in 2D"
+                                onclick="openModal('../../Images/projects/CelestialMechanics/KSC/2D-KSC.png',
+                                'Kustaanheimo-Stiefel Chain - 2D Trajectory Plot')">
+                        </div>
+                        <p class="preview-label">2D Plot</p>
                     </div>
-                    <p class="preview-label">2D Plot</p>
+                    <div class="preview-item">
+                        <div class="preview-content">
+                            <img src="../../Images/projects/CelestialMechanics/KSC/3D-KSC.png"
+                                alt="KSC Simulation Visualization in 3D"
+                                onclick="openModal('../../Images/projects/CelestialMechanics/KSC/3D-KSC.png',
+                                'Kustaanheimo-Stiefel Chain - 3D Trajectory Plot')">
+                        </div>
+                        <p class="preview-label">3D Plot</p>
+                    </div>
+                    <!-- <div class="preview-item">
+                        <div class="preview-content">
+                            <iframe src="../../Notes/Celestial-Mechanics/ARC-KSC-Review.pdf" 
+                                frameborder="0"></iframe>
+                        </div>
+                        <p class="preview-label">
+                            <a href="../../Notes/Celestial-Mechanics/ARC-KSC-Review.pdf" 
+                               target="_blank" 
+                               class="text-blue-400 hover:underline">
+                                📄 Project Notes
+                            </a>
+                        </p>
+                    </div> -->
                 </div>
-                <div class="preview-item">
-                    <div class="preview-content">
-                        <img src="../../Images/projects/CelestialMechanics/KSC/3D-KSC.png"
-                            alt="Lyapunov Exponent Visualization in 3D"
-                            onclick="openModal('../../Images/projects/CelestialMechanics/ARC/3D-ARC.png',
-                            'Visualization of Algorithmic Regularization Chain in 3D')">
-                    </div>
-                    <p class="preview-label">3D Plot</p>
-                </div>
-                <!-- <div class="preview-item">
-                    <div class="preview-content">
-                        <iframe src="../../Notes/Celestial-Mechanics/Lyapunov Exponent.pdf" 
-                            frameborder="0"></iframe>
-                    </div>
-                    <p class="preview-label">
-                        <a href="../../Notes/Celestial-Mechanics/Lyapunov Exponent.pdf" 
-                            target="_blank" 
-                            class="text-blue-400 hover:underline">
-                            📄 Project Notes
-                        </a>
-                    </p>
-                </div> -->
             </div>
-        </div>
 
-        <a href="../../index.html#work" class="back-link">Back to Projects</a>
+            <a href="../../index.html#work" class="back-link">Back to Projects</a>
         </div>
     </section>
 
