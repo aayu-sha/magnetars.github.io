@@ -5,8 +5,424 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Machine Learning Projects | Magnetars</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="projects-styles.css">
+    <style>
+        /* Base reset and smooth scrolling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Custom Cursor - Cyan */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00d9ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+            opacity: 0;
+        }
+
+        /* Interactive Demo Badge Styles - Cyan */
+        .demo-badge-container {
+            position: relative;
+            margin: 15px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(14, 165, 233, 0.1));
+            border-radius: 12px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .demo-badge-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 2px;
+            background: linear-gradient(45deg, #00d9ff, #0ea5e9, #06b6d4, #00d9ff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: border-animation 3s linear infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes border-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .demo-badge-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .demo-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .demo-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00d9ff, #0ea5e9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            border: 1px solid #06b6d4;
+        }
+
+        .demo-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .demo-link:hover::before {
+            left: 100%;
+        }
+
+        .demo-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .demo-link.secondary {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 1px solid #00d9ff;
+        }
+
+        .demo-icon {
+            font-size: 18px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Stats Grid - Cyan */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #00d9ff;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateZ(0);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: #0ea5e9;
+            box-shadow: 0 5px 15px rgba(0, 217, 255, 0.3);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00d9ff;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #00d9ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Tech Stack Badges - Cyan */
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .tech-badge {
+            padding: 6px 12px;
+            background: rgba(0, 217, 255, 0.2);
+            border: 1px solid #00d9ff;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #00d9ff;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: #00d9ff;
+            color: #0a0a0a;
+            transform: scale(1.05);
+        }
+
+        /* Modal Header Enhancement - Cyan */
+        .modal-header-enhanced {
+            background: linear-gradient(135deg, #00d9ff, #0ea5e9);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 2px solid #06b6d4;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header-enhanced::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .modal-header-enhanced h2 {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 10px 0;
+            color: white;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #22c55e;
+            font-size: 14px;
+            color: #22c55e;
+            position: relative;
+            z-index: 1;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Project Box Enhancement - Cyan */
+        .project-box {
+            position: relative;
+            overflow: hidden;
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .project-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(14, 165, 233, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-box:hover {
+            transform: translateY(-5px);
+            border-color: #00d9ff;
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.3);
+        }
+
+        .project-box:hover::before {
+            opacity: 1;
+        }
+
+        .project-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00d9ff, #0ea5e9, #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .project-box:hover::after {
+            transform: scaleX(1);
+        }
+
+        .project-box > div:first-child {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-box button {
+            background: linear-gradient(135deg, #00d9ff, #0ea5e9);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
+            white-space: nowrap;
+        }
+
+        .project-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.5);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: rgba(26, 26, 26, 0.95);
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 900px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .close:hover {
+            color: #00d9ff;
+            transform: rotate(90deg);
+        }
+
+        .model-block {
+            background: rgba(26, 26, 26, 0.5);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+
+        .model-block:hover {
+            border-color: #00d9ff;
+            transform: translateX(5px);
+        }
+
+        .model-block img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .model-block img:hover {
+            transform: scale(1.02);
+        }
+
+        .model-block h3 {
+            color: #00d9ff;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-box {
+                flex-direction: column;
+            }
+            
+            .demo-links {
+                flex-direction: column;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="cursor"></div>
@@ -33,10 +449,43 @@
                 <div>
                     <h2 class="text-2xl font-semibold text-white mb-2">Black Gram Plant Leaf Disease Classification (BPLD)</h2>
                     <p class="text-gray-400">
-                        Developed 8 machine learning models to classify diseases in black gram plant leaves using leaf images, aiding agricultural diagnostics. Models leverage deep learning and transfer learning, trained on 500+ leaf samples. A collaborative effort by Amrit Roy and Aayusha Singh.
+                        Developed 8 machine learning models to classify diseases in black gram plant leaves using leaf images, aiding agricultural diagnostics. Models leverage deep learning and transfer learning, trained on 1000+ leaf samples. Achieves 93.5% accuracy with custom DRPA-Net architecture.
+                    </p>
+                    
+                    <!-- Enhanced Demo Badge -->
+                    <div class="demo-badge-container">
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <span class="live-indicator">
+                                <span class="live-dot"></span>
+                                LIVE DEPLOYMENT
+                            </span>
+                        </div>
+                        <div style="text-align: center; margin-bottom: 10px;" class="demo-links">
+                            <a href="https://huggingface.co/spaces/aayushasingh/Blackgram-Disease-Classifier" target="_blank" class="demo-link">
+                                <span class="demo-icon">🚀</span>
+                                Try Interactive Demo
+                            </a>
+                            <!-- <a href="https://github.com/aayu-sha/Blackgram-Disease-Classifier" target="_blank" class="demo-link secondary">
+                                <span>📂</span>
+                                View Source Code
+                            </a> -->
+                        </div>
+                    </div>
+
+                    <!-- Tech Stack -->
+                    <div class="tech-badges">
+                        <span class="tech-badge">TensorFlow</span>
+                        <span class="tech-badge">Keras</span>
+                        <span class="tech-badge">Gradio</span>
+                        <span class="tech-badge">Plotly</span>
+                        <span class="tech-badge">Transfer Learning</span>
+                    </div>
+
+                    <p class="text-gray-400 mt-2 text-sm">
+                        A collaborative effort by Amrit Roy and Aayusha Singh.
                     </p>
                 </div>
-                <button onclick="openProjectModal('bpldModal')">Open Project</button>
+                <button onclick="openProjectModal('bpldModal')">View Details</button>
             </div>
             
             <!-- Retina Image Enhancement Project -->
@@ -44,24 +493,236 @@
                 <div>
                     <h2 class="text-2xl font-semibold text-white mb-2">Retina Image Enhancement</h2>
                     <p class="text-gray-400">
-                        Developed 8 machine learning models to enhance retinal images for improved disease detection (e.g., diabetic retinopathy). Models include denoising, generative, and hybrid approaches, trained on 1000+ retinal images. A collaborative effort by Aayusha Singh and Amrit Roy.
+                        Developed 8 machine learning models to enhance retinal images for improved disease detection (e.g., diabetic retinopathy). Models include denoising, generative, and hybrid approaches, trained on 1000+ retinal images.
                     </p>
-                    <p class="text-gray-400">
-                        <a href="https://github.com/aayu-sha/VAE" target="_blank" class="text-blue-400 hover:underline">GitHub Repository</a>
+                    
+                    <div class="demo-badge-container">
+                        <div class="demo-links">
+                            <a href="https://github.com/aayu-sha/VAE" target="_blank" class="demo-link secondary">
+                                <span>📂</span>
+                                GitHub Repository
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="tech-badges">
+                        <span class="tech-badge">VAE</span>
+                        <span class="tech-badge">Diffusion Models</span>
+                        <span class="tech-badge">Energy Based Models</span>
+                        <span class="tech-badge">CNN</span>
+                    </div>
+
+                    <p class="text-gray-400 mt-2 text-sm">
+                        A collaborative effort by Aayusha Singh and Amrit Roy.
                     </p>
                 </div>
-                <button onclick="openProjectModal('retinaModal')">Open Project</button>
+                <button onclick="openProjectModal('retinaModal')">View Details</button>
             </div>
 
             <a href="../../index.html#work" class="back-link">Back to Projects</a>
         </div>
     </section>
 
+    <!-- BPLD Project Modal -->
+    <div id="bpldModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal('bpldModal')">×</span>
+            
+            <!-- Enhanced Modal Header -->
+            <div class="modal-header-enhanced">
+                <h2 class="text-2xl font-semibold text-white mb-2">Black Gram Plant Leaf Disease Classification</h2>
+            </div>
+
+            <!-- Live Demo Section -->
+            <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(14, 165, 233, 0.1)); padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 2px solid #06b6d4;">
+                <h3 style="color: #00d9ff; text-align: center; margin-bottom: 15px; font-size: 18px;">🎯 Try the Models Yourself</h3>
+                <div class="demo-links" style="justify-content: center;">
+                    <a href="https://huggingface.co/spaces/aayushasingh/Blackgram-Disease-Classifier" target="_blank" class="demo-link">
+                        <span class="demo-icon">🚀</span>
+                        Launch Interactive App
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Models</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">93.5%</div>
+                    <div class="stat-label">Peak Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">1000+</div>
+                    <div class="stat-label">Training Images</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Disease Classes</div>
+                </div>
+            </div>
+
+            <!-- Model Details -->
+            <h3 class="text-xl font-semibold text-white mb-4" style="margin-top: 30px; color: #00d9ff;">Neural Architecture Implementations</h3>
+            
+            <!-- 1. CNN -->
+            <div class="model-block">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">1. Convolutional Neural Network (CNN)</h3>
+                    <p class="text-gray-400">
+                        A foundational deep learning model using convolutional layers to classify leaf diseases, effective for feature extraction. 
+                        <a href="https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf" target="_blank" class="text-blue-400 hover:underline">Reference: Krizhevsky et al., 2012</a>
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Utilizes multiple convolutional layers to extract spatial features from leaf images.</li>
+                        <li>Achieves 85.3% accuracy in detecting diseases like anthracnose and powdery mildew.</li>
+                        <li>Trained on a dataset of 1000+ leaf images with data augmentation for robustness.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. DenseNet -->
+            <div class="model-block">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">2. DenseNet</h3>
+                    <p class="text-gray-400">
+                        Uses dense connectivity between layers to improve gradient flow and feature reuse for leaf disease classification. 
+                        <a href="https://arxiv.org/abs/1608.06993" target="_blank" class="text-blue-400 hover:underline">Reference: Huang et al., 2016</a>
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Each layer receives inputs from all previous layers, enhancing feature propagation.</li>
+                        <li>Achieves 89.7% accuracy with reduced parameters compared to traditional CNNs.</li>
+                        <li>Performs well on small datasets due to its dense connectivity pattern.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. NASNet -->
+            <div class="model-block">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">3. NASNet</h3>
+                    <p class="text-gray-400">
+                        Employs neural architecture search to design an efficient network for classifying leaf diseases. 
+                        <a href="https://arxiv.org/abs/1611.01578" target="_blank" class="text-blue-400 hover:underline">Reference: Zoph et al., 2016</a>
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Automatically designs network architecture optimized for leaf disease classification.</li>
+                        <li>Achieves 87.5% accuracy with optimal computational efficiency.</li>
+                        <li>Utilizes a search space with recurrent neural networks to find optimal configurations.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. ResNeXt -->
+            <div class="model-block">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">4. ResNeXt</h3>
+                    <p class="text-gray-400">
+                        Introduces cardinality to ResNet, enhancing feature learning for leaf disease classification. 
+                        <a href="https://arxiv.org/abs/1611.05431" target="_blank" class="text-blue-400 hover:underline">Reference: Xie et al., 2016</a>
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Improves ResNet by adding a cardinality dimension for better feature extraction.</li>
+                        <li>Achieves 90.2% accuracy in identifying complex disease patterns.</li>
+                        <li>Reduces overfitting through skip connections and batch normalization.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. TRESNet -->
+            <div class="model-block">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">5. TRESNet</h3>
+                    <p class="text-gray-400">
+                        A transformer-based architecture optimized for efficient leaf disease classification. 
+                        <a href="https://arxiv.org/abs/2003.13630" target="_blank" class="text-blue-400 hover:underline">Reference: Ridnik et al., 2020</a>
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Leverages transformer blocks for global feature learning in leaf images.</li>
+                        <li>Achieves 91.0% accuracy with optimized speed for real-time applications.</li>
+                        <li>Reduces computational overhead while maintaining high classification accuracy.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6. VGGNet -->
+            <div class="model-block">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">6. VGGNet</h3>
+                    <p class="text-gray-400">
+                        A deep convolutional network with small filters, effective for classifying leaf diseases. 
+                        <a href="https://arxiv.org/abs/1409.1556" target="_blank" class="text-blue-400 hover:underline">Reference: Simonyan & Zisserman, 2014</a>
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Employs small 3x3 filters in deep layers to capture fine-grained patterns.</li>
+                        <li>Achieves 86.8% accuracy with high depth (16-19 layers).</li>
+                        <li>Effective but computationally intensive due to its uniform architecture.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 7. Xception -->
+            <div class="model-block">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">7. Xception</h3>
+                    <p class="text-gray-400">
+                        Uses depthwise separable convolutions for efficient leaf disease classification. 
+                        <a href="https://arxiv.org/abs/1610.02357" target="_blank" class="text-blue-400 hover:underline">Reference: Chollet, 2016</a>
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Replaces standard convolutions with depthwise separable convolutions.</li>
+                        <li>Achieves 88.4% accuracy with improved efficiency.</li>
+                        <li>Reduces the number of parameters while maintaining high performance.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 8. DRPA-Net -->
+            <div class="model-block">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">8. Dense Residual Paths with Attention (DRPA-Net) ⭐</h3>
+                    <p class="text-gray-400">
+                        Combines DenseNet's reuse, ResNeXt's cardinality, and attention mechanisms, using transfer learning from pre-trained DenseNet121. <strong>Best performing model - 93.5% accuracy.</strong> A collaborative design by the team.
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li>Integrates dense connections and residual paths for enhanced feature learning.</li>
+                        <li>Uses attention mechanisms to focus on disease-relevant regions.</li>
+                        <li>Leverages transfer learning from DenseNet121 for improved performance.</li>
+                        <li>Achieves state-of-the-art 93.5% accuracy in black gram leaf disease classification.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="model-block" style="margin-top: 30px;">
+                <img src="../../Images/projects/ML/BPLD/photo_2025-05-18_13-11-00.jpg" alt="BPLD Results" onclick="openImageModal('../../Images/projects/ML/BPLD/photo_2025-05-18_13-11-00.jpg', 'Results of Black Gram Plant Leaf Disease Classification Models')">
+                <div class="model-details">
+                    <h3 class="text-xl font-semibold text-white">Comparative Results</h3>
+                    <p class="text-gray-400">
+                        The 8 models were evaluated on a test set of 150 black gram leaf images:
+                    </p>
+                    <ul class="text-gray-400 list-disc list-inside mt-2">
+                        <li><strong>DRPA-Net: 93.5%</strong> - Best overall performance with attention mechanisms</li>
+                        <li>TRESNet: 91.0% - Efficient transformer-based approach</li>
+                        <li>ResNeXt: 90.2% - Strong feature learning with cardinality</li>
+                        <li>DenseNet: 89.7% - Benefiting from dense connectivity</li>
+                        <li>Xception: 88.4% - Efficient with depthwise convolutions</li>
+                        <li>NASNet: 87.5% - Optimized via neural architecture search</li>
+                        <li>VGGNet: 86.8% - Strong but computationally heavy</li>
+                        <li>CNN: 85.3% - Solid baseline performance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Retina Project Modal -->
     <div id="retinaModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeProjectModal('retinaModal')">×</span>
-            <h2 class="text-2xl font-semibold text-white mb-4">Retina Image Enhancement Models</h2>
+            <h2 class="text-2xl font-semibold text-white mb-4" style="text-align: center; color: #00d9ff;">Retina Image Enhancement Models</h2>
             
             <!-- 1. Variational Autoencoder (VAE) -->
             <div class="model-block">
@@ -71,7 +732,6 @@
                     <p class="text-white">
                         A generative model that learns latent representations of retinal images for enhancement, improving contrast and clarity. Reference: <a href="https://ar5iv.labs.arxiv.org/html/1606.05908" target="_blank" class="text-white hover:underline" style="color: white !important;"> Kingma & Welling, 2016 </a>
                     </p>
-                    
                 </div>
             </div>
 
@@ -83,7 +743,6 @@
                     <p class="text-white">
                         Reduces noise in retinal images by minimizing total variation, preserving edges. Reference: <a href="https://www.researchgate.net/publication/222469583_Nonlinear_total_variation_based_noise_removal_algorithms" target="_blank" class="text-white hover:underline" style="color: white !important;">Rudin et al., 1992</a>.
                     </p>
-                    
                 </div>
             </div>
 
@@ -106,7 +765,6 @@
                     <p class="text-white">
                         Models pixel dependencies in retinal images for enhancement, focusing on statistical patterns. Reference: <a href="https://ieeexplore.ieee.org/document/1100705" target="_blank" class="text-white hover:underline" style="color: white !important;">Jain, 1981</a>.
                     </p>
-                    
                 </div>
             </div>
 
@@ -118,7 +776,6 @@
                     <p class="text-white">
                         A generative approach using invertible transformations to enhance retinal images, preserving details. Reference: <a href="http://proceedings.mlr.press/v37/rezende15.pdf" target="_blank" class="text-white hover:underline" style="color: white !important;">Rezende & Mohamed, 2015</a>.
                     </p>
-                    
                 </div>
             </div>
 
@@ -130,7 +787,6 @@
                     <p class="text-white">
                         Uses energy functions to model and enhance retinal images, focusing on noise reduction. Reference: <a href="https://arxiv.org/abs/1903.08689" target="_blank" class="text-white hover:underline" style="color: white !important;">Du & Mordatch, 2019</a>.
                     </p>
-                    
                 </div>
             </div>
 
@@ -142,7 +798,6 @@
                     <p class="text-white">
                         Applies iterative denoising to enhance retinal images, improving quality for medical analysis. Reference: <a href="https://arxiv.org/abs/2006.11239" target="_blank" class="text-white hover:underline" style="color: white !important;">Ho et al., 2020</a>.
                     </p>
-                    
                 </div>
             </div>
 
@@ -154,193 +809,44 @@
                     <p class="text-white">
                         Combines Adaptive Local Means Denoising with a CNN to enhance retinal images, balancing noise reduction and detail preservation. A collaborative design by the team.
                     </p>
-                    
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- BPLD Project Modal (Placeholder) -->
-    <div id="bpldModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeProjectModal('bpldModal')">×</span>
-            <h2 class="text-2xl font-semibold text-white mb-4">Black Gram Plant Leaf Disease Classification Models</h2>
-            
-            <!-- 1. CNN -->
-            <div class="model-block">
-                <div class="model-details">
-                    <h3 class="text-xl font-semibold text-white">1. Convolutional Neural Network (CNN)</h3>
-                    <p class="text-gray-400">
-                        A foundational deep learning model using convolutional layers to classify leaf diseases, effective for feature extraction. Reference: Krizhevsky et al., 2012. <a href="https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
-                    </p>
-                    <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Utilizes multiple convolutional layers to extract spatial features from leaf images.</li>
-                        <li>Achieves high accuracy in detecting diseases like anthracnose and powdery mildew.</li>
-                        <li>Trained on a dataset of 1000+ leaf images with data augmentation for robustness.</li>
-                    </ul>
-                    
-                </div>
-            </div>
-
-            <!-- 2. DenseNet -->
-            <div class="model-block">
-                <div class="model-details">
-                    <h3 class="text-xl font-semibold text-white">2. DenseNet</h3>
-                    <p class="text-gray-400">
-                        Uses dense connectivity between layers to improve gradient flow and feature reuse for leaf disease classification. Reference: Huang et al., 2016. <a href="https://arxiv.org/abs/1608.06993" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
-                    </p>
-                    <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Each layer receives inputs from all previous layers, enhancing feature propagation.</li>
-                        <li>Reduces the number of parameters compared to traditional CNNs, improving efficiency.</li>
-                        <li>Performs well on small datasets due to its dense connectivity pattern.</li>
-                    </ul>
-                    
-                </div>
-            </div>
-
-            <!-- 3. NASNet -->
-            <div class="model-block">
-                <div class="model-details">
-                    <h3 class="text-xl font-semibold text-white">3. NASNet</h3>
-                    <p class="text-gray-400">
-                        Employs neural architecture search to design an efficient network for classifying leaf diseases. Reference: Zoph et al., 2016. <a href="https://arxiv.org/abs/1611.01578" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
-                    </p>
-                    <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Automatically designs network architecture optimized for leaf disease classification.</li>
-                        <li>Outperforms manually designed models in terms of accuracy and computational efficiency.</li>
-                        <li>Utilizes a search space with recurrent neural networks to find optimal configurations.</li>
-                    </ul>
-                    
-                </div>
-            </div>
-
-            <!-- 4. ResNeXt -->
-            <div class="model-block">
-                <div class="model-details">
-                    <h3 class="text-xl font-semibold text-white">4. ResNeXt</h3>
-                    <p class="text-gray-400">
-                        Introduces cardinality to ResNet, enhancing feature learning for leaf disease classification. Reference: Xie et al., 2016. <a href="https://arxiv.org/abs/1611.05431" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
-                    </p>
-                    <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Improves ResNet by adding a cardinality dimension for better feature extraction.</li>
-                        <li>Effective in identifying complex disease patterns in black gram leaves.</li>
-                        <li>Reduces overfitting through skip connections and batch normalization.</li>
-                    </ul>
-                   
-                </div>
-            </div>
-
-            <!-- 5. TRESNet -->
-            <div class="model-block">
-                <div class="model-details">
-                    <h3 class="text-xl font-semibold text-white">5. TRESNet</h3>
-                    <p class="text-gray-400">
-                        A transformer-based architecture optimized for efficient leaf disease classification. Reference: Ridnik et al., 2020. <a href="https://arxiv.org/abs/2003.13630" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
-                    </p>
-                    <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Leverages transformer blocks for global feature learning in leaf images.</li>
-                        <li>Optimized for speed and accuracy, suitable for real-time agricultural applications.</li>
-                        <li>Reduces computational overhead while maintaining high classification accuracy.</li>
-                    </ul>
-                    
-                </div>
-            </div>
-
-            <!-- 6. VGGNet -->
-            <div class="model-block">
-                <div class="model-details">
-                    <h3 class="text-xl font-semibold text-white">6. VGGNet</h3>
-                    <p class="text-gray-400">
-                        A deep convolutional network with small filters, effective for classifying leaf diseases. Reference: Simonyan & Zisserman, 2014. <a href="https://arxiv.org/abs/1409.1556" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
-                    </p>
-                    <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Employs small 3x3 filters in deep layers to capture fine-grained leaf disease patterns.</li>
-                        <li>High depth (16-19 layers) improves feature representation for classification.</li>
-                        <li>Effective but computationally intensive due to its uniform architecture.</li>
-                    </ul>
-                    
-                </div>
-            </div>
-
-            <!-- 7. Xception -->
-            <div class="model-block">
-                <div class="model-details">
-                    <h3 class="text-xl font-semibold text-white">7. Xception</h3>
-                    <p class="text-gray-400">
-                        Uses depthwise separable convolutions for efficient leaf disease classification. Reference: Chollet, 2016. <a href="https://arxiv.org/abs/1610.02357" target="_blank" class="text-blue-400 hover:underline" style="color: white !important;">Reference</a>.
-                    </p>
-                    <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Replaces standard convolutions with depthwise separable convolutions for efficiency.</li>
-                        <li>Improves accuracy by focusing on cross-channel correlations in leaf images.</li>
-                        <li>Reduces the number of parameters while maintaining high performance.</li>
-                    </ul>
-                    
-                </div>
-            </div>
-
-            <!-- 8. DRPA-Net -->
-            <div class="model-block">
-                <div class="model-details">
-                    <h3 class="text-xl font-semibold text-white">8. Dense Residual Paths with Attention (DRPA-Net)</h3>
-                    <p class="text-gray-400">
-                        Combines DenseNet’s reuse, ResNeXt’s cardinality, and attention mechanisms, using transfer learning from pre-trained DenseNet121 for leaf disease classification. A collaborative design by the team.
-                    </p>
-                    <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>Integrates dense connections and residual paths for enhanced feature learning.</li>
-                        <li>Uses attention mechanisms to focus on disease-relevant regions in leaf images.</li>
-                        <li>Leverages transfer learning from DenseNet121 for improved performance on small datasets.</li>
-                        <li>Achieves state-of-the-art accuracy in black gram leaf disease classification.</li>
-                    </ul>
-                    
-                </div>
-            </div>
-
-            <!-- Results Section -->
-            <div class="model-block">
-                <img src="../../Images/projects/ML/BPLD/photo_2025-05-18_13-11-00.jpg" alt="BPLD Results" onclick="openImageModal('../../Projects/ML/BPLD/photo_2025-05-18_13-11-00.jpg', 'Results of Black Gram Plant Leaf Disease Classification Models')" >
-                <div class="model-details">
-                    <h3 class="text-xl font-semibold text-white">Results</h3>
-                    <p class="text-gray-400">
-                        The 8 models were evaluated on a test set of 150 black gram leaf images, achieving the following accuracies:
-                    </p>
-                    <ul class="text-gray-400 list-disc list-inside mt-2">
-                        <li>CNN: 85.3% accuracy, effective for basic disease classification.</li>
-                        <li>DenseNet: 89.7% accuracy, benefiting from dense connectivity.</li>
-                        <li>NASNet: 87.5% accuracy, optimized architecture via neural search.</li>
-                        <li>ResNeXt: 90.2% accuracy, improved feature learning with cardinality.</li>
-                        <li>TRESNet: 91.0% accuracy, efficient transformer-based approach.</li>
-                        <li>VGGNet: 86.8% accuracy, strong but computationally heavy.</li>
-                        <li>Xception: 88.4% accuracy, efficient with depthwise convolutions.</li>
-                        <li>DRPA-Net: 93.5% accuracy, outperforming others with attention mechanisms and transfer learning.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
     </div>
 
     <!-- Image Zoom Modal -->
     <div id="imageModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeImageModal()">×</span>
-            <img id="modalImage" src="" alt="" class="w-full rounded-lg">
-            <p id="modalCaption" class="text-center text-gray-400 mt-4"></p>
-        </div>
-    </div>
-
-    <div id="imageModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeImageModal()">×</span>
-            <img id="modalImage" src="" alt="" class="rounded-lg">
-            <p id="modalCaption" class="text-center text-gray-400 mt-4"></p>
+            <img id="modalImage" src="" alt="" class="w-full rounded-lg" style="width: 100%; border-radius: 8px;">
+            <p id="modalCaption" class="text-center text-gray-400 mt-4" style="text-align: center; color: #a0a0a0; margin-top: 1rem;"></p>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="../../publication-script.js"></script>
-    <!-- <script src="../../script.js"></script> -->
     <script>
+        // Smooth custom cursor with interpolation
+        const cursor = document.getElementById('cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.opacity = '1';
+        });
+
+        function animateCursor() {
+            const speed = 0.15;
+            cursorX += (mouseX - cursorX) * speed;
+            cursorY += (mouseY - cursorY) * speed;
+            cursor.style.transform = `translate(${cursorX - 10}px, ${cursorY - 10}px)`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
         // GSAP Animation for project boxes
         document.addEventListener('DOMContentLoaded', () => {
             gsap.from('.project-box', {
@@ -350,23 +856,78 @@
                 stagger: 0.2,
                 ease: 'power3.out'
             });
+
+            // Animate demo badges on load
+            gsap.from('.demo-badge-container', {
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.8,
+                delay: 0.5,
+                ease: 'back.out(1.7)'
+            });
+
+            // Animate stats cards
+            gsap.from('.stat-card', {
+                opacity: 0,
+                y: 20,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.stats-grid',
+                    start: 'top 80%'
+                }
+            });
         });
 
         // Project Modal functions
         function openProjectModal(modalId) {
             const modal = document.getElementById(modalId);
             modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Animate modal content
+            gsap.from(modal.querySelector('.modal-content'), {
+                opacity: 0,
+                y: 50,
+                duration: 0.5,
+                ease: 'power3.out'
+            });
+
             gsap.from(modal.querySelectorAll('.model-block'), {
                 opacity: 0,
                 y: 20,
                 duration: 0.5,
                 stagger: 0.1,
+                delay: 0.2,
                 ease: 'power3.out'
             });
+
+            // Animate stats if present
+            if (modal.querySelector('.stats-grid')) {
+                gsap.from(modal.querySelectorAll('.stat-card'), {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 0.4,
+                    stagger: 0.05,
+                    delay: 0.3,
+                    ease: 'back.out(1.7)'
+                });
+            }
         }
 
         function closeProjectModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
+            const modal = document.getElementById(modalId);
+            gsap.to(modal.querySelector('.modal-content'), {
+                opacity: 0,
+                y: 30,
+                duration: 0.3,
+                ease: 'power2.in',
+                onComplete: () => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
         }
 
         // Image Modal functions
@@ -377,10 +938,28 @@
             modalImage.src = src;
             modalCaption.textContent = caption;
             modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+
+            gsap.from(modalImage, {
+                opacity: 0,
+                scale: 0.9,
+                duration: 0.4,
+                ease: 'power2.out'
+            });
         }
 
         function closeImageModal() {
-            document.getElementById('imageModal').style.display = 'none';
+            const modal = document.getElementById('imageModal');
+            gsap.to(modal.querySelector('img'), {
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.3,
+                ease: 'power2.in',
+                onComplete: () => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
         }
 
         // Close modals when clicking outside or pressing Esc
@@ -388,6 +967,7 @@
             const retinaModal = document.getElementById('retinaModal');
             const bpldModal = document.getElementById('bpldModal');
             const imageModal = document.getElementById('imageModal');
+            
             if (event.target == retinaModal) closeProjectModal('retinaModal');
             if (event.target == bpldModal) closeProjectModal('bpldModal');
             if (event.target == imageModal) closeImageModal();
@@ -400,6 +980,41 @@
                 closeImageModal();
             }
         });
+
+        // Hover effect for demo links
+        document.querySelectorAll('.demo-link').forEach(link => {
+            link.addEventListener('mouseenter', (e) => {
+                gsap.to(e.target, {
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+
+            link.addEventListener('mouseleave', (e) => {
+                gsap.to(e.target, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Smooth navbar on scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (!nav) return;
+            
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
     </script>
     <script src="projects.js"></script>
 </body>
